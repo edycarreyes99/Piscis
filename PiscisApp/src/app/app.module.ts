@@ -15,6 +15,7 @@ import {AuthService} from './auth.service';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {environment} from '../environments/environment';
+import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,7 @@ import {environment} from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     
   ],
-  providers: [AuthService],
+  providers: [AuthService,AuthContentOnlyGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
