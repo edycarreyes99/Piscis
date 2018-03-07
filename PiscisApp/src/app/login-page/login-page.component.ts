@@ -20,6 +20,7 @@ public password: string;
   onSubmitAddUser(){
     this.authService.registerUser(this.email, this.password)
     .then((res)=>{
+      this.authService.verificaUsuario();
       this.router.navigate(['/privado']);
     }).catch((err)=>{
       console.log(err);
@@ -30,8 +31,8 @@ public password: string;
     .then((res)=>{
       this.router.navigate(['/privado']);
     }).catch((err)=>{
-      console.log(err);
       this.router.navigate(['/login']);
+      console.log(err);
     })
   }
 }
