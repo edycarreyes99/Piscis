@@ -10,6 +10,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { PrivadoPageComponent } from './privado-page/privado-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { HistorialPageComponent } from './historial-page/historial-page.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     RegisterPageComponent,
     LoginPageComponent,
     PrivadoPageComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    HistorialPageComponent,
   ],
   imports: [
     BrowserModule,
