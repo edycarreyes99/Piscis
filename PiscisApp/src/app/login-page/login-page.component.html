@@ -11,12 +11,12 @@
               <!--Se ingresa los inputs para el inicio de sesion-->
               <div class="form-group text-center">
                 <label>E-Mail</label>
-                <input id= "email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese el E-Mail">
+                <input id= "email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese el E-Mail" [(ngModel)]="email">
                 <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu email con terceros.</small>
               </div>
               <div class="form-group text-center">
                 <label>Contraseña</label>
-                <input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
+                <input type="password" class="form-control" id="contrasena" placeholder="Contraseña" [(ngModel)]="password">
               </div>
               <!--se terminan de ingresar los inputs-->
               <div class="container text-center">
@@ -40,7 +40,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button onclick="registrar()" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                <button type="submit" (click)="onSubmitAddUser()" class="btn btn-success" data-dismiss="modal">Aceptar</button>
               </div>
             </div>
           </div>
