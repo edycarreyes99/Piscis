@@ -25,4 +25,13 @@ public password: string;
       console.log(err);
     });
   }
+  onSubmitLogin(){
+    this.authService.loginEmail(this.email, this.password)
+    .then((res)=>{
+      this.router.navigate(['/privado']);
+    }).catch((err)=>{
+      console.log(err);
+      this.router.navigate(['/login']);
+    })
+  }
 }
