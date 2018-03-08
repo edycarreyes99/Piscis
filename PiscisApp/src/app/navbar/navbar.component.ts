@@ -22,6 +22,12 @@ export class NavbarComponent implements OnInit {
     this.authService.getAuth().subscribe(user=>{
       if(user)
       {
+        if(user.emailVerified)
+        {
+          this.isVerified = true;
+        }else{
+          this.isVerified = false;
+        }
         this.isLogin=true;
         console.log("Hay Usuarios Activos");
         console.log(user.emailVerified);

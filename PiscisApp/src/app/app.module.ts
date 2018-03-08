@@ -21,6 +21,7 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {environment} from '../environments/environment';
 import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
+import {VerifiedContentOnlyGuard} from './guards/verified-content-only.guard';
 
 export const firebaseConfig={
   apiKey: "AIzaSyBu_Yb1UXx6W12dkeSYvr7aj9ueNwj0NLQ",
@@ -56,7 +57,7 @@ export const firebaseConfig={
     AngularFireModule.initializeApp(environment.firebaseConfig),
     
   ],
-  providers: [AuthService,AuthContentOnlyGuard,],
+  providers: [AuthService,AuthContentOnlyGuard,VerifiedContentOnlyGuard,NavbarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

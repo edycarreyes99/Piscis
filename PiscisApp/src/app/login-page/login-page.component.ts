@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {NavbarComponent} from '../navbar/navbar.component';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -12,6 +13,7 @@ public password: string;
   constructor(
    public authService: AuthService,
    public router: Router,
+   public navbar: NavbarComponent,
   ) { }
 
   ngOnInit() {
@@ -29,7 +31,12 @@ public password: string;
   onSubmitLogin(){
     this.authService.loginEmail(this.email, this.password)
     .then((res)=>{
-    this.router.navigate(['/historial']);
+      if(this.navbar.isVerified)
+      {
+        this.router.navigate(['/historial']);
+      }else{
+        this.router.navigate(['/privado']);
+      }
     }).catch((err)=>{
       this.router.navigate(['/login']);
       console.log(err);
