@@ -15,7 +15,7 @@
         <li class="nav-item">
           <a class="nav-link" href="" routerLink="/login" *ngIf="!isLogin">Inicia Sesión</a>
         </li>
-        <li class="nav-item" *ngIf="isLogin">
+        <li class="nav-item" *ngIf="isVerified">
           <a class="nav-link" href="" routerLink="/historial">Historial</a>
         </li>
         <li class="nav-item" *ngIf="isLogin">

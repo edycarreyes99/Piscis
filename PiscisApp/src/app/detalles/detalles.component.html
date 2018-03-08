@@ -1,0 +1,15 @@
+<mat-card *ngIf="contacto">
+  <mat-card-title>
+    Detalles del Contacto
+  </mat-card-title>
+  <mat-card-content>
+    ID: {{contacto.private_key_id}}<br>
+    Valor: {{contacto.valor}}<br>
+    Hora de Push: {{contacto.hora}}<br>
+    Key: {{contacto.key}}<br>
+    Email: {{contacto.email}}<br>
+    Empresa: {{contacto.empresa}}<br>
+    <button mat-button (click)="onCerrar()">Cerrar</button>
+
+  </mat-card-content>
+</mat-card>

@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   public isLogin: boolean;
+  public isVerified: boolean;
   public nombreUsuario: string;
   public emailUsuario: string;
   
@@ -23,14 +24,25 @@ export class NavbarComponent implements OnInit {
       {
         this.isLogin=true;
         console.log("Hay Usuarios Activos");
+        console.log(user.emailVerified);
+        this.contenido(user)
       }else{
         this.isLogin=false;
         console.log("No hay Usuarios Activos");
       }
     })
   }
-
+  contenido(user)
+  {
+    var user = user;
+    if(user.emailVerified)
+    {
+      this.isVerified = true;
+    }else{
+      this.isVerified = false;
+    }
+  }
   cerrar(){
      this.authService.logout();
-}
+  }
 }

@@ -29,7 +29,7 @@ public password: string;
   onSubmitLogin(){
     this.authService.loginEmail(this.email, this.password)
     .then((res)=>{
-      this.router.navigate(['/privado']);
+    this.router.navigate(['/historial']);
     }).catch((err)=>{
       this.router.navigate(['/login']);
       console.log(err);

@@ -7,6 +7,7 @@ import {PrivadoPageComponent} from './privado-page/privado-page.component';
 import {NotFoundPageComponent} from './not-found-page/not-found-page.component';
 import {HistorialPageComponent} from './historial-page/historial-page.component'
 import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
+import {NavbarComponent} from './navbar/navbar.component'
 const routes: Routes = [
   {path: '', component: HomePageComponent},
   {path: 'login', component: LoginPageComponent},

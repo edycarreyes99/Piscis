@@ -5,14 +5,27 @@ import { promise } from 'protractor';
 import { reject } from 'q';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
+import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import { InjectFlags } from '@angular/core/src/render3/di';
 
 @Injectable()
 export class AuthService {
-
+  contactos: AngularFireList<any[]>;
   constructor(
     public afAuth: AngularFireAuth,
-    public router: Router
+    public router: Router,
+    private af: AngularFireDatabase
   ) { }
+
+  getContactos(){
+    this.contactos = this.af.list('/contactos');
+    return this.contactos;
+  }
+
+  getContactosFiltro(filtro: string){
+      this.contactos = this.af.list('/contactos', ref => ref.orderByChild('direccion').equalTo(filtro)) ;
+      return this.contactos;
+  }
 
   registerUser(email, pass){
     return new Promise((resolve,reject)=>{
