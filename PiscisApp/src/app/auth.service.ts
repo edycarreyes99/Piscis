@@ -22,8 +22,8 @@ export class AuthService {
     return this.contactos;
   }
 
-  getContactosFiltro(filtro: string){
-      this.contactos = this.af.list('/contactos', ref => ref.orderByChild('direccion').equalTo(filtro)) ;
+  getContactosFiltro(filtro){
+      this.contactos = this.af.list('/contactos', ref => ref.orderByChild('private_key_id').equalTo(filtro)) ;
       return this.contactos;
   }
 

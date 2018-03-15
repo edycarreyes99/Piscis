@@ -23,7 +23,8 @@ import{
     MatStepperModule,
     MatTableModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectionListOptionEvent,
 }from '@angular/material';
 
 @NgModule({

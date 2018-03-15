@@ -22,7 +22,7 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import {environment} from '../environments/environment';
 import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
 import {VerifiedContentOnlyGuard} from './guards/verified-content-only.guard';
-
+import {AngularFirestoreModule} from 'angularfire2/firestore';
 export const firebaseConfig={
   apiKey: "AIzaSyBu_Yb1UXx6W12dkeSYvr7aj9ueNwj0NLQ",
   authDomain: "proyecto-robotica-35bed.firebaseapp.com",
@@ -48,16 +48,17 @@ export const firebaseConfig={
     HttpModule,
     ReactiveFormsModule,
     BrowserModule,
-    AngularFireDatabaseModule,
     MaterialModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     
   ],
-  providers: [AuthService,AuthContentOnlyGuard,VerifiedContentOnlyGuard,NavbarComponent],
+  providers: [AuthService,AuthContentOnlyGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

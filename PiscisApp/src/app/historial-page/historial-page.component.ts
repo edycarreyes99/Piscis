@@ -9,7 +9,7 @@ import {MatDialog} from '@angular/material';
 export class HistorialPageComponent implements OnInit{
   title = 'Temperaturas';
   contactos: any[];
-  ciudades = ['Todos', 'Quito','Guayaquil','Riobamba'];
+  ciudades = ['Todos','2018','11','10'];
   contacto = null;
   contactoEditar = null;
   contactoAgregar=false;
@@ -22,7 +22,9 @@ export class HistorialPageComponent implements OnInit{
     .map(changes =>{
       return changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
     })
-    .subscribe(contactos => this.contactos = contactos);
+    .subscribe(contactos => {
+      this.contactos = contactos
+    });
   }
   onSelect(event){
     let query = null;
