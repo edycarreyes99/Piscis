@@ -5,19 +5,19 @@ import { promise } from 'protractor';
 import { reject } from 'q';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
-import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+//import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import { AngularFireDatabase} from 'angularfire2/database';
 import { InjectFlags } from '@angular/core/src/render3/di';
 
 @Injectable()
 export class AuthService {
-  contactos: AngularFireList<any[]>;
   constructor(
     public afAuth: AngularFireAuth,
     public router: Router,
     private af: AngularFireDatabase
   ) { }
 
-  getContactos(){
+  /*getContactos(){
     this.contactos = this.af.list('/contactos');
     return this.contactos;
   }
@@ -25,7 +25,7 @@ export class AuthService {
   getContactosFiltro(filtro){
       this.contactos = this.af.list('/contactos', ref => ref.orderByChild('hora').equalTo(filtro)) ;
       return this.contactos;
-  }
+  }*/
 
   registerUser(email, pass){
     return new Promise((resolve,reject)=>{

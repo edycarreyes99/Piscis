@@ -1,14 +1,14 @@
-<mat-card *ngIf="contacto">
+<mat-card *ngIf="temperatura">
   <mat-card-title>
-    Detalles del Contacto
+    Detalles de la temperatura
   </mat-card-title>
   <mat-card-content>
-    ID: {{contacto.private_key_id}}<br>
-    Valor: {{contacto.valor}}<br>
-    Año: {{contacto.ano}}<br>
-    Mes: {{contacto.mes}}<br>
-    Dia: {{contacto.dia}}<br>
-    Hora: {{contacto.hora}}<br>
+    ID: {{temperatura.private_key_id}}<br>
+    Valor: {{temperatura.valor}}<br>
+    Año: {{temperatura.ano}}<br>
+    Mes: {{temperatura.mes}}<br>
+    Dia: {{temperatura.dia}}<br>
+    Hora: {{temperatura.hora}}<br>
     <button mat-button (click)="onCerrar()">Cerrar</button>
 
   </mat-card-content>
