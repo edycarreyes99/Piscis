@@ -3,13 +3,27 @@
   <span class="fill-remaining-space"></span>
   <span>Piscis</span>
 </mat-toolbar>
-<mat-card>
-  <mat-select placeholder="Ciudad" (change)="onSelect($event)">
-    <mat-option *ngFor= "let ciudad of ciudades" [value]="ciudad">
-      {{ciudad}}
+<mat-form-field>
+  <mat-select placeholder="Año" (change)="onSelect($event)">
+    <mat-option *ngFor= "let ano of anos" [value]="ano">
+      {{ano}}
     </mat-option>
   </mat-select>
-</mat-card>
+</mat-form-field>
+<mat-form-field>
+  <mat-select placeholder="Mes" (change)="onSelect($event)">
+    <mat-option *ngFor= "let mes of meses" [value]="mes">
+      {{mes}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-select placeholder="Dia" (change)="onSelect($event)">
+    <mat-option *ngFor= "let dia of dias" [value]="dia">
+      {{dia}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 <mat-card>
   <table class="table table-hover">
     <thead class="thead-inverse">
@@ -27,7 +41,7 @@
         <button mat-button (click)="onClick(contacto)">Detalles</button>
         </td>
       </tr>
-      <app-detalles [contacto]="contacto" (cerrar)="cerrarDetalles()"></app-detalles>
+      <tr><app-detalles [contacto]="contacto" (cerrar)="cerrarDetalles()"></app-detalles></tr>
     </tbody>
   </table>
 </mat-card>

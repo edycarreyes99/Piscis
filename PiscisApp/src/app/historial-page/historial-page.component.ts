@@ -9,7 +9,12 @@ import {MatDialog} from '@angular/material';
 export class HistorialPageComponent implements OnInit{
   title = 'Temperaturas';
   contactos: any[];
-  ciudades = ['Todos','2018','11','10'];
+  fecha= new Date();
+  anos = ['Todos',`${this.fecha.getFullYear()}`];
+  meses = [
+    "Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+    ];
+    dias = []
   contacto = null;
   contactoEditar = null;
   contactoAgregar=false;
@@ -18,23 +23,35 @@ export class HistorialPageComponent implements OnInit{
     private servicio: AuthService,
     private dialog: MatDialog){}
   ngOnInit(){
+    for(var i=1; i<=31; i++)
+    {
+      this.dias = this.dias.concat(`${i}`);
+    }
+    if(this.fecha.getFullYear()!=2018)
+    {
+      this.anos = this.anos.concat(`${this.fecha.getFullYear()}`);
+    }
     this.servicio.getContactos().snapshotChanges()
     .map(changes =>{
       return changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
     })
     .subscribe(contactos => {
       this.contactos = contactos
+      //this.ciudades = this.ciudades.concat(contactos);
+
     });
   }
-  onSelect(event){
+  onSelect($event){
     let query = null;
-    if(event.value == "Todos")
+    if($event.value == "Todos")
       query= this.servicio.getContactos();
     else
-      query = this.servicio.getContactosFiltro(event.value);
+      query = this.servicio.getContactosFiltro($event.value);
     query.snapshotChanges()
     .map(changes =>{
-      return changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
+      return changes.map(c => ({
+        key: c.payload.key, ...c.payload.val()
+      }))
     }).subscribe(contactos =>{
       this.contactos = contactos;
     })
