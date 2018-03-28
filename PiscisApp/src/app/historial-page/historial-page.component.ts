@@ -33,6 +33,7 @@ export class HistorialPageComponent implements OnInit{
   ano: string;
   mes: string;
   dia: string;
+  filtro = true;
 
   //reglas de filtros activos
   filtros = {}
@@ -61,6 +62,8 @@ export class HistorialPageComponent implements OnInit{
   }
   private aplicarFiltros(){
       this.temperaturasFiltradas = _.filter(this.temperaturas, _.conforms(this.filtros))
+      this.contacto = null;
+      this.filtro = false;
   }
 
   filtroExactoAno(property: string, regla:any){
@@ -75,6 +78,12 @@ export class HistorialPageComponent implements OnInit{
   filtroExactoDia(property: string, regla: any){
     this.filtros[property] = val=>val ==regla
     this.aplicarFiltros()
+  }
+  eliminarFiltro(property: string){
+    delete this.filtros[property]
+    this[property]=null
+    this.aplicarFiltros();
+    this.filtro= true;
   }
 
   /*onSelect($event){
@@ -94,10 +103,10 @@ export class HistorialPageComponent implements OnInit{
     this.contacto = null;
   }*/
   
-  onClick(temperatura){
-    this.temperatura = temperatura;
+  onClick(contacto){
+    this.contacto = contacto;
   }
   cerrarDetalles(){
-    this.temperatura = null;
+    this.contacto = null;
   }
 }

@@ -3,6 +3,7 @@
   <span class="fill-remaining-space"></span>
   <span>Piscis</span>
 </mat-toolbar>
+<mat-card>
 <mat-form-field>
   <mat-select placeholder="Año" [(ngModel)]="ano" (change)="filtroExactoAno('ano',ano)">
     <mat-option value="2018" >2018</mat-option>
@@ -11,6 +12,7 @@
     <mat-option value="2021" >2021</mat-option>
     <mat-option value="2022" >2022</mat-option>
   </mat-select>
+  <button mat-button *ngIf="ano" (click)="eliminarFiltro('ano')">Eliminar Filtro</button>
 </mat-form-field>
 <mat-form-field>
   <mat-select placeholder="Mes" [(ngModel)]="mes" (change)="filtroExactoMes('mes',mes)">
@@ -27,6 +29,7 @@
     <mat-option value="Noviembre" >Noviembre</mat-option>
     <mat-option value="Diciembre" >Diciembre</mat-option>
   </mat-select>
+  <button mat-button *ngIf="mes" (click)="eliminarFiltro('mes')">Eliminar Filtro</button>
 </mat-form-field>
 <mat-form-field>
   <mat-select placeholder="Dia" [(ngModel)]="dia" (change)="filtroExactoAno('dia',dia)">
@@ -62,8 +65,31 @@
     <mat-option value="30">30</mat-option>
     <mat-option value="31">31</mat-option>
   </mat-select>
+  <button mat-button *ngIf="dia" (click)="eliminarFiltro('dia')">Eliminar Filtro</button>
 </mat-form-field>
-<mat-card>
+</mat-card>
+<mat-card *ngIf="filtro">
+  <table class="table table-hover">
+    <thead class="thead-inverse">
+      <tr>
+        <th>ID</th>
+        <th>Valor</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let temperatura of temperaturas">
+        <td>{{temperatura.private_key_id}}
+        <td>{{temperatura.valor}}</td>
+        <td>
+        <button mat-button (click)="onClick(temperatura)">Detalles</button>
+        </td>
+      </tr>
+      <app-detalles [contacto]="contacto" (cerrar)="cerrarDetalles()"></app-detalles>
+    </tbody>
+  </table>
+</mat-card>
+<mat-card *ngIf="!filtro">
   <table class="table table-hover">
     <thead class="thead-inverse">
       <tr>
@@ -74,13 +100,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let temperatura of temperaturasFiltradas">
-        <td>{{temperatura.private_key_id}}</td>
+        <td>{{temperatura.private_key_id}}
         <td>{{temperatura.valor}}</td>
         <td>
-        <button mat-button (click)="onClick(contacto)">Detalles</button>
+        <button mat-button (click)="onClick(temperatura)">Detalles</button>
         </td>
       </tr>
-      <tr><app-detalles [contacto]="contacto" (cerrar)="cerrarDetalles()"></app-detalles></tr>
+      <app-detalles [contacto]="contacto" (cerrar)="cerrarDetalles()"></app-detalles>
     </tbody>
   </table>
 </mat-card>
