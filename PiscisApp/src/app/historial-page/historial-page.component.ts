@@ -46,7 +46,10 @@ export class HistorialPageComponent implements OnInit{
     {
       this.anos = this.anos.concat(`${this.fecha.getFullYear()}`);
     }
-    this.db.list('/contactos')
+    this.db.list('/contactos').snapshotChanges()
+    .map(temperaturas=>{
+      return temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
+    })
     .subscribe(temperaturas=>{
       this.temperaturas = temperaturas;
     })

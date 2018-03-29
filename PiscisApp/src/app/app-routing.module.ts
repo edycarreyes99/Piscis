@@ -8,7 +8,6 @@ import {NotFoundPageComponent} from './not-found-page/not-found-page.component';
 import {HistorialPageComponent} from './historial-page/historial-page.component'
 import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
 import {NavbarComponent} from './navbar/navbar.component'
-import {VerifiedContentOnlyGuard} from './guards/verified-content-only.guard';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
