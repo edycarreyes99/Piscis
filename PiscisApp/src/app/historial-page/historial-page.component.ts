@@ -3,6 +3,7 @@ import {AuthService} from '../auth.service'
 import {MatDialog} from '@angular/material';
 import {AngularFireDatabase} from 'angularfire2/database';
 import * as _ from 'lodash';
+import { DocumentSnapshot } from '@firebase/firestore-types';
 @Component({
   selector: 'app-historial-page',
   templateUrl: './historial-page.component.html',
@@ -48,6 +49,8 @@ export class HistorialPageComponent implements OnInit{
     }
     this.db.list('/contactos').snapshotChanges()
     .map(temperaturas=>{
+      let values = temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
+      console.log(values);
       return temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
     })
     .subscribe(temperaturas=>{
