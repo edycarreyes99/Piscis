@@ -49,7 +49,9 @@ export class HistorialPageComponent implements OnInit{
     }
     this.db.list('/contactos').snapshotChanges()
     .map(temperaturas=>{
-      let values = temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
+      let values = temperaturas.map(c=>({
+        key: c.payload.key, ...c.payload.val()
+      }))
       console.log(values);
       return temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
     })
