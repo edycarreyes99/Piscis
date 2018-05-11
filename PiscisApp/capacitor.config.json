@@ -1,0 +1,6 @@
+{
+  "appId": "com.firebase.app.piscisapp",
+  "appName": "PiscisApp",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}
