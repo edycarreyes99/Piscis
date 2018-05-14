@@ -10,6 +10,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { PrivadoPageComponent } from './privado-page/privado-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { HistorialPageComponent } from './historial-page/historial-page.component';
+import {DataChartsComponent} from './data-charts/data-charts.component';
 import {AuthService} from './auth.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
@@ -41,6 +42,7 @@ export const firebaseConfig={
     NotFoundPageComponent,
     HistorialPageComponent,
     DetallesComponent,
+    DataChartsComponent,
   ],
   imports: [
     BrowserModule,
