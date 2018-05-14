@@ -5,8 +5,8 @@ import { promise } from 'protractor';
 import { reject } from 'q';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
-//import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
-import { AngularFireDatabase} from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+//import { AngularFireDatabase} from 'angularfire2/database';
 import { InjectFlags } from '@angular/core/src/render3/di';
 
 @Injectable()
@@ -67,4 +67,7 @@ export class AuthService {
     })
   }
 
+  dataCharts(dataset: string){
+    return this.af.list(dataset);
+  }
 }

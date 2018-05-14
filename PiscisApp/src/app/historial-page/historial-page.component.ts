@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import {AuthService} from '../auth.service'
 import {MatDialog} from '@angular/material';
 import {AngularFireDatabase} from 'angularfire2/database';
 import * as _ from 'lodash';
 import { DocumentSnapshot } from '@firebase/firestore-types';
+declare var Plotly: any;
 @Component({
   selector: 'app-historial-page',
   templateUrl: './historial-page.component.html',
@@ -11,6 +12,7 @@ import { DocumentSnapshot } from '@firebase/firestore-types';
 })
 export class HistorialPageComponent implements OnInit{
   title = 'Temperaturas';
+  @ViewChild('chart') el: ElementRef;
   contactos: any[];
   fecha= new Date();
   anos = ['Todos',`${this.fecha.getFullYear()}`];
@@ -19,6 +21,7 @@ export class HistorialPageComponent implements OnInit{
     ];
     dias = []
   contacto = null;
+  chart = false;
   temperatura = null;
   contactoEditar = null;
   contactoAgregar=false;
@@ -68,30 +71,43 @@ export class HistorialPageComponent implements OnInit{
 
     });*/
   }
+  //funcion que aplica los filtros cuando se establece cada parametro en los select
   private aplicarFiltros(){
       this.temperaturasFiltradas = _.filter(this.temperaturas, _.conforms(this.filtros))
       this.contacto = null;
       this.filtro = false;
   }
-
+//se aplica el filtro para el select de años
   filtroExactoAno(property: string, regla:any){
     let query = null;
     this.filtros[property] = val => val == regla
     this.aplicarFiltros()
   }
+  //se aplica el filtro para el select de mes
   filtroExactoMes(property: string, regla: any){
     this.filtros[property] = val=>val ==regla
     this.aplicarFiltros()
   }
+  //se aplica el filtro para el select de dias
   filtroExactoDia(property: string, regla: any){
     this.filtros[property] = val=>val ==regla
     this.aplicarFiltros()
   }
+  //funcion que ejecuta el boton para eliminar los filtros de cada select
   eliminarFiltro(property: string){
     delete this.filtros[property]
     this[property]=null
     this.aplicarFiltros();
     this.filtro= true;
+  }
+
+  //funcion que muestra el grafico
+  mostrarGrafico(){
+    this.chart=true;
+  }
+  //funcion que oculta el grafico
+  cerrarGrafico(){
+    this.chart=false;
   }
 
   /*onSelect($event){

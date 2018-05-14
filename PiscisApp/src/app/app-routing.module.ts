@@ -7,7 +7,8 @@ import {PrivadoPageComponent} from './privado-page/privado-page.component';
 import {NotFoundPageComponent} from './not-found-page/not-found-page.component';
 import {HistorialPageComponent} from './historial-page/historial-page.component'
 import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
-import {NavbarComponent} from './navbar/navbar.component'
+import {NavbarComponent} from './navbar/navbar.component';
+import {DataChartsComponent} from './data-charts/data-charts.component';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'privado', component: PrivadoPageComponent,canActivate:[AuthContentOnlyGuard]},
   {path: 'historial', component: HistorialPageComponent,canActivate:[AuthContentOnlyGuard]},
   {path: '**', component: NotFoundPageComponent},
+  {path: 'dataCharts', component: DataChartsComponent},
 ];
 
 @NgModule({

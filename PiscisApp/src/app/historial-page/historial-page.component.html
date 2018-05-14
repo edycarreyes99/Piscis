@@ -3,6 +3,7 @@
   <span class="fill-remaining-space"></span>
   <span>Piscis</span>
 </mat-toolbar>
+
 <mat-card>
 <mat-form-field>
   <mat-select placeholder="Año" [(ngModel)]="ano" (change)="filtroExactoAno('ano',ano)">
@@ -65,9 +66,23 @@
     <mat-option value="30">30</mat-option>
     <mat-option value="31">31</mat-option>
   </mat-select>
-  <button mat-button *ngIf="dia" (click)="eliminarFiltro('dia')">Eliminar Filtro</button>
+  <button mat-button *ngIf="ano && mes && dia" (click)="eliminarFiltro('dia')">Eliminar Filtro</button>
 </mat-form-field>
+<button mat-button *ngIf="ano && mes && dia && !chart" class="my-auto" (click)="mostrarGrafico()">Mostrar Gráfico</button>
 </mat-card>
+<!--Aqui es donde ira el grafico-->
+<div *ngIf="chart">
+    <mat-card>
+        <mat-card-title>
+          Grafico de la temperatura
+        </mat-card-title>
+        <mat-card-content>
+          <app-data-charts></app-data-charts>
+          <button mat-button (click)="cerrarGrafico()">Cerrar Grafico</button>
+      
+        </mat-card-content>
+      </mat-card>
+</div>
 <mat-card *ngIf="filtro">
   <table class="table table-hover">
     <thead class="thead-inverse">
@@ -89,7 +104,7 @@
     </tbody>
   </table>
 </mat-card>
-<mat-card *ngIf="!filtro">
+<mat-card *ngIf="!filtro && !chart">
   <table class="table table-hover">
     <thead class="thead-inverse">
       <tr>
