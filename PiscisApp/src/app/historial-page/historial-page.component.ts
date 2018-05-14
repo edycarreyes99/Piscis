@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material';
 import {AngularFireDatabase} from 'angularfire2/database';
 import * as _ from 'lodash';
 import { DocumentSnapshot } from '@firebase/firestore-types';
+import { PropertyRead } from '@angular/compiler';
 declare var Plotly: any;
 @Component({
   selector: 'app-historial-page',
@@ -33,6 +34,7 @@ export class HistorialPageComponent implements OnInit{
   ){}
   temperaturas : any;
   temperaturasFiltradas: any;
+  
   //propiedades del filtrado
   ano: string;
   mes: string;
@@ -42,14 +44,7 @@ export class HistorialPageComponent implements OnInit{
   //reglas de filtros activos
   filtros = {}
   ngOnInit(){
-    for(var i=1; i<=31; i++)
-    {
-      this.dias = this.dias.concat(`${i}`);
-    }
-    if(this.fecha.getFullYear()!=2018)
-    {
-      this.anos = this.anos.concat(`${this.fecha.getFullYear()}`);
-    }
+    //se extraen los datos por primera vez... En este caso se mostraran todos los datos la primera vez que se cargue la pagina antes de aplicar los filtros.
     this.db.list('/contactos').snapshotChanges()
     .map(temperaturas=>{
       let values = temperaturas.map(c=>({
@@ -61,44 +56,53 @@ export class HistorialPageComponent implements OnInit{
     .subscribe(temperaturas=>{
       this.temperaturas = temperaturas;
     })
-    /*this.servicio.getContactos().snapshotChanges()
-    .map(changes =>{
-      return changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-    })
-    .subscribe(contactos => {
-      this.contactos = contactos
-      //this.ciudades = this.ciudades.concat(contactos);
-
-    });*/
-  }
-  //funcion que aplica los filtros cuando se establece cada parametro en los select
-  private aplicarFiltros(){
-      this.temperaturasFiltradas = _.filter(this.temperaturas, _.conforms(this.filtros))
-      this.contacto = null;
-      this.filtro = false;
+    //se llaman a las funciones desde el servicio y se igualan todas las variables.
+      this.servicio.extraerDatos();
+      this.temperaturasFiltradas = this.servicio.temperaturasFiltradas;
+      this.temperaturas = this.servicio.temperaturas;
+      this.temperatura = this.servicio.temperatura;
+      this.filtros = this.servicio.filtros;
   }
 //se aplica el filtro para el select de años
-  filtroExactoAno(property: string, regla:any){
-    let query = null;
-    this.filtros[property] = val => val == regla
-    this.aplicarFiltros()
-  }
+filtroExactoAno(property: string, regla:any){
+  this.servicio.filtroExactoAno(property,regla);
+  this.temperaturasFiltradas = this.servicio.temperaturasFiltradas;
+  this.temperaturas = this.servicio.temperaturas;
+  this.temperatura = this.servicio.temperatura;
+  this.filtro = this.servicio.filtro;
+  this.filtros = this.servicio.filtros;
+}
+
   //se aplica el filtro para el select de mes
   filtroExactoMes(property: string, regla: any){
-    this.filtros[property] = val=>val ==regla
-    this.aplicarFiltros()
+    this.servicio.filtroExactoMes(property,regla);
+    this.temperaturasFiltradas = this.servicio.temperaturasFiltradas;
+    this.temperaturas = this.servicio.temperaturas;
+    this.temperatura = this.servicio.temperatura;
+    this.filtro = this.servicio.filtro;
+    this.filtros = this.servicio.filtros;
   }
   //se aplica el filtro para el select de dias
   filtroExactoDia(property: string, regla: any){
-    this.filtros[property] = val=>val ==regla
-    this.aplicarFiltros()
+    this.servicio.filtroExactoDia(property, regla);
+    this.temperaturasFiltradas = this.servicio.temperaturasFiltradas;
+    this.temperaturas = this.servicio.temperaturas;
+    this.temperatura = this.servicio.temperatura;
+    this.filtro = this.servicio.filtro;
+    this.filtros = this.servicio.filtros;
   }
   //funcion que ejecuta el boton para eliminar los filtros de cada select
   eliminarFiltro(property: string){
+    this.servicio.eliminarFiltro(property)
     delete this.filtros[property]
     this[property]=null
-    this.aplicarFiltros();
+    this.servicio.aplicarFiltros();
     this.filtro= true;
+    this.temperaturasFiltradas = this.servicio.temperaturasFiltradas;
+    this.temperaturas = this.servicio.temperaturas;
+    this.temperatura = this.servicio.temperatura;
+    this.filtro = this.servicio.filtro;
+    this.filtros = this.servicio.filtros;
   }
 
   //funcion que muestra el grafico
