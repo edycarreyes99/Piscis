@@ -92,6 +92,12 @@ filtroExactoAno(property: string, regla:any){
     this.temperatura = this.servicio.temperatura;
     this.filtro = this.servicio.filtro;
     this.filtros = this.servicio.filtros;
+    this.temperaturasFiltradas.map(charts=>{
+      let values = charts.map(c=>({
+        key: c.payload.key,... c.payload.val()
+      }))
+      console.log(values);
+    })
   }
   //funcion que ejecuta el boton para eliminar los filtros de cada select
   eliminarFiltro(property: string){

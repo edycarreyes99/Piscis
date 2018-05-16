@@ -49,9 +49,12 @@ export class AuthService {
       let values = temperaturas.map(c=>({
         key: c.payload.key,... c.payload.val()
       }))
-      Object.getOwnPropertyNames(values).forEach(function(val, idx, array) {
-        console.log(val + " -> " + values[val]);
-      })
+      /*Object.getOwnPropertyNames(values).forEach(function(val, idx, array) {
+        console.log(val + " -> " + Object.values(values[val].valor));
+      })*/
+      /*Object.keys(values).forEach(function(val,idx,array){
+        console.log(val+"->"+Object.values(values[val].valor));
+      })*/
       return temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
     })
     .subscribe(temperaturas=>{
