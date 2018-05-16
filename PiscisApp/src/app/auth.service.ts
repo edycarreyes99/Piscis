@@ -27,8 +27,12 @@ export class AuthService {
   temperatura = null;
   contactoEditar = null;
   contactoAgregar=false;
+  banderita = false;
   temperaturas : any;
   temperaturasFiltradas: any;
+  temperaturasFiltradasGrafico:any;
+  arrayx = [];
+  arrayy = [];
   //propiedades del filtrado
   ano: string;
   mes: string;
@@ -43,14 +47,16 @@ export class AuthService {
     this.af.list('/contactos').snapshotChanges()
     .map(temperaturas=>{
       let values = temperaturas.map(c=>({
-        key: c.payload.key, ...c.payload.val()
+        key: c.payload.key,... c.payload.val()
       }))
-      console.log(values);
+      Object.getOwnPropertyNames(values).forEach(function(val, idx, array) {
+        console.log(val + " -> " + values[val]);
+      })
       return temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
     })
     .subscribe(temperaturas=>{
       this.temperaturas = temperaturas;
-    })
+      })
   }
 
 //funcion para aplicar cada uno de los filtros al seleccionarlos
@@ -75,6 +81,23 @@ filtroExactoMes(property: string, regla: any){
 filtroExactoDia(property: string, regla: any){
   this.filtros[property] = val=>val ==regla
   this.aplicarFiltros()
+  /*this.temperaturasFiltradas.forEach(function(element) {
+    this.arrayx.push(element.val().hora);
+    this.arrayy.push(element.val().valor)
+    console.log("el grafico auth de x es: "+this.arrayx);
+    console.log("el grafico auth de y es: "+this.arrayy);
+  });*/
+  this.temperaturasFiltradasGrafico = this.temperaturasFiltradas;
+  this.banderita = true;
+}
+extraerDatosGrafico(){
+  this.temperaturasFiltradas.forEach(element => {
+    this.arrayx.push(element.val().hora);
+    this.arrayy.push(element.val().valor)
+    console.log("el grafico auth de x es: "+this.arrayx);
+    console.log("el grafico auth de y es: "+this.arrayy);
+  });
+  this.temperaturasFiltradasGrafico = this.temperaturasFiltradas;
 }
 //funcion que ejecuta el boton para eliminar los filtros de cada select
 eliminarFiltro(property: string){

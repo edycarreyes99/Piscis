@@ -50,12 +50,14 @@ export class HistorialPageComponent implements OnInit{
       let values = temperaturas.map(c=>({
         key: c.payload.key, ...c.payload.val()
       }))
-      console.log(values);
       return temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
     })
     .subscribe(temperaturas=>{
       this.temperaturas = temperaturas;
     })
+    if(this.temperaturasFiltradas){
+      console.log("el grafico auth de x es: "+this.temperaturasFiltradas);
+    }
     //se llaman a las funciones desde el servicio y se igualan todas las variables.
       this.servicio.extraerDatos();
       this.temperaturasFiltradas = this.servicio.temperaturasFiltradas;
