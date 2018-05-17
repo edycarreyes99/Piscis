@@ -1,0 +1,51 @@
+[debug] [2018-05-17T05:07:10.621Z] ----------------------------------------------------------------------
+[debug] [2018-05-17T05:07:10.701Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\edyca\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2018-05-17T05:07:10.702Z] CLI Version:   3.18.4
+[debug] [2018-05-17T05:07:10.702Z] Platform:      win32
+[debug] [2018-05-17T05:07:10.702Z] Node Version:  v9.11.1
+[debug] [2018-05-17T05:07:10.704Z] Time:          Thu May 17 2018 07:07:10 GMT+0200 (Hora de verano romance)
+[debug] [2018-05-17T05:07:10.704Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-05-17T05:07:10.783Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-05-17T05:07:10.783Z] > authorizing via signed-in user
+[debug] [2018-05-17T05:07:10.798Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-05-17T05:07:10.798Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/8lZpE66R8nWHKPk0F4phiXOUkVCfj_fSeFtfsHVJC5xGo3li3dSpQgqWwVhB6YqF',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu May 17 2018 07:07:10 GMT+0200 (Hora de verano romance)
+[debug] [2018-05-17T05:07:11.382Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-17T05:07:11.493Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/proyecto-robotica-35bed  
+  
+ Thu May 17 2018 07:07:11 GMT+0200 (Hora de verano romance)
+[debug] [2018-05-17T05:07:12.176Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-17T05:07:12.179Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/proyecto-robotica-35bed/tokens  
+  
+ Thu May 17 2018 07:07:12 GMT+0200 (Hora de verano romance)
+[debug] [2018-05-17T05:07:12.716Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'proyecto-robotica-35bed'...
+[info] 
+[info] i  deploying storage, hosting
+[debug] [2018-05-17T05:07:13.556Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/proyecto-robotica-35bed  
+  
+ Thu May 17 2018 07:07:13 GMT+0200 (Hora de verano romance)
+[debug] [2018-05-17T05:07:14.254Z] <<< HTTP RESPONSE 200
+[info] i  storage: checking storage.rules for compilation errors...
+[debug] [2018-05-17T05:07:14.338Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/proyecto-robotica-35bed:test  
+ { source: { files: [ [Object] ] } } 
+ Thu May 17 2018 07:07:14 GMT+0200 (Hora de verano romance)
+[debug] [2018-05-17T05:07:14.731Z] <<< HTTP RESPONSE 200
+[info] +  storage: rules file storage.rules compiled successfully
+[info] i  storage: uploading rules storage.rules...
+[debug] [2018-05-17T05:07:14.785Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/proyecto-robotica-35bed/rulesets  
+ { source: { files: [ [Object] ] } } 
+ Thu May 17 2018 07:07:14 GMT+0200 (Hora de verano romance)
+[debug] [2018-05-17T05:07:15.232Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-17T05:07:15.232Z] [rules] created ruleset projects/proyecto-robotica-35bed/rulesets/41aba9d1-c405-4e37-acb3-013eb3f6520a
+[info] i  hosting: preparing public directory for upload...
+[debug] [2018-05-17T05:07:18.490Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/proyecto-robotica-35bed/uploads/-LCgUgO6-QUO44lQOTnB?fileCount=13&message=  
+  
+ Thu May 17 2018 07:07:18 GMT+0200 (Hora de verano romance)
