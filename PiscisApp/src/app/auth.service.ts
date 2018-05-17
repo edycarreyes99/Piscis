@@ -49,12 +49,6 @@ export class AuthService {
       let values = temperaturas.map(c=>({
         key: c.payload.key,... c.payload.val()
       }))
-      /*Object.getOwnPropertyNames(values).forEach(function(val, idx, array) {
-        console.log(val + " -> " + Object.values(values[val].valor));
-      })*/
-      /*Object.keys(values).forEach(function(val,idx,array){
-        console.log(val+"->"+Object.values(values[val].valor));
-      })*/
       return temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
     })
     .subscribe(temperaturas=>{
@@ -84,23 +78,8 @@ filtroExactoMes(property: string, regla: any){
 filtroExactoDia(property: string, regla: any){
   this.filtros[property] = val=>val ==regla
   this.aplicarFiltros()
-  /*this.temperaturasFiltradas.forEach(function(element) {
-    this.arrayx.push(element.val().hora);
-    this.arrayy.push(element.val().valor)
-    console.log("el grafico auth de x es: "+this.arrayx);
-    console.log("el grafico auth de y es: "+this.arrayy);
-  });*/
   this.temperaturasFiltradasGrafico = this.temperaturasFiltradas;
   this.banderita = true;
-}
-extraerDatosGrafico(){
-  this.temperaturasFiltradas.forEach(element => {
-    this.arrayx.push(element.val().hora);
-    this.arrayy.push(element.val().valor)
-    console.log("el grafico auth de x es: "+this.arrayx);
-    console.log("el grafico auth de y es: "+this.arrayy);
-  });
-  this.temperaturasFiltradasGrafico = this.temperaturasFiltradas;
 }
 //funcion que ejecuta el boton para eliminar los filtros de cada select
 eliminarFiltro(property: string){
@@ -111,17 +90,6 @@ eliminarFiltro(property: string){
 }
 
 //terminan las funciones para Historial-page
-
-
-  /*getContactos(){
-    this.contactos = this.af.list('/contactos');
-    return this.contactos;
-  }
-
-  getContactosFiltro(filtro){
-      this.contactos = this.af.list('/contactos', ref => ref.orderByChild('hora').equalTo(filtro)) ;
-      return this.contactos;
-  }*/
 
   registerUser(email, pass){
     return new Promise((resolve,reject)=>{
@@ -161,9 +129,5 @@ eliminarFiltro(property: string){
     }).catch(function(error){
       console.log(error);
     })
-  }
-
-  dataCharts(dataset: string){
-    return this.af.list(dataset);
   }
 }

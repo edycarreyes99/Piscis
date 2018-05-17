@@ -45,6 +45,7 @@ export class HistorialPageComponent implements OnInit{
 
   //reglas de filtros activos
   filtros = {}
+
   ngOnInit(){
     //se extraen los datos por primera vez... En este caso se mostraran todos los datos la primera vez que se cargue la pagina antes de aplicar los filtros.
     this.db.list('/contactos').snapshotChanges()
@@ -57,9 +58,7 @@ export class HistorialPageComponent implements OnInit{
     .subscribe(temperaturas=>{
       this.temperaturas = temperaturas;
     })
-    if(this.temperaturasFiltradas){
-      console.log("el grafico auth de x es: "+this.temperaturasFiltradas);
-    }
+
     //se llaman a las funciones desde el servicio y se igualan todas las variables.
       this.servicio.extraerDatos();
       this.temperaturasFiltradas = this.servicio.temperaturasFiltradas;
@@ -129,11 +128,11 @@ filtroExactoAno(property: string, regla:any){
     for(var i=0; i<Object.keys(this.temperaturasFiltradas).length;i++){
       //se convierten los valores de las temperaturas a enteros para su push al arreglo para el grafico
       //console.log(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));
-      this.arrayx.push(Object.values(Object.values(this.temperaturasFiltradas[i].hora).join("")).join(""));
-      this.arrayy.push(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));
+      this.arrayx.push(Object.values(Object.values(this.temperaturasFiltradas[i].hora).join("")).join(""));//datos de las X que son las horas de cada temperatura
+      this.arrayy.push(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));//datos de las Y que son las temperaturas de cada hora
     } 
     //se emite en consola el arreglo en Y
-    console.log(Object.values(this.arrayy));
+    //console.log(Object.values(this.arrayy));
 
     //se emite la señal para que el componente del grafico agarre los valores desde este componente
     this.chart=true;
@@ -141,24 +140,9 @@ filtroExactoAno(property: string, regla:any){
   //funcion que oculta el grafico
   cerrarGrafico(){
     this.chart=false;
+    this.arrayx = [];
+    this.arrayy = [];
   }
-
-  /*onSelect($event){
-    let query = null;
-    if($event.value == "Todos")
-      query= this.servicio.getContactos();
-    else
-      query = this.servicio.getContactosFiltro($event.value);
-    query.snapshotChanges()
-    .map(changes =>{
-      return changes.map(c => ({
-        key: c.payload.key, ...c.payload.val()
-      }))
-    }).subscribe(contactos =>{
-      this.contactos = contactos;
-    })
-    this.contacto = null;
-  }*/
   
   onClick(contacto){
     this.contacto = contacto;

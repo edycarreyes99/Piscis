@@ -51,17 +51,17 @@ export class DataChartsComponent implements OnInit{
     
      //se reciben las temperaturas filtradas desde el servicio
      this.temperaturasFiltradas = this.servicio.temperaturasFiltradas
-     console.log("chart abierto");
+     //console.log("chart abierto");
      //se reciben los arreglos desde el componente de historial
      this.arrayx = this.historial.arrayx;
      this.arrayy = this.historial.arrayy;
      //se emiten por consola los arreglos recibidos desde historial
-     console.log('el arreglo de x es: '+this.arrayx);
-     console.log('el arreglo de y es: '+this.arrayy);
+     //console.log('el arreglo de x es: '+this.arrayx);
+     //console.log('el arreglo de y es: '+this.arrayy);
      //this.getReportValues();
      this.createChart();
      //se emiten las temperaturas filtradas recibidas desde el servicio
-     console.log('temperaturas filtradas en data charts'+this.temperaturasFiltradas[0].hora);
+     //console.log('temperaturas filtradas en data charts'+this.temperaturasFiltradas);
  }
  
  createChart(){
