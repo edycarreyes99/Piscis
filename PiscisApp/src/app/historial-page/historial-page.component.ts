@@ -26,6 +26,8 @@ export class HistorialPageComponent implements OnInit{
   temperatura = null;
   contactoEditar = null;
   contactoAgregar=false;
+  arrayx= [];
+  arrayy= [];
 
   constructor(
     private servicio: AuthService,
@@ -43,6 +45,7 @@ export class HistorialPageComponent implements OnInit{
 
   //reglas de filtros activos
   filtros = {}
+
   ngOnInit(){
     //se extraen los datos por primera vez... En este caso se mostraran todos los datos la primera vez que se cargue la pagina antes de aplicar los filtros.
     this.db.list('/contactos').snapshotChanges()
@@ -50,12 +53,12 @@ export class HistorialPageComponent implements OnInit{
       let values = temperaturas.map(c=>({
         key: c.payload.key, ...c.payload.val()
       }))
-      console.log(values);
       return temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
     })
     .subscribe(temperaturas=>{
       this.temperaturas = temperaturas;
     })
+
     //se llaman a las funciones desde el servicio y se igualan todas las variables.
       this.servicio.extraerDatos();
       this.temperaturasFiltradas = this.servicio.temperaturasFiltradas;
@@ -90,6 +93,12 @@ filtroExactoAno(property: string, regla:any){
     this.temperatura = this.servicio.temperatura;
     this.filtro = this.servicio.filtro;
     this.filtros = this.servicio.filtros;
+    this.temperaturasFiltradas.map(charts=>{
+      let values = charts.map(c=>({
+        key: c.payload.key,... c.payload.val()
+      }))
+      //console.log(values);
+    })
   }
   //funcion que ejecuta el boton para eliminar los filtros de cada select
   eliminarFiltro(property: string){
@@ -107,29 +116,33 @@ filtroExactoAno(property: string, regla:any){
 
   //funcion que muestra el grafico
   mostrarGrafico(){
+    //se dan a conocer los objetos de las temperaturas filtradas
+    //console.log('Las temperaturas Filtradas son: '+Object.entries(this.temperaturasFiltradas));
+
+    //se mapean todos los objetos de las temperaturas filtradas
+    this.temperaturasFiltradas.map(tf=>{
+      //console.log(Object.keys(tf).length)    
+    })
+
+    //se recorre todo el arreglo de objetos de las temperaturas filtradas
+    for(var i=0; i<Object.keys(this.temperaturasFiltradas).length;i++){
+      //se convierten los valores de las temperaturas a enteros para su push al arreglo para el grafico
+      //console.log(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));
+      this.arrayx.push(Object.values(Object.values(this.temperaturasFiltradas[i].hora).join("")).join(""));//datos de las X que son las horas de cada temperatura
+      this.arrayy.push(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));//datos de las Y que son las temperaturas de cada hora
+    } 
+    //se emite en consola el arreglo en Y
+    //console.log(Object.values(this.arrayy));
+
+    //se emite la señal para que el componente del grafico agarre los valores desde este componente
     this.chart=true;
   }
   //funcion que oculta el grafico
   cerrarGrafico(){
     this.chart=false;
+    this.arrayx = [];
+    this.arrayy = [];
   }
-
-  /*onSelect($event){
-    let query = null;
-    if($event.value == "Todos")
-      query= this.servicio.getContactos();
-    else
-      query = this.servicio.getContactosFiltro($event.value);
-    query.snapshotChanges()
-    .map(changes =>{
-      return changes.map(c => ({
-        key: c.payload.key, ...c.payload.val()
-      }))
-    }).subscribe(contactos =>{
-      this.contactos = contactos;
-    })
-    this.contacto = null;
-  }*/
   
   onClick(contacto){
     this.contacto = contacto;
