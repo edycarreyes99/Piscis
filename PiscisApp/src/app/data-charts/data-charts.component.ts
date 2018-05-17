@@ -48,16 +48,20 @@ export class DataChartsComponent implements OnInit{
    ){}
    temperaturasFiltradas : any;
    ngOnInit(){
-     this.banderita = this.servicio.banderita;
-     console.log("se recibio la bandera verde de dia");
+    
+     //se reciben las temperaturas filtradas desde el servicio
      this.temperaturasFiltradas = this.servicio.temperaturasFiltradas
      console.log("chart abierto");
-     this.arrayx = this.servicio.arrayx;
-     this.arrayy = this.servicio.arrayy;
-     this.getReportValues();
-     this.createChart();
+     //se reciben los arreglos desde el componente de historial
+     this.arrayx = this.historial.arrayx;
+     this.arrayy = this.historial.arrayy;
+     //se emiten por consola los arreglos recibidos desde historial
      console.log('el arreglo de x es: '+this.arrayx);
      console.log('el arreglo de y es: '+this.arrayy);
+     //this.getReportValues();
+     this.createChart();
+     //se emiten las temperaturas filtradas recibidas desde el servicio
+     console.log('temperaturas filtradas en data charts'+Object.values(this.temperaturasFiltradas));
  }
  
  createChart(){
@@ -76,7 +80,7 @@ export class DataChartsComponent implements OnInit{
  getReportValues(){
    this.arrayx = this.servicio.arrayx;
    this.arrayy = this.servicio.arrayy;
-   this.arrayx.push(1,2,3,4,5);
-   this.arrayy.push(1,2,4,8,16);
+   //this.arrayx.push(1,2,3,4,5);
+   //this.arrayy.push(1,2,4,8,16);
  }
  }

@@ -26,6 +26,8 @@ export class HistorialPageComponent implements OnInit{
   temperatura = null;
   contactoEditar = null;
   contactoAgregar=false;
+  arrayx= [];
+  arrayy= [];
 
   constructor(
     private servicio: AuthService,
@@ -115,15 +117,26 @@ filtroExactoAno(property: string, regla:any){
 
   //funcion que muestra el grafico
   mostrarGrafico(){
-    this.chart=true;
+    //se dan a conocer los objetos de las temperaturas filtradas
     //console.log('Las temperaturas Filtradas son: '+Object.entries(this.temperaturasFiltradas));
+
+    //se mapean todos los objetos de las temperaturas filtradas
     this.temperaturasFiltradas.map(tf=>{
       //console.log(Object.keys(tf).length)    
     })
+
+    //se recorre todo el arreglo de objetos de las temperaturas filtradas
     for(var i=0; i<Object.keys(this.temperaturasFiltradas).length;i++){
-      console.log(Object.values(Object.values(this.temperaturasFiltradas[i].valor).toString()).toString());
-      //console.log("elemento "+i+"\n"+Object.values(this.temperaturasFiltradas[i].valor))
-    }  
+      //se convierten los valores de las temperaturas a enteros para su push al arreglo para el grafico
+      //console.log(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));
+      this.arrayx.push(Object.values(this.temperaturasFiltradas[i].hora));
+      this.arrayy.push(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));
+    } 
+    //se emite en consola el arreglo en Y
+    console.log(Object.values(this.arrayy));
+
+    //se emite la señal para que el componente del grafico agarre los valores desde este componente
+    this.chart=true;
   }
   //funcion que oculta el grafico
   cerrarGrafico(){
