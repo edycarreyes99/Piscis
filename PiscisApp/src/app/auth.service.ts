@@ -27,8 +27,12 @@ export class AuthService {
   temperatura = null;
   contactoEditar = null;
   contactoAgregar=false;
+  banderita = false;
   temperaturas : any;
   temperaturasFiltradas: any;
+  temperaturasFiltradasGrafico:any;
+  arrayx = [];
+  arrayy = [];
   //propiedades del filtrado
   ano: string;
   mes: string;
@@ -43,14 +47,13 @@ export class AuthService {
     this.af.list('/contactos').snapshotChanges()
     .map(temperaturas=>{
       let values = temperaturas.map(c=>({
-        key: c.payload.key, ...c.payload.val()
+        key: c.payload.key,... c.payload.val()
       }))
-      console.log(values);
       return temperaturas.map(c=>({key: c.payload.key, ...c.payload.val()}))
     })
     .subscribe(temperaturas=>{
       this.temperaturas = temperaturas;
-    })
+      })
   }
 
 //funcion para aplicar cada uno de los filtros al seleccionarlos
@@ -75,6 +78,8 @@ filtroExactoMes(property: string, regla: any){
 filtroExactoDia(property: string, regla: any){
   this.filtros[property] = val=>val ==regla
   this.aplicarFiltros()
+  this.temperaturasFiltradasGrafico = this.temperaturasFiltradas;
+  this.banderita = true;
 }
 //funcion que ejecuta el boton para eliminar los filtros de cada select
 eliminarFiltro(property: string){
@@ -85,17 +90,6 @@ eliminarFiltro(property: string){
 }
 
 //terminan las funciones para Historial-page
-
-
-  /*getContactos(){
-    this.contactos = this.af.list('/contactos');
-    return this.contactos;
-  }
-
-  getContactosFiltro(filtro){
-      this.contactos = this.af.list('/contactos', ref => ref.orderByChild('hora').equalTo(filtro)) ;
-      return this.contactos;
-  }*/
 
   registerUser(email, pass){
     return new Promise((resolve,reject)=>{
@@ -135,9 +129,5 @@ eliminarFiltro(property: string){
     }).catch(function(error){
       console.log(error);
     })
-  }
-
-  dataCharts(dataset: string){
-    return this.af.list(dataset);
   }
 }

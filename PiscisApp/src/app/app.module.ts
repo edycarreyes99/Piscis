@@ -22,7 +22,7 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {environment} from '../environments/environment';
 import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
-//import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {AngularFirestoreModule} from 'angularfire2/firestore';
 export const firebaseConfig={
   apiKey: "AIzaSyBu_Yb1UXx6W12dkeSYvr7aj9ueNwj0NLQ",
   authDomain: "proyecto-robotica-35bed.firebaseapp.com",
@@ -56,6 +56,7 @@ export const firebaseConfig={
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    AngularFirestoreModule
 
     
   ],

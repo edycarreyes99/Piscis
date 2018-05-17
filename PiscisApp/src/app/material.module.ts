@@ -25,6 +25,8 @@ import{
     MatToolbarModule,
     MatTooltipModule,
     MatSelectionListOptionEvent,
+    MAT_NATIVE_DATE_FORMATS,
+    MAT_DATE_LOCALE
 }from '@angular/material';
 
 @NgModule({
@@ -50,7 +52,7 @@ import{
     MatStepperModule,
     MatTableModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
     ],
     exports: [
         MatButtonModule,
@@ -74,8 +76,11 @@ import{
     MatStepperModule,
     MatTableModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
     ],
+    providers:[
+        {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+    ]
 })
 
 export class MaterialModule{}

@@ -5,6 +5,12 @@
 </mat-toolbar>
 
 <mat-card>
+  <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="true" #picker></mat-datepicker>
+        
+  </mat-form-field>
 <mat-form-field>
   <mat-select placeholder="Año" [(ngModel)]="ano" (change)="filtroExactoAno('ano',ano)">
     <mat-option value="2018" >2018</mat-option>
@@ -68,7 +74,7 @@
   </mat-select>
   <button mat-button *ngIf="ano && mes && dia" (click)="eliminarFiltro('dia')">Eliminar Filtro</button>
 </mat-form-field>
-<button mat-button *ngIf="ano && mes && dia && !chart" class="my-auto" (click)="mostrarGrafico()">Mostrar Gráfico</button>
+<button mat-button *ngIf="ano && mes && dia !chart" class="my-auto" (click)="mostrarGrafico()">Mostrar Gráfico</button>
 </mat-card>
 <!--Aqui es donde ira el grafico-->
 <div *ngIf="chart">
