@@ -96,7 +96,7 @@ filtroExactoAno(property: string, regla:any){
       let values = charts.map(c=>({
         key: c.payload.key,... c.payload.val()
       }))
-      console.log(values);
+      //console.log(values);
     })
   }
   //funcion que ejecuta el boton para eliminar los filtros de cada select
@@ -116,6 +116,14 @@ filtroExactoAno(property: string, regla:any){
   //funcion que muestra el grafico
   mostrarGrafico(){
     this.chart=true;
+    //console.log('Las temperaturas Filtradas son: '+Object.entries(this.temperaturasFiltradas));
+    this.temperaturasFiltradas.map(tf=>{
+      //console.log(Object.keys(tf).length)    
+    })
+    for(var i=0; i<Object.keys(this.temperaturasFiltradas).length;i++){
+      console.log(Object.values(Object.values(this.temperaturasFiltradas[i].valor).toString()).toString());
+      //console.log("elemento "+i+"\n"+Object.values(this.temperaturasFiltradas[i].valor))
+    }  
   }
   //funcion que oculta el grafico
   cerrarGrafico(){
