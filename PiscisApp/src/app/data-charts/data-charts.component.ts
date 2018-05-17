@@ -38,7 +38,8 @@ export class DataChartsComponent implements OnInit{
   chartData = null;
   arrayx: any;
   arrayy:any;
-  af: AngularFirestoreCollection<any>
+  af: AngularFirestoreCollection<any>;
+  contador = 0;
 
 
 
@@ -59,6 +60,7 @@ export class DataChartsComponent implements OnInit{
      //console.log('el arreglo de x es: '+this.arrayx);
      //console.log('el arreglo de y es: '+this.arrayy);
      //this.getReportValues();
+     this.contador++;
      this.createChart();
      //se emiten las temperaturas filtradas recibidas desde el servicio
      //console.log('temperaturas filtradas en data charts'+this.temperaturasFiltradas);
@@ -68,13 +70,22 @@ export class DataChartsComponent implements OnInit{
    const element = this.el.nativeElement;
    const data= [{
      x:this.arrayx,
-     y:this.arrayy
+     y:this.arrayy,
+     marker:{color:'#19d3f3'}
    }]
+  
  
    const style ={
      margin: {t:0}
    }
-   Plotly.plot(element,data,style);
+   if(this.contador>1)
+   {
+    Plotly.plot(element,data,style);
+   }else{
+     Plotly.purge(this.el.nativeElement);
+     Plotly.plot(element,data,style);
+   }
+   
  }
  
  getReportValues(){
