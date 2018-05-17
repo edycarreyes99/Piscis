@@ -61,7 +61,7 @@ export class DataChartsComponent implements OnInit{
      //this.getReportValues();
      this.createChart();
      //se emiten las temperaturas filtradas recibidas desde el servicio
-     console.log('temperaturas filtradas en data charts'+Object.values(this.temperaturasFiltradas));
+     console.log('temperaturas filtradas en data charts'+this.temperaturasFiltradas[0].hora);
  }
  
  createChart(){

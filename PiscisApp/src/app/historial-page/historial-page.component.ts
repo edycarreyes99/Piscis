@@ -129,7 +129,7 @@ filtroExactoAno(property: string, regla:any){
     for(var i=0; i<Object.keys(this.temperaturasFiltradas).length;i++){
       //se convierten los valores de las temperaturas a enteros para su push al arreglo para el grafico
       //console.log(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));
-      this.arrayx.push(Object.values(this.temperaturasFiltradas[i].hora));
+      this.arrayx.push(Object.values(Object.values(this.temperaturasFiltradas[i].hora).join("")).join(""));
       this.arrayy.push(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));
     } 
     //se emite en consola el arreglo en Y
