@@ -74,7 +74,7 @@
   </mat-select>
   <button mat-button *ngIf="ano && mes && dia" (click)="eliminarFiltro('dia')">Eliminar Filtro</button>
 </mat-form-field>
-<button mat-button *ngIf=" !chart" class="my-auto" (click)="mostrarGrafico()">Mostrar Gráfico</button>
+<button mat-button *ngIf="ano && mes && dia !chart" class="my-auto" (click)="mostrarGrafico()">Mostrar Gráfico</button>
 </mat-card>
 <!--Aqui es donde ira el grafico-->
 <div *ngIf="chart">
