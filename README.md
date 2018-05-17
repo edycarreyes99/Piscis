@@ -1,2 +1,2 @@
 # piscis
-Proyecto Final de Piscis UNAN - LEON
+Una red de monitoreo multiplataforma.
