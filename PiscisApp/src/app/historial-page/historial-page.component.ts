@@ -5,6 +5,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import * as _ from 'lodash';
 import { DocumentSnapshot } from '@firebase/firestore-types';
 import { PropertyRead } from '@angular/compiler';
+import {Chart} from 'chart.js'
 declare var Plotly: any;
 @Component({
   selector: 'app-historial-page',

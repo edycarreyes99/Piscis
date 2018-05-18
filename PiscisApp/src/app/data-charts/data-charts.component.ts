@@ -18,6 +18,7 @@ import 'rxjs/add/operator/map';
 //import { AngularFireDatabase} from 'angularfire2/database';
 import { InjectFlags } from '@angular/core/src/render3/di';
 import {AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument} from 'angularfire2/firestore';
+import {Chart} from 'chart.js';
 
 
 
@@ -68,11 +69,27 @@ export class DataChartsComponent implements OnInit{
  
  createChart(){
    const element = this.el.nativeElement;
-   const data= [{
-     x:this.arrayx,
-     y:this.arrayy,
-     marker:{color:'#19d3f3'}
-   }]
+   const data= {
+    type: 'line',
+    data: {
+        labels: this.arrayx,
+        datasets: [{
+            label: 'Temperatura',
+            data: this.arrayy,
+            borderColor: '#32db64',
+            fill: false
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+}
   
  
    const style ={
@@ -80,10 +97,10 @@ export class DataChartsComponent implements OnInit{
    }
    if(this.contador>1)
    {
-    Plotly.plot(element,data,style);
+    this.chartData = new Chart(element,data);
    }else{
-     Plotly.purge(this.el.nativeElement);
-     Plotly.plot(element,data,style);
+     this.chartData = null;
+     this.chartData = new Chart(element,data);
    }
    
  }
