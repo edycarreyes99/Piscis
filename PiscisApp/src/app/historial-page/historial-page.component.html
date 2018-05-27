@@ -6,88 +6,88 @@
 
 <mat-card>
   <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker touchUi="true" #picker></mat-datepicker>
-        
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi="true" #picker></mat-datepicker>
+
   </mat-form-field>
-<mat-form-field>
-  <mat-select placeholder="Año" [(ngModel)]="ano" (change)="filtroExactoAno('ano',ano)">
-    <mat-option value="2018" >2018</mat-option>
-    <mat-option value="2019" >2019</mat-option>
-    <mat-option value="2020" >2020</mat-option>
-    <mat-option value="2021" >2021</mat-option>
-    <mat-option value="2022" >2022</mat-option>
-  </mat-select>
-  <button mat-button *ngIf="ano" (click)="eliminarFiltro('ano')">Eliminar Filtro</button>
-</mat-form-field>
-<mat-form-field>
-  <mat-select placeholder="Mes" [(ngModel)]="mes" (change)="filtroExactoMes('mes',mes)">
-    <mat-option value="Enero" >Enero</mat-option>
-    <mat-option value="Febrero" >Febrero</mat-option>
-    <mat-option value="Marzo" >Marzo</mat-option>
-    <mat-option value="Abril" >Abril</mat-option>
-    <mat-option value="Mayo" >Mayo</mat-option>
-    <mat-option value="Junio" >Junio</mat-option>
-    <mat-option value="Julio" >Julio</mat-option>
-    <mat-option value="Agosto" >Agosto</mat-option>
-    <mat-option value="Septiembre" >Septiembre</mat-option>
-    <mat-option value="Octubre" >Octubre</mat-option>
-    <mat-option value="Noviembre" >Noviembre</mat-option>
-    <mat-option value="Diciembre" >Diciembre</mat-option>
-  </mat-select>
-  <button mat-button *ngIf="mes" (click)="eliminarFiltro('mes')">Eliminar Filtro</button>
-</mat-form-field>
-<mat-form-field>
-  <mat-select placeholder="Dia" [(ngModel)]="dia" (change)="filtroExactoAno('dia',dia)">
-    <mat-option value="1">1</mat-option>
-    <mat-option value="2">2</mat-option>
-    <mat-option value="3">3</mat-option>
-    <mat-option value="4">4</mat-option>
-    <mat-option value="5">5</mat-option>
-    <mat-option value="6">6</mat-option>
-    <mat-option value="7">7</mat-option>
-    <mat-option value="8">8</mat-option>
-    <mat-option value="9">9</mat-option>
-    <mat-option value="10">10</mat-option>
-    <mat-option value="11">11</mat-option>
-    <mat-option value="12">12</mat-option>
-    <mat-option value="13">13</mat-option>
-    <mat-option value="14">14</mat-option>
-    <mat-option value="15">15</mat-option>
-    <mat-option value="16">16</mat-option>
-    <mat-option value="17">17</mat-option>
-    <mat-option value="18">18</mat-option>
-    <mat-option value="19">19</mat-option>
-    <mat-option value="20">20</mat-option>
-    <mat-option value="21">21</mat-option>
-    <mat-option value="22">22</mat-option>
-    <mat-option value="23">23</mat-option>
-    <mat-option value="24">24</mat-option>
-    <mat-option value="25">25</mat-option>
-    <mat-option value="26">26</mat-option>
-    <mat-option value="27">27</mat-option>
-    <mat-option value="28">28</mat-option>
-    <mat-option value="29">29</mat-option>
-    <mat-option value="30">30</mat-option>
-    <mat-option value="31">31</mat-option>
-  </mat-select>
-  <button mat-button *ngIf="ano && mes && dia" (click)="eliminarFiltro('dia')">Eliminar Filtro</button>
-</mat-form-field>
-<button mat-button *ngIf="ano && mes && dia !chart" class="my-auto" (click)="mostrarGrafico()">Mostrar Gráfico</button>
+  <mat-form-field>
+    <mat-select placeholder="Año" [(ngModel)]="ano" (change)="filtroExactoAno('ano',ano)">
+      <mat-option value="2018">2018</mat-option>
+      <mat-option value="2019">2019</mat-option>
+      <mat-option value="2020">2020</mat-option>
+      <mat-option value="2021">2021</mat-option>
+      <mat-option value="2022">2022</mat-option>
+    </mat-select>
+    <button mat-button *ngIf="ano" (click)="eliminarFiltro('ano')">Eliminar Filtro</button>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Mes" [(ngModel)]="mes" (change)="filtroExactoMes('mes',mes)">
+      <mat-option value="Enero">Enero</mat-option>
+      <mat-option value="Febrero">Febrero</mat-option>
+      <mat-option value="Marzo">Marzo</mat-option>
+      <mat-option value="Abril">Abril</mat-option>
+      <mat-option value="Mayo">Mayo</mat-option>
+      <mat-option value="Junio">Junio</mat-option>
+      <mat-option value="Julio">Julio</mat-option>
+      <mat-option value="Agosto">Agosto</mat-option>
+      <mat-option value="Septiembre">Septiembre</mat-option>
+      <mat-option value="Octubre">Octubre</mat-option>
+      <mat-option value="Noviembre">Noviembre</mat-option>
+      <mat-option value="Diciembre">Diciembre</mat-option>
+    </mat-select>
+    <button mat-button *ngIf="mes" (click)="eliminarFiltro('mes')">Eliminar Filtro</button>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Dia" [(ngModel)]="dia" (change)="filtroExactoAno('dia',dia)">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+      <mat-option value="4">4</mat-option>
+      <mat-option value="5">5</mat-option>
+      <mat-option value="6">6</mat-option>
+      <mat-option value="7">7</mat-option>
+      <mat-option value="8">8</mat-option>
+      <mat-option value="9">9</mat-option>
+      <mat-option value="10">10</mat-option>
+      <mat-option value="11">11</mat-option>
+      <mat-option value="12">12</mat-option>
+      <mat-option value="13">13</mat-option>
+      <mat-option value="14">14</mat-option>
+      <mat-option value="15">15</mat-option>
+      <mat-option value="16">16</mat-option>
+      <mat-option value="17">17</mat-option>
+      <mat-option value="18">18</mat-option>
+      <mat-option value="19">19</mat-option>
+      <mat-option value="20">20</mat-option>
+      <mat-option value="21">21</mat-option>
+      <mat-option value="22">22</mat-option>
+      <mat-option value="23">23</mat-option>
+      <mat-option value="24">24</mat-option>
+      <mat-option value="25">25</mat-option>
+      <mat-option value="26">26</mat-option>
+      <mat-option value="27">27</mat-option>
+      <mat-option value="28">28</mat-option>
+      <mat-option value="29">29</mat-option>
+      <mat-option value="30">30</mat-option>
+      <mat-option value="31">31</mat-option>
+    </mat-select>
+    <button mat-button *ngIf="ano && mes && dia" (click)="eliminarFiltro('dia')">Eliminar Filtro</button>
+  </mat-form-field>
+  <button mat-button *ngIf="ano && mes && dia !chart" class="my-auto" (click)="mostrarGrafico()">Mostrar Gráfico</button>
 </mat-card>
 <!--Aqui es donde ira el grafico-->
 <div *ngIf="chart">
-    <mat-card>
-        <mat-card-title>
-          Grafico de la temperatura
-        </mat-card-title>
-        <mat-card-content>
-          <app-data-charts></app-data-charts>
-          <button mat-button (click)="cerrarGrafico()">Cerrar Grafico</button>
-      
-        </mat-card-content>
-      </mat-card>
+  <mat-card>
+    <mat-card-title>
+      Grafico de la temperatura
+    </mat-card-title>
+    <mat-card-content>
+      <app-data-charts></app-data-charts>
+      <button mat-button (click)="cerrarGrafico()">Cerrar Grafico</button>
+
+    </mat-card-content>
+  </mat-card>
 </div>
 <mat-card *ngIf="filtro">
   <table class="table table-hover">
@@ -101,10 +101,10 @@
     <tbody>
       <tr *ngFor="let temperatura of temperaturas">
         <td>{{temperatura.private_key_id}}
-        <td>{{temperatura.valor}}</td>
-        <td>
-        <button mat-button (click)="onClick(temperatura)">Detalles</button>
-        </td>
+          <td>{{temperatura.valor}}</td>
+          <td>
+            <button mat-button (click)="onClick(temperatura)">Detalles</button>
+          </td>
       </tr>
       <app-detalles [contacto]="contacto" (cerrar)="cerrarDetalles()"></app-detalles>
     </tbody>
@@ -122,10 +122,10 @@
     <tbody>
       <tr *ngFor="let temperatura of temperaturasFiltradas">
         <td>{{temperatura.private_key_id}}
-        <td>{{temperatura.valor}}</td>
-        <td>
-        <button mat-button (click)="onClick(temperatura)">Detalles</button>
-        </td>
+          <td>{{temperatura.valor}}</td>
+          <td>
+            <button mat-button (click)="onClick(temperatura)">Detalles</button>
+          </td>
       </tr>
       <app-detalles [contacto]="contacto" (cerrar)="cerrarDetalles()"></app-detalles>
     </tbody>

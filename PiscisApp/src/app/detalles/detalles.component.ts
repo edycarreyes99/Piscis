@@ -13,10 +13,10 @@ export class DetallesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  
+
   }
 
-  onCerrar(){
+  onCerrar() {
     this.cerrar.emit();
   }
 

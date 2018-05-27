@@ -1,70 +1,71 @@
 <!--se agrega el card para contener los inputs-->
 <div class="card mx-auto mt-3 mb-3" style="width: 18rem;">
-    <!--se ingresa la imagen como logitopo-->
-    <img class="card-img-top" src="https://firebasestorage.googleapis.com/v0/b/proyecto-robotica-35bed.appspot.com/o/fotos%2FPiscis%20Logo.png?alt=media&token=5e2b1404-b32a-4192-a47e-3354a23ba484" alt="Card image cap">
-    <!-- se termina de ingresar la imagen como logotipo-->
-    <!--Se ingresa los inputs para el registro e inicio de sesion-->
+  <!--se ingresa la imagen como logitopo-->
+  <img class="card-img-top" src="https://firebasestorage.googleapis.com/v0/b/proyecto-robotica-35bed.appspot.com/o/fotos%2FPiscis%20Logo.png?alt=media&token=5e2b1404-b32a-4192-a47e-3354a23ba484"
+    alt="Card image cap">
+  <!-- se termina de ingresar la imagen como logotipo-->
+  <!--Se ingresa los inputs para el registro e inicio de sesion-->
+  <div class="container">
     <div class="container">
-      <div class="container">
-          <p class="h4 text-center">Registrate o Inicia Sesion</p>
-          <div>
-              <!--Se ingresa los inputs para el inicio de sesion-->
-              <div class="form-group text-center">
-                <label>E-Mail</label>
-                <input id= "email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese el E-Mail" [(ngModel)]="email">
-                <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu email con terceros.</small>
-              </div>
-              <div class="form-group text-center">
-                <label>Contraseña</label>
-                <input type="password" class="form-control" id="contrasena" placeholder="Contraseña" [(ngModel)]="password">
-              </div>
-              <!--se terminan de ingresar los inputs-->
-              <div class="container text-center">
-              <button type="submit" (click)="onSubmitLogin()" class="btn btn-link" data-toggle="modal" data-target="#ModalInici">Iniciar Sesion</button>
-              <button class="btn btn-link" data-toggle="modal" data-target="#ModalRegistro">Registrarse</button>
-            </div>
-          </div>
-      </div>
-      <!-- Modal Registro -->
-      <div class="modal fade" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmacion de Registro</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                ¿Esta Seguro que desea registrar este Usuario?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button type="submit" (click)="onSubmitAddUser()" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-              </div>
-            </div>
-          </div>
+      <p class="h4 text-center">Registrate o Inicia Sesion</p>
+      <div>
+        <!--Se ingresa los inputs para el inicio de sesion-->
+        <div class="form-group text-center">
+          <label>E-Mail</label>
+          <input id="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese el E-Mail" [(ngModel)]="email">
+          <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu email con terceros.</small>
         </div>
-        <!-- se termina de agregar el modal-->
-        <!-- Modal Inicio -->
-      <div class="modal fade" id="ModalInicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Confirmacion de Registro</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body"></div>
-              <div id="cuerpoModalError"></div>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-success" data-dismiss="modal">Aceptar</button>
-            </div>
-          </div>
+        <div class="form-group text-center">
+          <label>Contraseña</label>
+          <input type="password" class="form-control" id="contrasena" placeholder="Contraseña" [(ngModel)]="password">
+        </div>
+        <!--se terminan de ingresar los inputs-->
+        <div class="container text-center">
+          <button type="submit" (click)="onSubmitLogin()" class="btn btn-link" data-toggle="modal" data-target="#ModalInicio">Iniciar Sesion</button>
+          <button class="btn btn-link" data-toggle="modal" data-target="#ModalRegistro">Registrarse</button>
         </div>
       </div>
-      <!-- se termina de agregar el modal-->
     </div>
-  <!-- se termina de agregar el card-->
+    <!-- Modal Registro -->
+    <div class="modal fade" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmacion de Registro</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ¿Esta Seguro que desea registrar este Usuario?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button type="submit" (click)="onSubmitAddUser()" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- se termina de agregar el modal-->
+    <!-- Modal Inicio -->
+    <div class="modal fade" id="ModalInicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmacion de Registro</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"></div>
+          <div id="cuerpoModalError"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- se termina de agregar el modal-->
+</div>
+<!-- se termina de agregar el card-->
