@@ -7,7 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class DetallesComponent implements OnInit {
 
-  @Input() contacto: any = null;
+  @Input() elemento: any = null;
+  @Input() detallesElemento: any = false;
   @Output() cerrar = new EventEmitter();
 
   constructor() { }

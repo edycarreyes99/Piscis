@@ -6,6 +6,8 @@ import * as _ from 'lodash';
 import { DocumentSnapshot } from '@firebase/firestore-types';
 import { PropertyRead } from '@angular/compiler';
 import {Chart} from 'chart.js'
+import * as M from 'materialize-css';
+import * as $ from 'jquery';
 declare var Plotly: any;
 @Component({
   selector: 'app-historial-page',
@@ -22,7 +24,8 @@ export class HistorialPageComponent implements OnInit{
     "Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
     ];
     dias = []
-  contacto = null;
+  elemento = null;
+  detallesElemento = false;
   chart = false;
   temperatura = null;
   contactoEditar = null;
@@ -48,6 +51,8 @@ export class HistorialPageComponent implements OnInit{
   filtros = {}
 
   ngOnInit(){
+    $('#tablaSinFiltro').paginate();
+    M.AutoInit();
     //se extraen los datos por primera vez... En este caso se mostraran todos los datos la primera vez que se cargue la pagina antes de aplicar los filtros.
     this.db.list('/contactos').snapshotChanges()
     .map(temperaturas=>{
@@ -145,10 +150,11 @@ filtroExactoAno(property: string, regla:any){
     this.arrayy = [];
   }
   
-  onClick(contacto){
-    this.contacto = contacto;
+  onClick(elemento){
+    this.elemento = elemento;
+    this.detallesElemento = true;
   }
   cerrarDetalles(){
-    this.contacto = null;
+    this.elemento = null;
   }
 }
