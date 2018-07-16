@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">PiscisApp</string>
-    <string name="title_activity_main">PiscisApp</string>
-    <string name="package_name">com.firebase.app.piscisapp</string>
-    <string name="fileprovider_authority">com.firebase.app.piscisapp.fileprovider</string>
-    <string name="custom_url_scheme">com.firebase.app.piscisapp</string>
-</resources>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../auth.service';
+import { AuthService } from '../auth.service';
 import { auth } from 'firebase/app';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,43 +12,39 @@ export class NavbarComponent implements OnInit {
   public isVerified: boolean;
   public nombreUsuario: string;
   public emailUsuario: string;
-  
+
   constructor(
-    public authService : AuthService,
-    public router : Router,
+    public authService: AuthService,
+    public router: Router,
   ) { }
 
   ngOnInit() {
-    this.authService.getAuth().subscribe(user=>{
-      if(user)
-      {
-        if(user.emailVerified)
-        {
+    this.authService.getAuth().subscribe(user => {
+      if (user) {
+        if (user.emailVerified) {
           this.isVerified = true;
-        }else{
+        } else {
           this.isVerified = false;
         }
-        this.isLogin=true;
+        this.isLogin = true;
         console.log("Hay Usuarios Activos");
         console.log(user.emailVerified);
         this.contenido(user)
-      }else{
-        this.isLogin=false;
+      } else {
+        this.isLogin = false;
         console.log("No hay Usuarios Activos");
       }
     })
   }
-  contenido(user)
-  {
+  contenido(user) {
     var user = user;
-    if(user.emailVerified)
-    {
+    if (user.emailVerified) {
       this.isVerified = true;
-    }else{
+    } else {
       this.isVerified = false;
     }
   }
-  cerrar(){
-     this.authService.logout();
+  cerrar() {
+    this.authService.logout();
   }
 }
