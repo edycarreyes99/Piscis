@@ -24,14 +24,16 @@
               "src/styles.scss",
               "node_modules/bootswatch/dist/litera/bootstrap.css",
               "node_modules/font-awesome/css/font-awesome.css",
-              "src/app/not-found-page/styles/404.css"
+              "src/app/not-found-page/styles/404.css",
+              "node_modules/materialize-css/dist/css/materialize.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/chart.js/dist/Chart.js",
-              "node_modules/plotly.js/dist/plotly.js"
+              "node_modules/plotly.js/dist/plotly.js",
+              "node_modules/materialize-css/dist/js/materialize.js"
 
             ]
           },
