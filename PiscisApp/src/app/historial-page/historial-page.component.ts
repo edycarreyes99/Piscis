@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef, OnDestroy } from '@angular/core';
 import {AuthService} from '../auth.service'
 import {MatDialog} from '@angular/material';
 import {AngularFireDatabase} from 'angularfire2/database';
@@ -8,13 +8,16 @@ import { PropertyRead } from '@angular/compiler';
 import {Chart} from 'chart.js'
 import * as M from 'materialize-css';
 import * as $ from 'jquery';
+import { Http, Response } from '@angular/http';
+import { Subject } from 'rxjs';
+import 'rxjs/add/operator/map';
 declare var Plotly: any;
 @Component({
   selector: 'app-historial-page',
   templateUrl: './historial-page.component.html',
   styleUrls: ['./historial-page.component.scss']
 })
-export class HistorialPageComponent implements OnInit{
+export class HistorialPageComponent implements OnDestroy,OnInit{
   title = 'Temperaturas';
   @ViewChild('chart') el: ElementRef;
   contactos: any[];
@@ -36,7 +39,8 @@ export class HistorialPageComponent implements OnInit{
   constructor(
     private servicio: AuthService,
     private dialog: MatDialog,
-    private db : AngularFireDatabase
+    private db : AngularFireDatabase,
+    private http: Http
   ){}
   temperaturas : any;
   temperaturasFiltradas: any;
@@ -46,11 +50,12 @@ export class HistorialPageComponent implements OnInit{
   mes: string;
   dia: string;
   filtro = true;
-
+  persons: any = [];
   //reglas de filtros activos
   filtros = {}
 
   ngOnInit(){
+   
     M.AutoInit();
     //se extraen los datos por primera vez... En este caso se mostraran todos los datos la primera vez que se cargue la pagina antes de aplicar los filtros.
     this.db.list('/contactos').snapshotChanges()
@@ -70,6 +75,8 @@ export class HistorialPageComponent implements OnInit{
       this.temperaturas = this.servicio.temperaturas;
       this.temperatura = this.servicio.temperatura;
       this.filtros = this.servicio.filtros;
+  }
+  ngOnDestroy(): void {
   }
 //se aplica el filtro para el select de años
 filtroExactoAno(property: string, regla:any){

@@ -57,7 +57,6 @@ export const firebaseConfig={
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule
-
     
   ],
   providers: [AuthService,AuthContentOnlyGuard,NavbarComponent],
