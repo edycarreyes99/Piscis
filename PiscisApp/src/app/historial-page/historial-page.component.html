@@ -4,7 +4,7 @@
   <span>Piscis</span>
 </mat-toolbar>
 <!--selects-->
-<mat-card class="mt-2 mb-3">
+<mat-card class="mt-2 mb-3 text-center">
   <!--Material Data Picker-->
   <!--<mat-form-field>
     <input matInput [matDatepicker]="picker" placeholder="Choose a date">
@@ -13,7 +13,7 @@
 
   </mat-form-field>-->
   <!--select de los anos-->
-  <mat-form-field>
+  <mat-form-field class="text-center mx-auto wow slideInLeft">
     <mat-select placeholder="Año" [(ngModel)]="ano" (change)="filtroExactoAno('ano',ano)">
       <mat-option value="2018">2018</mat-option>
       <mat-option value="2019">2019</mat-option>
@@ -24,7 +24,7 @@
     <button mat-button *ngIf="ano" (click)="eliminarFiltro('ano')">Eliminar Filtro</button>
   </mat-form-field>
   <!--select de los meses-->
-  <mat-form-field>
+  <mat-form-field class="text-center mx-auto">
     <mat-select placeholder="Mes" [(ngModel)]="mes" (change)="filtroExactoMes('mes',mes)">
       <mat-option value="Enero">Enero</mat-option>
       <mat-option value="Febrero">Febrero</mat-option>
@@ -42,7 +42,7 @@
     <button mat-button *ngIf="mes" (click)="eliminarFiltro('mes')">Eliminar Filtro</button>
   </mat-form-field>
   <!--select de los dias-->
-  <mat-form-field>
+  <mat-form-field class="text-center mx-auto">
     <mat-select placeholder="Dia" [(ngModel)]="dia" (change)="filtroExactoAno('dia',dia)">
       <mat-option value="1">1</mat-option>
       <mat-option value="2">2</mat-option>
@@ -104,15 +104,15 @@
       <tr>
         <th>Fecha</th>
         <th>Hora</th>
-        <th>Accion</th>
+        <th class="text-center">Detalles</th>
       </tr>
     </thead>
     <tbody *ngFor="let temperatura of temperaturas">
       <tr>
-        <td>{{temperatura.private_key_id}}
+        <td >{{temperatura.private_key_id}}
           <td>{{temperatura.hora}}</td>
-          <td>
-            <button class="btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)" data-position="bottom" data-tooltip="Mostrar Detalles">
+          <td class="text-center mx-auto">
+            <button class="mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)" data-position="bottom" data-tooltip="Mostrar Detalles">
               <i class="material-icons">add</i>
             </button>
           </td>
@@ -130,15 +130,15 @@
       <tr>
         <th>Fecha/Hora</th>
         <th>Valor</th>
-        <th>Accion</th>
+        <th>Detalles</th>
       </tr>
     </thead>
     <tbody *ngFor="let temperatura of temperaturasFiltradas">
       <tr>
-        <td>{{temperatura.private_key_id}}
-          <td>{{temperatura.valor}}</td>
-          <td>
-            <button class="btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)" data-position="bottom" data-tooltip="Mostrar Detalles">
+        <td >{{temperatura.private_key_id}}
+          <td >{{temperatura.valor}}</td>
+          <td class="text-center mx-auto">
+            <button class=" mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)" data-position="bottom" data-tooltip="Mostrar Detalles">
               <i class="material-icons">add</i>
             </button>
           </td>
