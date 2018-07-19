@@ -23,7 +23,6 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import {environment} from '../environments/environment';
 import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
-import {DataTableModule} from 'angular-6-datatable';
 import {DataTablesModule} from 'angular-datatables';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { NgwWowModule } from 'ngx-wow';
@@ -61,7 +60,6 @@ export const firebaseConfig={
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    DataTableModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
