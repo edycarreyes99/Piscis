@@ -24,6 +24,8 @@ import {environment} from '../environments/environment';
 import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {DataTableModule} from 'angular-6-datatable';
+import {DataTablesModule} from 'angular-datatables';
+import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 export const firebaseConfig={
   apiKey: "AIzaSyBu_Yb1UXx6W12dkeSYvr7aj9ueNwj0NLQ",
   authDomain: "proyecto-robotica-35bed.firebaseapp.com",
@@ -58,7 +60,11 @@ export const firebaseConfig={
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    DataTableModule
+    DataTableModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    DataTablesModule
   ],
   providers: [AuthService,AuthContentOnlyGuard,NavbarComponent],
   bootstrap: [AppComponent]

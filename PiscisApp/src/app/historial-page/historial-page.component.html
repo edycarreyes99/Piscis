@@ -97,39 +97,6 @@
   </mat-card>
 </div>
 <!--Temperaturas sin filtro aplicado-->
-<table class="table table-striped" [mfData]="temperaturas" #mf="mfDataTable" [mfRowsOnPage]="5">
-  <thead>
-  <tr>
-      <th style="width: 20%">
-          <mfDefaultSorter by="name">Name</mfDefaultSorter>
-      </th>
-      <th style="width: 50%">
-          <mfDefaultSorter by="email">Email</mfDefaultSorter>
-      </th>
-      <th style="width: 10%">
-          <mfDefaultSorter by="age">Age</mfDefaultSorter>
-      </th>
-      <th style="width: 20%">
-          <mfDefaultSorter by="city">City</mfDefaultSorter>
-      </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let temperatura of temperaturas">
-      <td>{{temperatura.private_key_id}}</td>
-      <td>{{temperatura.valor}}</td>
-      <td class="text-right">{{temperatura.mes}}</td>
-      <td>{{temperatura.hora}}</td>
-  </tr>
-  </tbody>
-  <tfoot>
-  <tr>
-      <td colspan="4">
-          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-      </td>
-  </tr>
-  </tfoot>
-</table>
 <!--<mat-card class="mt-4 z-depth-2" *ngIf="filtro" id="tablaSinFiltro">
   <table class="table table-hover z-depth-2">
     <thead class="thead-inverse">
@@ -141,36 +108,42 @@
     </thead>
     <tbody *ngFor="let temperatura of temperaturas">
       <tr>
-        <td >{{temperatura.private_key_id}}
+        <td>{{temperatura.private_key_id}}
           <td>{{temperatura.hora}}</td>
           <td class="text-center mx-auto">
-            <button class="mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)" data-position="bottom" data-tooltip="Mostrar Detalles">
+            <button class="mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)"
+              data-position="bottom" data-tooltip="Mostrar Detalles">
               <i class="material-icons">add</i>
             </button>
           </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+    </tfoot>
   </table>
   <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
 </mat-card>
 <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
 
   <ng-container matColumnDef="seqNo">
-      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
-      <mat-cell *matCellDef="let lesson">{{lesson.seqNo}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+    <mat-cell *matCellDef="let lesson">{{lesson.seqNo}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-      <mat-cell class="description-cell"
-                *matCellDef="let lesson">{{lesson.description}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+    <mat-cell class="description-cell" *matCellDef="let lesson">{{lesson.description}}</mat-cell>
 
   </ng-container>
 
   <ng-container matColumnDef="duration">
-      <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
-      <mat-cell class="duration-cell"
-                *matCellDef="let lesson">{{lesson.duration}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+    <mat-cell class="duration-cell" *matCellDef="let lesson">{{lesson.duration}}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -179,6 +152,31 @@
 
 </mat-table>-->
 
+
+<mat-card class="mt-4 z-depth-2" *ngIf="filtro" id="tablaSinFiltro">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Valor</th>
+        <th class="text-center">Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let temperatura of temperaturas">
+        <td class="text-center">{{ temperatura.key }}</td>
+        <td class="text-center">{{ temperatura.valor }}</td>
+        <td class="text-center mx-auto">
+          <button class=" mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)"
+            data-position="bottom" data-tooltip="Mostrar Detalles">
+            <i class="material-icons">add</i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
+</mat-card>
 
 
 
@@ -195,10 +193,11 @@
     </thead>
     <tbody *ngFor="let temperatura of temperaturasFiltradas">
       <tr>
-        <td >{{temperatura.private_key_id}}
-          <td >{{temperatura.valor}}</td>
+        <td>{{temperatura.private_key_id}}
+          <td>{{temperatura.valor}}</td>
           <td class="text-center mx-auto">
-            <button class=" mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)" data-position="bottom" data-tooltip="Mostrar Detalles">
+            <button class=" mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)"
+              data-position="bottom" data-tooltip="Mostrar Detalles">
               <i class="material-icons">add</i>
             </button>
           </td>
@@ -207,7 +206,3 @@
   </table>
   <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
 </mat-card>
-<mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>

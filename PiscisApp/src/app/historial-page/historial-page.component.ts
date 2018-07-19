@@ -20,6 +20,8 @@ declare var Plotly: any;
   styleUrls: ['./historial-page.component.scss']
 })
 export class HistorialPageComponent implements OnDestroy, OnInit {
+  dtOptions: DataTables.Settings = {};
+  dtTrigger = new Subject();
   title = 'Temperaturas';
   @ViewChild('chart') el: ElementRef;
   contactos: any[];
@@ -60,7 +62,10 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
   filtros = {}
 
   ngOnInit() {
-
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 24
+    };
     M.AutoInit();
     //WOW.init();
     //se extraen los datos por primera vez... En este caso se mostraran todos los datos la primera vez que se cargue la pagina antes de aplicar los filtros.
@@ -68,11 +73,13 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
       .map(temperaturas => {
         let values = temperaturas.map(c => ({
           key: c.payload.key, ...c.payload.val()
-        }))
+        }));
+        this.extractData;
         return temperaturas.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       })
       .subscribe(temperaturas => {
         this.temperaturas = temperaturas;
+        this.dtTrigger.next();
         for (var j = 0; j < Object.keys(this.temperaturas).length; j++) {
             this.numeroElemento.push(j);
           }
@@ -87,6 +94,7 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
     this.filtros = this.servicio.filtros;
   }
   ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
   //se aplica el filtro para el select de años
   filtroExactoAno(property: string, regla: any) {
@@ -135,6 +143,10 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
     this.temperatura = this.servicio.temperatura;
     this.filtro = this.servicio.filtro;
     this.filtros = this.servicio.filtros;
+  }
+  private extractData(res: Response) {
+    const body = res.json();
+    return body.data || {};
   }
 
   //funcion que muestra el grafico
