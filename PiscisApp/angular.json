@@ -91,7 +91,6 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/bootswatch/dist/litera/bootstrap.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "src/app/not-found-page/styles/404.css"
             ],
