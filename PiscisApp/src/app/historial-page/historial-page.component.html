@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="mt-2 z-depth-2" color="primary">
   <span>{{title}}</span>
   <span class="fill-remaining-space"></span>
   <span>Piscis</span>
@@ -10,7 +10,6 @@
     <input matInput [matDatepicker]="picker" placeholder="Choose a date">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi="true" #picker></mat-datepicker>
-
   </mat-form-field>-->
   <!--select de los anos-->
   <mat-form-field class="text-center mx-auto wow slideInLeft">
@@ -92,14 +91,47 @@
     </mat-card-title>
     <mat-card-content>
       <app-data-charts></app-data-charts>
-      <button mat-button (click)="cerrarGrafico()">Cerrar Grafico</button>
+      <a class="waves-effect waves-light btn text-light mt-5" (click)="cerrarGrafico()">Cerrar Grafico</a>
 
     </mat-card-content>
   </mat-card>
 </div>
 <!--Temperaturas sin filtro aplicado-->
-<mat-card class="mt-4" *ngIf="filtro" id="tablaSinFiltro">
-  <table class="table table-hover">
+<table class="table table-striped" [mfData]="temperaturas" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+  <tr>
+      <th style="width: 20%">
+          <mfDefaultSorter by="name">Name</mfDefaultSorter>
+      </th>
+      <th style="width: 50%">
+          <mfDefaultSorter by="email">Email</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+          <mfDefaultSorter by="age">Age</mfDefaultSorter>
+      </th>
+      <th style="width: 20%">
+          <mfDefaultSorter by="city">City</mfDefaultSorter>
+      </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let temperatura of temperaturas">
+      <td>{{temperatura.private_key_id}}</td>
+      <td>{{temperatura.valor}}</td>
+      <td class="text-right">{{temperatura.mes}}</td>
+      <td>{{temperatura.hora}}</td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+      <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+  </tr>
+  </tfoot>
+</table>
+<!--<mat-card class="mt-4 z-depth-2" *ngIf="filtro" id="tablaSinFiltro">
+  <table class="table table-hover z-depth-2">
     <thead class="thead-inverse">
       <tr>
         <th>Fecha</th>
@@ -117,12 +149,40 @@
             </button>
           </td>
       </tr>
-      <tr>
-        <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
-      </tr>
     </tbody>
   </table>
+  <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
 </mat-card>
+<mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+
+  <ng-container matColumnDef="seqNo">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let lesson">{{lesson.seqNo}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let lesson">{{lesson.description}}</mat-cell>
+
+  </ng-container>
+
+  <ng-container matColumnDef="duration">
+      <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+      <mat-cell class="duration-cell"
+                *matCellDef="let lesson">{{lesson.duration}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>-->
+
+
+
+
+
 <!--Temperaturas con el filtro aplicado-->
 <mat-card *ngIf="!filtro && !chart" id="tablaConFiltro">
   <table class="table table-hover">
@@ -143,15 +203,11 @@
             </button>
           </td>
       </tr>
-      <tr>
-        <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
-      </tr>
     </tbody>
   </table>
+  <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
 </mat-card>
 <mat-paginator [length]="100"
               [pageSize]="10"
               [pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>
-
-<!--<img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwmatJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">-->

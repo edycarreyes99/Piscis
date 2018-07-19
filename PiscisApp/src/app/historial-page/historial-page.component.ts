@@ -12,6 +12,7 @@ import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
 import * as WOW from 'wowjs';
+import {MatTableModule} from '@angular/material/table';
 declare var Plotly: any;
 @Component({
   selector: 'app-historial-page',
@@ -61,7 +62,7 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
   ngOnInit() {
 
     M.AutoInit();
-    WOW.init();
+    //WOW.init();
     //se extraen los datos por primera vez... En este caso se mostraran todos los datos la primera vez que se cargue la pagina antes de aplicar los filtros.
     this.db.list('/contactos').snapshotChanges()
       .map(temperaturas => {
@@ -169,10 +170,18 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
   }
 
   onClick(elemento) {
+    console.log('Detalles Mostrado');
     this.elemento = elemento;
     this.detallesElemento = true;
+    $(window).ready( function() {
+      $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+    });
   }
   cerrarDetalles() {
+    $(window).ready(function() {
+      $("html, body").animate({ scrollTop: 0 }, 1000);
+      return false;
+    });
     this.elemento = null;
   }
 }
