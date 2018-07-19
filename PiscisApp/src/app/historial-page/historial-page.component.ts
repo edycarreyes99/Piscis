@@ -92,7 +92,7 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
         for (var j = 0; j < Object.keys(this.temperaturas).length; j++) {
             this.numeroElemento.push(j);
           }
-          console.log(this.numeroElemento);
+          //console.log(this.numeroElemento);
       })
 
     //se llaman a las funciones desde el servicio y se igualan todas las variables.
