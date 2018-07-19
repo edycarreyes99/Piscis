@@ -1,18 +1,18 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="mt-2 z-depth-2" color="primary">
   <span>{{title}}</span>
   <span class="fill-remaining-space"></span>
   <span>Piscis</span>
 </mat-toolbar>
-
-<mat-card>
+<!--selects-->
+<mat-card class="mt-2 mb-3 text-center">
   <!--Material Data Picker-->
   <!--<mat-form-field>
     <input matInput [matDatepicker]="picker" placeholder="Choose a date">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi="true" #picker></mat-datepicker>
-
   </mat-form-field>-->
-  <mat-form-field>
+  <!--select de los anos-->
+  <mat-form-field class="text-center mx-auto wow slideInLeft">
     <mat-select placeholder="Año" [(ngModel)]="ano" (change)="filtroExactoAno('ano',ano)">
       <mat-option value="2018">2018</mat-option>
       <mat-option value="2019">2019</mat-option>
@@ -22,7 +22,8 @@
     </mat-select>
     <button mat-button *ngIf="ano" (click)="eliminarFiltro('ano')">Eliminar Filtro</button>
   </mat-form-field>
-  <mat-form-field>
+  <!--select de los meses-->
+  <mat-form-field class="text-center mx-auto wow slideInLeft">
     <mat-select placeholder="Mes" [(ngModel)]="mes" (change)="filtroExactoMes('mes',mes)">
       <mat-option value="Enero">Enero</mat-option>
       <mat-option value="Febrero">Febrero</mat-option>
@@ -39,7 +40,8 @@
     </mat-select>
     <button mat-button *ngIf="mes" (click)="eliminarFiltro('mes')">Eliminar Filtro</button>
   </mat-form-field>
-  <mat-form-field>
+  <!--select de los dias-->
+  <mat-form-field class="text-center mx-auto wow slideInLeft">
     <mat-select placeholder="Dia" [(ngModel)]="dia" (change)="filtroExactoAno('dia',dia)">
       <mat-option value="1">1</mat-option>
       <mat-option value="2">2</mat-option>
@@ -75,7 +77,11 @@
     </mat-select>
     <button mat-button *ngIf="ano && mes && dia" (click)="eliminarFiltro('dia')">Eliminar Filtro</button>
   </mat-form-field>
-  <button mat-button *ngIf="ano && mes && dia !chart" class="my-auto" (click)="mostrarGrafico()">Mostrar Gráfico</button>
+  <button *ngIf="ano && mes && dia && !chart" class="my-auto ml-3 btn-floating btn-small waves-effect waves-light red" (click)="mostrarGrafico()">
+    <i class="material-icons">
+      bar_chart
+    </i>
+  </button>
 </mat-card>
 <!--Aqui es donde ira el grafico-->
 <div *ngIf="chart">
@@ -85,51 +91,115 @@
     </mat-card-title>
     <mat-card-content>
       <app-data-charts></app-data-charts>
-      <button mat-button (click)="cerrarGrafico()">Cerrar Grafico</button>
+      <a class="waves-effect waves-light btn text-light mt-5" (click)="cerrarGrafico()">Cerrar Grafico</a>
 
     </mat-card-content>
   </mat-card>
 </div>
-<mat-card *ngIf="filtro">
-  <table class="table table-hover">
+<!--Temperaturas sin filtro aplicado-->
+<!--<mat-card class="mt-4 z-depth-2" *ngIf="filtro" id="tablaSinFiltro">
+
+  <table class="table table-hover z-depth-2">
     <thead class="thead-inverse">
       <tr>
-        <th>ID</th>
-        <th>Valor</th>
-        <th>Accion</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th class="text-center">Detalles</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let temperatura of temperaturas">
+      <tr>
+        <td>{{temperatura.private_key_id}}
+          <td>{{temperatura.hora}}</td>
+          <td class="text-center mx-auto">
+            <button class="mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)"
+              data-position="bottom" data-tooltip="Mostrar Detalles">
+              <i class="material-icons">add</i>
+            </button>
+          </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
+</mat-card>
+<mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+
+  <ng-container matColumnDef="seqNo">
+    <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+    <mat-cell *matCellDef="let lesson">{{lesson.seqNo}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+    <mat-cell class="description-cell" *matCellDef="let lesson">{{lesson.description}}</mat-cell>
+
+  </ng-container>
+
+  <ng-container matColumnDef="duration">
+    <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+    <mat-cell class="duration-cell" *matCellDef="let lesson">{{lesson.duration}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>-->
+
+<mat-card class="mt-4 z-depth-2 wow slideInLeft" *ngIf="filtro" id="tablaSinFiltro">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Valor</th>
+        <th class="text-center">Detalles</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let temperatura of temperaturas">
-        <td>{{temperatura.private_key_id}}
-          <td>{{temperatura.valor}}</td>
-          <td>
-            <button mat-button (click)="onClick(temperatura)">Detalles</button>
-          </td>
+        <td class="text-center">{{ temperatura.key }}</td>
+        <td class="text-center">{{ temperatura.valor }}</td>
+        <td class="text-center mx-auto">
+          <button class=" mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)"
+            data-position="bottom" data-tooltip="Mostrar Detalles">
+            <i class="material-icons">add</i>
+          </button>
+        </td>
       </tr>
-      <app-detalles [contacto]="contacto" (cerrar)="cerrarDetalles()"></app-detalles>
     </tbody>
   </table>
+  <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
 </mat-card>
-<mat-card *ngIf="!filtro && !chart">
+
+<!--Temperaturas con el filtro aplicado-->
+<mat-card *ngIf="!filtro && !chart" id="tablaConFiltro">
   <table class="table table-hover">
     <thead class="thead-inverse">
       <tr>
-        <th>ID</th>
+        <th>Fecha/Hora</th>
         <th>Valor</th>
-        <th>Accion</th>
+        <th>Detalles</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let temperatura of temperaturasFiltradas">
+    <tbody *ngFor="let temperatura of temperaturasFiltradas">
+      <tr>
         <td>{{temperatura.private_key_id}}
           <td>{{temperatura.valor}}</td>
-          <td>
-            <button mat-button (click)="onClick(temperatura)">Detalles</button>
+          <td class="text-center mx-auto">
+            <button class=" mx-auto btn-floating btn-small waves-effect waves-light teal tooltipped btn" (click)="onClick(temperatura)"
+              data-position="bottom" data-tooltip="Mostrar Detalles">
+              <i class="material-icons">add</i>
+            </button>
           </td>
       </tr>
-      <app-detalles [contacto]="contacto" (cerrar)="cerrarDetalles()"></app-detalles>
     </tbody>
   </table>
+  <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
 </mat-card>
-<!--<img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwmatJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">-->

@@ -1,6 +1,6 @@
 /* SystemJS module definition */
 declare var module: NodeModule;
-declare var $: any;
+declare var WOW: any;
 interface NodeModule {
   id: string;
 }

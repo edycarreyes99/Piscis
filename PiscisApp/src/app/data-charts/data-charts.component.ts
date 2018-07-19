@@ -37,8 +37,8 @@ export class DataChartsComponent implements OnInit{
   banderita: boolean;
   ref: AngularFireList<any>;
   chartData = null;
-  arrayx: any;
-  arrayy:any;
+  arrayxtemp: any;
+  arrayytemp:any;
   af: AngularFirestoreCollection<any>;
   contador = 0;
 
@@ -55,8 +55,8 @@ export class DataChartsComponent implements OnInit{
      this.temperaturasFiltradas = this.servicio.temperaturasFiltradas
      //console.log("chart abierto");
      //se reciben los arreglos desde el componente de historial
-     this.arrayx = this.historial.arrayx;
-     this.arrayy = this.historial.arrayy;
+     this.arrayxtemp = this.historial.arrayx;
+     this.arrayytemp = this.historial.arrayy;
      //se emiten por consola los arreglos recibidos desde historial
      //console.log('el arreglo de x es: '+this.arrayx);
      //console.log('el arreglo de y es: '+this.arrayy);
@@ -72,10 +72,10 @@ export class DataChartsComponent implements OnInit{
    const data= {
     type: 'line',
     data: {
-        labels: this.arrayx,
+        labels: this.arrayxtemp,
         datasets: [{
             label: 'Temperatura',
-            data: this.arrayy,
+            data: this.arrayytemp,
             borderColor: '#32db64',
             fill: false
         }]
@@ -106,8 +106,8 @@ export class DataChartsComponent implements OnInit{
  }
  
  getReportValues(){
-   this.arrayx = this.servicio.arrayx;
-   this.arrayy = this.servicio.arrayy;
+   this.arrayxtemp = this.servicio.arrayx;
+   this.arrayytemp = this.servicio.arrayy;
    //this.arrayx.push(1,2,3,4,5);
    //this.arrayy.push(1,2,4,8,16);
  }

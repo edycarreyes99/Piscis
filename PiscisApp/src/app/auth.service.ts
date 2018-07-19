@@ -33,6 +33,8 @@ export class AuthService {
   temperaturasFiltradasGrafico: any;
   arrayx = [];
   arrayy = [];
+  numeroElemento =[];
+  numeroElementoFiltrado=[];
   //propiedades del filtrado
   ano: string;
   mes: string;
@@ -53,6 +55,7 @@ export class AuthService {
       })
       .subscribe(temperaturas => {
         this.temperaturas = temperaturas;
+        //console.log(Object.values(this.temperaturas));
       })
   }
 
