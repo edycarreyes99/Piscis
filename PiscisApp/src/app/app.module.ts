@@ -26,6 +26,7 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {DataTableModule} from 'angular-6-datatable';
 import {DataTablesModule} from 'angular-datatables';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { NgwWowModule } from 'ngx-wow';
 export const firebaseConfig={
   apiKey: "AIzaSyBu_Yb1UXx6W12dkeSYvr7aj9ueNwj0NLQ",
   authDomain: "proyecto-robotica-35bed.firebaseapp.com",
@@ -64,7 +65,8 @@ export const firebaseConfig={
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    DataTablesModule
+    DataTablesModule,
+    NgwWowModule.forRoot()
   ],
   providers: [AuthService,AuthContentOnlyGuard,NavbarComponent],
   bootstrap: [AppComponent]

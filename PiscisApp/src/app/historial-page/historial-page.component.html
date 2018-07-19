@@ -23,7 +23,7 @@
     <button mat-button *ngIf="ano" (click)="eliminarFiltro('ano')">Eliminar Filtro</button>
   </mat-form-field>
   <!--select de los meses-->
-  <mat-form-field class="text-center mx-auto">
+  <mat-form-field class="text-center mx-auto wow slideInLeft">
     <mat-select placeholder="Mes" [(ngModel)]="mes" (change)="filtroExactoMes('mes',mes)">
       <mat-option value="Enero">Enero</mat-option>
       <mat-option value="Febrero">Febrero</mat-option>
@@ -41,7 +41,7 @@
     <button mat-button *ngIf="mes" (click)="eliminarFiltro('mes')">Eliminar Filtro</button>
   </mat-form-field>
   <!--select de los dias-->
-  <mat-form-field class="text-center mx-auto">
+  <mat-form-field class="text-center mx-auto wow slideInLeft">
     <mat-select placeholder="Dia" [(ngModel)]="dia" (change)="filtroExactoAno('dia',dia)">
       <mat-option value="1">1</mat-option>
       <mat-option value="2">2</mat-option>
@@ -98,6 +98,7 @@
 </div>
 <!--Temperaturas sin filtro aplicado-->
 <!--<mat-card class="mt-4 z-depth-2" *ngIf="filtro" id="tablaSinFiltro">
+
   <table class="table table-hover z-depth-2">
     <thead class="thead-inverse">
       <tr>
@@ -152,8 +153,7 @@
 
 </mat-table>-->
 
-
-<mat-card class="mt-4 z-depth-2" *ngIf="filtro" id="tablaSinFiltro">
+<mat-card class="mt-4 z-depth-2 wow slideInLeft" *ngIf="filtro" id="tablaSinFiltro">
   <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
     <thead>
       <tr>
@@ -177,9 +177,6 @@
   </table>
   <app-detalles [elemento]="elemento" [detallesElemento]="detallesElemento" (cerrar)="cerrarDetalles()"></app-detalles>
 </mat-card>
-
-
-
 
 <!--Temperaturas con el filtro aplicado-->
 <mat-card *ngIf="!filtro && !chart" id="tablaConFiltro">
