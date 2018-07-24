@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
+import * as M from 'materialize-css';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -19,6 +20,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    M.AutoInit();
     this.authService.getAuth().subscribe(user => {
       if (user) {
         if (user.emailVerified) {

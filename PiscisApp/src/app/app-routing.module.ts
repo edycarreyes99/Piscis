@@ -9,6 +9,7 @@ import {HistorialPageComponent} from './historial-page/historial-page.component'
 import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
 import {NavbarComponent} from './navbar/navbar.component';
 import {DataChartsComponent} from './data-charts/data-charts.component';
+import {ProfileDashboardComponent} from './profile-dashboard/profile-dashboard.component'
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -18,6 +19,8 @@ const routes: Routes = [
   {path: 'historial', component: HistorialPageComponent,canActivate:[AuthContentOnlyGuard]},
   {path: '**', component: NotFoundPageComponent},
   {path: 'dataCharts', component: DataChartsComponent},
+  {path: 'dashboard', component: ProfileDashboardComponent}
+
 ];
 
 @NgModule({

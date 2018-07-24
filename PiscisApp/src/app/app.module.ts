@@ -26,6 +26,7 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {DataTablesModule} from 'angular-datatables';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { NgwWowModule } from 'ngx-wow';
+import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
 export const firebaseConfig={
   apiKey: "AIzaSyBu_Yb1UXx6W12dkeSYvr7aj9ueNwj0NLQ",
   authDomain: "proyecto-robotica-35bed.firebaseapp.com",
@@ -46,6 +47,7 @@ export const firebaseConfig={
     HistorialPageComponent,
     DetallesComponent,
     DataChartsComponent,
+    ProfileDashboardComponent
   ],
   imports: [
     BrowserModule,

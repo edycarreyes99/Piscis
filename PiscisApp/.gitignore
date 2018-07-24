@@ -5,6 +5,9 @@
 /tmp
 /out-tsc
 
+# Dashboard node_modules app
+/src/assets/adminDashboard/node_modules
+
 # dependencies
 /node_modules
 
