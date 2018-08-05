@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
+import * as M from 'materialize-css';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -17,6 +18,7 @@ export class LoginPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    M.AutoInit();
   }
 
   onSubmitAddUser() {

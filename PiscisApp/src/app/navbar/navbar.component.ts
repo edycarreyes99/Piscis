@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { auth } from 'firebase/app';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd  } from '@angular/router';
 import * as M from 'materialize-css';
 @Component({
   selector: 'app-navbar',
@@ -48,5 +48,11 @@ export class NavbarComponent implements OnInit {
   }
   cerrar() {
     this.authService.logout();
+    this.router.navigate(['/']);
+    this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
+      // Reload WoW animations when done navigating to page,
+      // but you are free to call it whenever/wherever you like
+      location.reload(true);
+    });
   }
 }

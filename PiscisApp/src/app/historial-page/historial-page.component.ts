@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { AuthService } from '../auth.service'
 import { MatDialog } from '@angular/material';
 import { AngularFireDatabase } from 'angularfire2/database';
+import {Router, NavigationEnd} from '@angular/router'
 import * as _ from 'lodash';
 import { DocumentSnapshot } from '@firebase/firestore-types';
 import { PropertyRead } from '@angular/compiler';
@@ -13,7 +14,6 @@ import { Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
 import {Subscription} from 'rxjs/Subscription';
 import { NgwWowService } from 'ngx-wow';
-import { Router, NavigationEnd } from '../../../node_modules/@angular/router';
 @Component({
   selector: 'app-historial-page',
   templateUrl: './historial-page.component.html',
@@ -104,7 +104,7 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
   }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
-    this.wowSubscription.unsubscribe();
+    //this.wowSubscription.unsubscribe();
   }
   //se aplica el filtro para el select de años
   filtroExactoAno(property: string, regla: any) {
