@@ -33,11 +33,13 @@ export class LoginPageComponent implements OnInit {
   onSubmitLogin() {
     this.authService.loginEmail(this.email, this.password)
       .then((res) => {
-        if (this.navbar.isVerified) {
-          this.router.navigate(['/historial']);
-        } else {
-          this.router.navigate(['/privado']);
-        }
+        this.authService.getAuth().subscribe(user=>{
+          if(user.emailVerified){
+            this.router.navigate(['/historial']);
+          }else{
+            this.router.navigate(['/privado']);
+          }
+        })
       }).catch((err) => {
         this.router.navigate(['/login']);
         console.log(err);

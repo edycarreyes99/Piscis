@@ -17,9 +17,9 @@ const routes: Routes = [
   {path: 'register', component: RegisterPageComponent},
   {path: 'privado', component: PrivadoPageComponent,canActivate:[AuthContentOnlyGuard]},
   {path: 'historial', component: HistorialPageComponent,canActivate:[AuthContentOnlyGuard]},
-  {path: '**', component: NotFoundPageComponent},
   {path: 'dataCharts', component: DataChartsComponent},
-  {path: 'dashboard', component: ProfileDashboardComponent}
+  {path: 'dashboard', component: ProfileDashboardComponent},
+  {path: '**', component: NotFoundPageComponent},
 
 ];
 

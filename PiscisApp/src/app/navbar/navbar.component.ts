@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { auth } from 'firebase/app';
 import { Router, NavigationEnd  } from '@angular/router';
 import * as M from 'materialize-css';
+declare var $:any;
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -21,6 +22,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     M.AutoInit();
+    $(document).ready(function(){
+      $('.tap-target').tapTarget('open');
+    });
+  
     this.authService.getAuth().subscribe(user => {
       if (user) {
         if (user.emailVerified) {
