@@ -10,6 +10,9 @@ import {AuthContentOnlyGuard} from './guards/auth-content-only.guard';
 import {NavbarComponent} from './navbar/navbar.component';
 import {DataChartsComponent} from './data-charts/data-charts.component';
 import {ProfileDashboardComponent} from './profile-dashboard/profile-dashboard.component'
+import {MonitoreoComponent} from './monitoreo/monitoreo.component';
+import {AddUserComponent} from './profile-dashboard/add-user/add-user.component';
+import {RealtimeDataseComponent} from './realtime-datase/realtime-datase.component';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -19,6 +22,9 @@ const routes: Routes = [
   {path: 'historial', component: HistorialPageComponent,canActivate:[AuthContentOnlyGuard]},
   {path: 'dataCharts', component: DataChartsComponent},
   {path: 'dashboard', component: ProfileDashboardComponent},
+  {path: 'streaming', component: MonitoreoComponent},
+  {path: 'addUser', component: AddUserComponent},
+  {path: 'realtime', component: RealtimeDataseComponent},
   {path: '**', component: NotFoundPageComponent},
 
 ];

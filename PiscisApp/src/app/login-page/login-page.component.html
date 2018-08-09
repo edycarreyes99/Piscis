@@ -23,7 +23,7 @@
         </div>
         <!--se terminan de ingresar los inputs-->
         <div class="container text-center">
-          <button type="submit" (click)="onSubmitLogin()" class="btn btn-link mb-3">Iniciar Sesion</button>
+          <button type="submit" (keyup.enter)="onSubmitLogin()" (click)="onSubmitLogin()" class="btn btn-link mb-3">Iniciar Sesion</button>
         </div>
       </div>
     </div>

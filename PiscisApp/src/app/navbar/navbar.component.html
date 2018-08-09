@@ -60,33 +60,45 @@
       </a>
     </div>
   </li>
-  <li >
-    <a href="" routerLink="historial">
+  <li>
+    <a href="" routerLink="/">
       <i class="material-icons">home</i>Inicio</a>
   </li>
-
   <li *ngIf="isVerified && isLogin">
-    <a href="" routerLink="historial">
+    <a href="" routerLink="/realtime">
+      <i class="material-icons">whatshot</i>Tiempo Real</a>
+  </li>
+  <li *ngIf="isVerified && isLogin">
+    <a href="" routerLink="/historial">
       <i class="material-icons">timeline</i>Historial</a>
   </li>
   <li *ngIf="isVerified && isLogin">
-    <a href="" routerLink="privado">
-      <i class="material-icons">whatshot</i>Tiempo Real</a>
+    <a href="" routerLink="/streaming">
+      <i class="material-icons">visibility</i>Streaming</a>
   </li>
   <li>
     <div class="divider"></div>
   </li>
-  <li class="no-padding">
+  <li class="no-padding" *ngIf="isVerified && isLogin">
     <ul class="collapsible collapsible-accordion">
       <li>
         <a class="collapsible-header">
-        <i class="material-icons">arrow_drop_down</i><i class="material-icons">account_circle</i>Cuenta</a>
+          <i class="material-icons">arrow_drop_down</i>
+          <i class="material-icons">account_circle</i>Cuenta</a>
         <div class="collapsible-body">
           <ul>
-            <li><a href="" routerLink="/dashboard">Perfil</a></li>
-            <li><a href="#!">Agregar Usuario</a></li>
-            <li><a href="#!">Third</a></li>
-            <li><a href="#!">Fourth</a></li>
+            <li>
+              <a href="" routerLink="/dashboard">Perfil</a>
+            </li>
+            <li>
+              <a href="" routerLink="/addUser">Agregar Usuario</a>
+            </li>
+            <li>
+              <a href="#!">Third</a>
+            </li>
+            <li>
+              <a href="#!">Fourth</a>
+            </li>
           </ul>
         </div>
       </li>
@@ -103,9 +115,9 @@
 
 <!--Estructura del Tap Target Menu-->
 <div class="tap-target teal lighten-3" data-target="menu">
-    <div class="tap-target-content">
-      <h5>Aqui Estoy!</h5>
-      <p>Si deseas navegar por toda la plataforma solo basta que me toques para yo poderte mostrar las rutas.</p>
-    </div>
+  <div class="tap-target-content">
+    <h5>Aqui Estoy!</h5>
+    <p>Si deseas navegar por toda la plataforma solo basta que me toques para yo poderte mostrar las rutas.</p>
   </div>
+</div>
 <!-- se termina de agregar el navbar-->

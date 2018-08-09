@@ -27,8 +27,10 @@ import {DataTablesModule} from 'angular-datatables';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { NgwWowModule } from 'ngx-wow';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
-import { ProfileLinkComponent } from './profile-dashboard/profile-link/profile-link.component';
 import { MonitoreoComponent } from './monitoreo/monitoreo.component';
+import { AddUserComponent } from './profile-dashboard/add-user/add-user.component';
+import { SidenavDashboardComponent } from './profile-dashboard/sidenav-dashboard/sidenav-dashboard.component';
+import { RealtimeDataseComponent } from './realtime-datase/realtime-datase.component';
 export const firebaseConfig={
   apiKey: "AIzaSyBu_Yb1UXx6W12dkeSYvr7aj9ueNwj0NLQ",
   authDomain: "proyecto-robotica-35bed.firebaseapp.com",
@@ -50,8 +52,10 @@ export const firebaseConfig={
     DetallesComponent,
     DataChartsComponent,
     ProfileDashboardComponent,
-    ProfileLinkComponent,
-    MonitoreoComponent
+    MonitoreoComponent,
+    AddUserComponent,
+    SidenavDashboardComponent,
+    RealtimeDataseComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +76,7 @@ export const firebaseConfig={
     DataTablesModule,
     NgwWowModule.forRoot()
   ],
-  providers: [AuthService,AuthContentOnlyGuard,NavbarComponent],
+  providers: [AuthService,AuthContentOnlyGuard,NavbarComponent,SidenavDashboardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

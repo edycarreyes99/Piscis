@@ -11,6 +11,21 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
     crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>
+      UPLOADCARE_PUBLIC_KEY = '420d8a2ee1d9d190d223';
+      UPLOADCARE_LOCALE = 'es';
+      UPLOADCARE_TABS = 'file camera facebook gdrive instagram';
+      UPLOADCARE_EFFECTS = 'crop';
+      UPLOADCARE_IMAGE_SHRINK = '1023x1024 100';
+      UPLOADCARE_IMAGES_ONLY = true;
+      UPLOADCARE_PREVIEW_STEP = true;
+      UPLOADCARE_SYSTEM_DIALOG = true;
+    </script>
+    
+    <script src="https://ucarecdn.com/libs/widget/3.6.0/uploadcare.full.min.js"></script><script src="https://ucarecdn.com/libs/widget-tab-effects/1.x/uploadcare.tab-effects.js"></script>
+    <script>
+      uploadcare.registerTab('preview', uploadcareTabEffects)
+    </script>
 </head>
 
 <body>

@@ -1,14 +1,20 @@
-<div class="jumbotron bg-light mx-auto mt-3 text-center">
-  <div class="display-4">
-      Bienvenidos a 
-  </div>
-  <div class="display-1">
+<div class="jumbotron hero-technology full-screen-hero" style="width: auto; height: auto;">
+  <div class="box">
+    <div class="display-4 text-light">
+      Bienvenidos a
+    </div>
+    <div class="display-1 text-light">
       Piscis.
-  </div>
-  <img src="https://firebasestorage.googleapis.com/v0/b/proyecto-robotica-35bed.appspot.com/o/fotos%2FPiscis%20Logo.png?alt=media&token=5e2b1404-b32a-4192-a47e-3354a23ba484" width="200" alt="Piscis Logo">
-  <div class="text-center">
-    <div class="h3 mt-3">
-      <a href="" routerLink="login">Inicie sesión</a> para poder acceder a nuestra base de datos.
+    </div>
+    <img src="https://firebasestorage.googleapis.com/v0/b/proyecto-robotica-35bed.appspot.com/o/fotos%2FPiscis%20Logo.png?alt=media&token=5e2b1404-b32a-4192-a47e-3354a23ba484"
+      width="200" alt="Piscis Logo">
+    <div class="text-center">
+      <div class="h3 mt-3">
+        <a href="" routerLink="/historial" class="text-warning" *ngIf="isLogin && isVerified">Click Aqui</a>
+        <a href="" routerLink="/privado" class="text-warning" *ngIf="isLogin && !isVerified">Verifique su Cuenta</a>
+        <a href="" routerLink="/login" class="text-warning" *ngIf="!isLogin">Inicie sesión</a> 
+        para poder acceder a nuestra base de datos.
+      </div>
     </div>
   </div>
 </div>
