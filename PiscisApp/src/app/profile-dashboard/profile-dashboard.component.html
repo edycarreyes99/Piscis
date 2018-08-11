@@ -1,3 +1,24 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cambiar Imagen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-file-upload></app-file-upload>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Modal-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
 <div class="wrapper">
@@ -25,15 +46,17 @@
                                         style="background-image:url('https://thewallpaper.co/wp-content/uploads/2017/10/vector-moon-balloons-fantasy-bokehship-clouds-ship-hd-free-background-images-boat-amazinghigh-resolution-cartoon-wallpapers-schooner-sail-balloon.jpg');background-color:rgb(255,255,255);"></div>
                                 </div>
                                 <div>
-                                    <img class="rounded-circle" src="https://ucarecdn.com/ecfc9cd9-a201-489e-a99e-16b2f7946765/2.jpeg" height="150px" style="margin-top:-70px;">
+                                    <img class="rounded-circle" src="https://firebasestorage.googleapis.com/v0/b/proyecto-robotica-35bed.appspot.com/o/thumb%40512_ereyes.jpg?alt=media&token=f411fa2f-237b-41cd-bb95-dcc9e22d351d"
+                                        height="150px" style="margin-top:-70px;">
                                     <h3 style="color:rgb(70,116,163);">Edycar Reyes</h3>
                                     <p style="padding:20px;padding-bottom:0;padding-top:5px;color:rgb(73,97,120);">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto minus, cum consectetur
                                         odit, tempore beatae, quia
                                         <p>
                                 </div>
                             </div>
-                            <input type="hidden" role="uploadcare-uploader" name="profile" data-image-shrink="1023x1024 100" data-crop="1:1" id="inputProfile" (change)="uploadFile()" />
-                            <input type="hidden"role="uploadcare-uploader"name="profile"data-tabs="file camera facebook gdrive instagram"data-public-key="420d8a2ee1d9d190d223"data-image-shrink="1023x1024 100"data-images-only="true"data-preview-step="true"data-system-dialog="true"data-crop="4:3"data-effects="crop" />
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Cambiar Imagen
+                            </button>
                         </div>
                         <div class="col-md-8" style="padding-top:10;">
                             <h1>Perfil</h1>
