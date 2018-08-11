@@ -4,7 +4,7 @@
 
   <h3>AngularFire Drop Zone</h3>
 
-  <div class="file">
+  <!--<div class="file">
     <label class="file-label">
 
 
@@ -20,7 +20,13 @@
         </span>
       </span>
     </label>
-  </div>
+  </div>-->
+  
+  <form action="/file-upload" class="dropzone">
+    <div class="fallback">
+      <input name="file" type="file" multiple (change)="startUpload($event.target.files)"/>
+    </div>
+  </form>
 
   <div *ngIf="percentage | async as pct">
 
