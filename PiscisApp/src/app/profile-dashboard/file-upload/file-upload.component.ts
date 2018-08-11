@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
+import {AuthService} from '../../auth.service'
 
 @Component({
   selector: 'app-file-upload',
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent {
+  @Output()cambiar = new EventEmitter();
 
   // Main task 
   task: AngularFireUploadTask;
@@ -19,12 +21,12 @@ export class FileUploadComponent {
   snapshot: Observable<any>;
 
   // Download URL
-  downloadURL: Observable<string>;
+  downloadURL: string;
 
   // State for dropzone CSS toggling
   isHovering: boolean;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
+  constructor(private storage: AngularFireStorage, private db: AngularFirestore,public auth:AuthService) { }
 
   
   toggleHover(event: boolean) {
@@ -46,7 +48,7 @@ export class FileUploadComponent {
     const path = `test/${new Date().getTime()}_${file.name}`;
 
     // Totally optional metadata
-    const customMetadata = { app: 'My AngularFire-powered PWA!' };
+    const customMetadata = { app: 'Foto de Perfil de la plataforma Piscis' };
 
     // The main task
     this.task = this.storage.upload(path, file, { customMetadata })
@@ -56,7 +58,14 @@ export class FileUploadComponent {
     this.snapshot   = this.task.snapshotChanges()
 
     // The file's download URL
-    this.downloadURL = this.task.downloadURL(); 
+    this.task.downloadURL().subscribe(url=>{
+      this.downloadURL = url;
+      this.auth.afAuth.auth.currentUser.updateProfile({
+        displayName: '',
+        photoURL: this.downloadURL
+      });
+    }); 
+    this.cambiar.emit();
   }
 
   // Determines if the upload task is active

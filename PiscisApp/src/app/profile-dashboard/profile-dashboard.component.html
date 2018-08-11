@@ -13,7 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="cambiarImagen()">Guardar</button>
             </div>
         </div>
     </div>
@@ -46,8 +46,8 @@
                                         style="background-image:url('https://thewallpaper.co/wp-content/uploads/2017/10/vector-moon-balloons-fantasy-bokehship-clouds-ship-hd-free-background-images-boat-amazinghigh-resolution-cartoon-wallpapers-schooner-sail-balloon.jpg');background-color:rgb(255,255,255);"></div>
                                 </div>
                                 <div>
-                                    <img class="rounded-circle" src="https://firebasestorage.googleapis.com/v0/b/proyecto-robotica-35bed.appspot.com/o/thumb%40512_ereyes.jpg?alt=media&token=f411fa2f-237b-41cd-bb95-dcc9e22d351d"
-                                        height="150px" style="margin-top:-70px;">
+                                    <img class="rounded-circle" [src]="url"
+                                        height="150px" style="margin-top:-70px;" >
                                     <h3 style="color:rgb(70,116,163);">Edycar Reyes</h3>
                                     <p style="padding:20px;padding-bottom:0;padding-top:5px;color:rgb(73,97,120);">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto minus, cum consectetur
                                         odit, tempore beatae, quia
