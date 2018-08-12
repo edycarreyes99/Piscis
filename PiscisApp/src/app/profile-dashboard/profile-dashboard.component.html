@@ -13,7 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="cambiarImagen()">Guardar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>
             </div>
         </div>
     </div>
@@ -41,13 +41,13 @@
                         <div class="col-md-4 relative">
                             <div class="avatar"></div>
                             <div class="text-center profile-card" style="margin:15px;background-color:#ffffff;color:rgb(3,118,234);">
-                                <div class="profile-card-img" style="background-image:url(&quot;iceland.jpg&quot;);height:150px;background-size:cover;">
+                                <div class="profile-card-img" style="height:150px;background-size:cover;">
                                     <div class="d-flex justify-content-center align-items-center align-content-center align-self-center flex-wrap profile-back"
                                         style="background-image:url('https://thewallpaper.co/wp-content/uploads/2017/10/vector-moon-balloons-fantasy-bokehship-clouds-ship-hd-free-background-images-boat-amazinghigh-resolution-cartoon-wallpapers-schooner-sail-balloon.jpg');background-color:rgb(255,255,255);"></div>
                                 </div>
-                                <div>
-                                    <img class="rounded-circle" [src]="url"
-                                        height="150px" style="margin-top:-70px;" >
+                                <div *ngIf="user | async as usr">
+                                    <img class="rounded-circle" src="{{usr.photoURL}}"
+                                        height="150px" style="margin-top:-70px;">
                                     <h3 style="color:rgb(70,116,163);">Edycar Reyes</h3>
                                     <p style="padding:20px;padding-bottom:0;padding-top:5px;color:rgb(73,97,120);">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto minus, cum consectetur
                                         odit, tempore beatae, quia
