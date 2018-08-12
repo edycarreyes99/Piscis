@@ -76,7 +76,7 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
       pageLength: 24
     };
     M.AutoInit();
-    WOW.init();
+    //WOW.init();
 
     //se extraen los datos por primera vez... En este caso se mostraran todos los datos la primera vez que se cargue la pagina antes de aplicar los filtros.
     this.db.list('/contactos').snapshotChanges()

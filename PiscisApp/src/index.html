@@ -11,25 +11,110 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
     crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--<script>
-      UPLOADCARE_PUBLIC_KEY = '420d8a2ee1d9d190d223';
-      UPLOADCARE_LOCALE = 'es';
-      UPLOADCARE_TABS = 'file camera facebook gdrive instagram';
-      UPLOADCARE_EFFECTS = 'crop';
-      UPLOADCARE_IMAGE_SHRINK = '1023x1024 100';
-      UPLOADCARE_IMAGES_ONLY = true;
-      UPLOADCARE_PREVIEW_STEP = true;
-      UPLOADCARE_SYSTEM_DIALOG = true;
-    </script>
-    
-    <script src="https://ucarecdn.com/libs/widget/3.6.0/uploadcare.full.min.js"></script><script src="https://ucarecdn.com/libs/widget-tab-effects/1.x/uploadcare.tab-effects.js"></script>
-    <script>
-      uploadcare.registerTab('preview', uploadcareTabEffects)
-    </script>-->
+
+
+  <!-- PRELOADER -->
+  <style type="text/css">
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #2980b9;
+      z-index: 9999;
+      height: 100%;
+      width: 100%;
+    }
+
+    #status {
+      width: 920px;
+      height: 532px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -266px 0 0 -460px;
+    }
+
+    .cube1,
+    .cube2 {
+      background-color: white;
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-animation: sk-cubemove 1.8s infinite ease-in-out;
+      animation: sk-cubemove 1.8s infinite ease-in-out;
+    }
+    .cube2 {
+      -webkit-animation-delay: -0.9s;
+      animation-delay: -0.9s;
+    }
+ 
+
+
+    @-webkit-keyframes sk-cubemove {
+      25% {
+        -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5)
+      }
+      50% {
+        -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg)
+      }
+      75% {
+        -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5)
+      }
+      100% {
+        -webkit-transform: rotate(-360deg)
+      }
+    }
+
+    @keyframes sk-cubemove {
+      25% {
+        transform: translateX(42px) rotate(-90deg) scale(0.5);
+        -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
+      }
+      50% {
+        transform: translateX(42px) translateY(42px) rotate(-179deg);
+        -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+      }
+      50.1% {
+        transform: translateX(42px) translateY(42px) rotate(-180deg);
+        -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+      }
+      75% {
+        transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+        -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+      }
+      100% {
+        transform: rotate(-360deg);
+        -webkit-transform: rotate(-360deg);
+      }
+    }
+  </style>
+  <!---->
 </head>
 
-<body>
+<body id="color">
+  <!--Contenedores del Spinner al cargar la pagina-->
+  <div id="preloader">
+    <div id="status">
+      <div class="cube1"></div>
+      <div class="cube2"></div>
+    </div>
+  </div>
+
   <app-root></app-root>
+
+  <!--Se enlaza Jquery a la pagina-->
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+  $(window).on('load',function(){
+    $('#status').fadeOut();
+    $('#preloader').delay(1000).fadeOut("slow");
+  })
+  </script>
 </body>
 
 </html>

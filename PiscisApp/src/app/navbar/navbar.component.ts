@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     M.AutoInit();
-    $(document).ready(function(){
+    $(window).on('load',function(){
       $('.tap-target').tapTarget('open');
     });
   
