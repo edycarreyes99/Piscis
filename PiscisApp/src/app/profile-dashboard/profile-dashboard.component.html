@@ -13,7 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="toast()">Guardar</button>
             </div>
         </div>
     </div>
@@ -46,12 +46,10 @@
                                         style="background-image:url('https://thewallpaper.co/wp-content/uploads/2017/10/vector-moon-balloons-fantasy-bokehship-clouds-ship-hd-free-background-images-boat-amazinghigh-resolution-cartoon-wallpapers-schooner-sail-balloon.jpg');background-color:rgb(255,255,255);"></div>
                                 </div>
                                 <div *ngIf="user | async as usr">
-                                    <img class="rounded-circle" src="{{usr.photoURL}}"
-                                        height="150px" style="margin-top:-70px;">
-                                    <h3 style="color:rgb(70,116,163);">Edycar Reyes</h3>
-                                    <p style="padding:20px;padding-bottom:0;padding-top:5px;color:rgb(73,97,120);">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto minus, cum consectetur
-                                        odit, tempore beatae, quia
-                                        <p>
+                                    <img class="rounded-circle" src="{{usr.photoURL}}" height="150px" style="margin-top:-70px;">
+                                    <h3 style="color:rgb(70,116,163);">{{usr.Nombre}} {{usr.Apellido}}</h3>
+                                    <p style="padding:20px;padding-bottom:0;padding-top:5px;color:rgb(73,97,120);">{{usr.bio}}
+                                    <p>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -61,50 +59,52 @@
                         <div class="col-md-8" style="padding-top:10;">
                             <h1>Perfil</h1>
                             <hr>
-                            <div class="form-row">
+                            <div class="form-row" *ngIf="user | async as usr">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label>Nombre</label>
-                                        <input class="form-control" type="text" name="firstname">
+                                        <input disabled value="{{usr.Nombre}}" id="nombre" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label>Apellido</label>
-                                        <input class="form-control" type="text" name="lastname">
+                                        <input disabled value="{{usr.Apellido}}" id="apellido" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <label class="col-form-label">Email</label>
-                                    <input class="form-control" type="email">
+                                    <input disabled value="{{usr.Correo}}" id="email" type="email" class="form-control"  [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
                                 </div>
                                 <div class="col">
                                     <label class="col-form-label">Username</label>
-                                    <input class="form-control" type="password" name="confirmpass" autocomplete="off" required="">
+                                    <input id="username" type="text" class="form-control" disabled value="{{usr.username}}">
                                 </div>
                             </div>
-                            <div class="form-row">
+                            <div class="form-row" *ngIf="user | async as usr">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label>Contraseña</label>
-                                        <input class="form-control" type="password" name="password" autocomplete="off" required="">
+                                        <input id="password" type="password" class="form-control" id="contrasena" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label>Confirmar Contraseña</label>
-                                        <input class="form-control" type="password" name="confirmpass" autocomplete="off" required="">
+                                        <input id="passwordconfirm" type="password" class="form-control" id="contrasenaconfirm" [(ngModel)]="passwordconfirm" [ngModelOptions]="{standalone: true}">
                                     </div>
+                                </div>
+                                <div class="col-md-12 content-right">
+                                    <button class="btn btn-warning form-btn" type="submit" (click)="actualizarContrasena()" type="reset">Actualizar Contraseña</button>
                                 </div>
                             </div>
                             <hr>
                             <label class="col-form-label">Cuéntanos sobre ti</label>
-                            <textarea class="form-control"></textarea>
+                            <textarea id="textareaBio" class="form-control" [(ngModel)]="bio" [ngModelOptions]="{standalone: true}"></textarea>
                             <hr>
                             <div class="form-row">
                                 <div class="col-md-12 content-right">
-                                    <button class="btn btn-primary form-btn" type="submit">Guardar</button>
-                                    <button class="btn btn-danger form-btn" type="reset">Cancelar</button>
+                                    <button id="actualizarDatosPerfilBtn" class="btn btn-primary form-btn" type="submit" (click)="actualizarDatosPerfil()">Guardar</button>
                                 </div>
                             </div>
                         </div>

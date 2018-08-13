@@ -37,14 +37,14 @@
       <div class="background">
         <img src="http://globalpathholidays.com/wp-content/uploads/2015/08/landing-page-large.jpg">
       </div>
-      <a href="#user" *ngIf="isLogin">
-        <img class="circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPlAiIom1bx7f422n9C-OuGjb7NUH8E3-nzU18wUxa15dJaKIs">
+      <a href="#user" *ngIf="user | async as usr">
+        <img class="circle" src="{{usr.photoURL}}">
       </a>
-      <a href="#name" *ngIf="isLogin">
-        <span class="white-text name">Edycar Reyes</span>
+      <a href="#name" *ngIf="user | async as usr">
+        <span class="white-text name">{{usr.Nombre}} {{usr.Apellido}}</span>
       </a>
-      <a href="#email" *ngIf="isLogin">
-        <span class="white-text email">edycarreyes@gmail.com</span>
+      <a href="#email" *ngIf="user | async as usr">
+        <span class="white-text email">{{usr.Correo}}</span>
       </a>
       <a class="waves-effect waves-light btn btn-small m-2" href="" routerLink="login" *ngIf="!isLogin">
         <span class="white-text m-1">

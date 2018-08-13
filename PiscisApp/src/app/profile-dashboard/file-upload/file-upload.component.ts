@@ -36,8 +36,8 @@ export class FileUploadComponent implements OnInit {
   // State for dropzone CSS toggling
   isHovering: boolean;
 
-  //Se crea el usuario imaginario
-  user: string = 'ereyes';
+  //Se crea la variable del email del usuario logueado actualmente
+  userEmail: string;
 
   userDoc: AngularFirestoreDocument<any>;
   userid: Observable<any>;
@@ -57,10 +57,13 @@ export class FileUploadComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   startUpload(event: FileList) {
+    //se extrae el correo electonico del usuario actual para usarlo en el query
+    this.userEmail = this.auth.afAuth.auth.currentUser.email;
+    
     // The File object
     const file = event.item(0)
 
@@ -71,7 +74,7 @@ export class FileUploadComponent implements OnInit {
     }
 
     // The storage path
-    const path = `Profile Pictures/${this.user}_${file.name}`;
+    const path = `Profile Pictures/${this.userEmail}_${file.name}`;
 
     // Totally optional metadata
     const customMetadata = { app: 'Foto de Perfil de la plataforma Piscis' };
@@ -92,13 +95,16 @@ export class FileUploadComponent implements OnInit {
         photoURL: this.downloadURL
       });
 
+      
       //se publican los datos actuales a firestore
-      this.afs.collection('Piscis').doc('Users').collection('Administradores').doc(`${this.user}`).set({
+      this.afs.collection('Piscis').doc('Users').collection('Administradores').doc(`${this.userEmail}`).set({
         userid: this.auth.afAuth.auth.currentUser.uid,
         photoURL: this.downloadURL,
         Nombre: 'Edycar',
         Apellido: 'Reyes',
-        Correo: this.auth.afAuth.auth.currentUser.email
+        Correo: this.auth.afAuth.auth.currentUser.email,
+        username: 'ereyes',
+        password: '123123'
       });
     });
   }

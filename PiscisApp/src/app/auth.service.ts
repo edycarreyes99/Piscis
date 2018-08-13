@@ -115,9 +115,10 @@ export class AuthService {
   }
 
   logout() {
+    this.router.navigate(['/']);
     return this.afAuth.auth.signOut().then(function () {
-      this.router.navigate(['/']);
       console.log("Se ha cerrado sesion");
+      location.reload();
     }).catch(function (error) {
       console.log(error);
     });

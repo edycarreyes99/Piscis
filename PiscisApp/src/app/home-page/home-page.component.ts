@@ -24,7 +24,6 @@ isVerified = false;
           this.isVerified = false;
         }
         this.isLogin = true;
-        console.log("hay usuarios para el home");
       }else{
         this.isLogin = false;
       }
