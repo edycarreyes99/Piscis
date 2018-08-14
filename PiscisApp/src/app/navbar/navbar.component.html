@@ -1,26 +1,131 @@
 <!--se agrega el navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <span class="text-info">Piscis</span></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarColor03">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="" routerLink="/" *ngIf="!isLogin">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" routerLink="/login" *ngIf="!isLogin">Inicia Sesión</a>
-        </li>
-        <li class="nav-item" *ngIf="isVerified">
-          <a class="nav-link" href="" routerLink="/historial">Historial</a>
-        </li>
-        <li class="nav-item" *ngIf="isLogin">
-            <a class="nav-link" href="" (click)="cerrar()">Salir</a>
-          </li>
-      </ul>
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <span class="text-info">Piscis</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="" routerLink="/" *ngIf="!isLogin">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="" routerLink="/login" *ngIf="!isLogin">Inicia Sesión</a>
+      </li>
+      <li class="nav-item" *ngIf="isVerified">
+        <a class="nav-link" href="" routerLink="/historial">Historial</a>
+      </li>
+      <li class="nav-item" *ngIf="isLogin">
+        <a class="nav-link" href="" (click)="cerrar()">Salir</a>
+      </li>
+      <li class="nav-item" *ngIf="isVerified">
+        <a class="nav-link" href="" routerLink="/privado">Privado</a>
+      </li>
+    </ul>
+  </div>
+</nav>-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+<!--Sidenav-->
+<ul id="slide-out" class="sidenav">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="http://globalpathholidays.com/wp-content/uploads/2015/08/landing-page-large.jpg">
+      </div>
+      <a href="#user" *ngIf="user | async as usr">
+        <img class="circle" src="{{usr.photoURL}}">
+      </a>
+      <a href="#name" *ngIf="user | async as usr">
+        <span class="white-text name">{{usr.Nombre}} {{usr.Apellido}}</span>
+      </a>
+      <a href="#email" *ngIf="user | async as usr">
+        <span class="white-text email">{{usr.Correo}}</span>
+      </a>
+      <a class="waves-effect waves-light btn btn-small m-2" href="" routerLink="login" *ngIf="!isLogin">
+        <span class="white-text m-1">
+          <i class="material-icons left ml-1">account_circle</i>
+          <strong>Iniciar Sesión</strong>
+        </span>
+      </a>
+      <a class="waves-effect waves-light btn btn-small m-2" *ngIf="isLogin" (click)="cerrar()">
+        <span class="white-text m-1">
+          <i class="material-icons left ml-1">arrow_back</i>
+          <strong>Salir</strong>
+        </span>
+      </a>
     </div>
-  </nav>
+  </li>
+  <li>
+    <a href="" routerLink="/">
+      <i class="material-icons">home</i>Inicio</a>
+  </li>
+  <li *ngIf="isVerified && isLogin">
+    <a href="" routerLink="/realtime">
+      <i class="material-icons">whatshot</i>Tiempo Real</a>
+  </li>
+  <li *ngIf="isVerified && isLogin">
+    <a href="" routerLink="/historial">
+      <i class="material-icons">timeline</i>Historial</a>
+  </li>
+  <li *ngIf="isVerified && isLogin">
+    <a href="" routerLink="/streaming">
+      <i class="material-icons">visibility</i>Streaming</a>
+  </li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">
+          <i class="material-icons">arrow_drop_down</i>
+          <i class="material-icons">account_circle</i>Cuenta</a>
+        <div class="collapsible-body">
+          <ul>
+            <li>
+              <a href="" routerLink="/dashboard" *ngIf="isVerified && isLogin">Perfil</a>
+            </li>
+            <li>
+              <a href="" routerLink="/addUser" *ngIf="isVerified && isLogin">Agregar Usuario</a>
+            </li>
+            <li>
+              <a href="" *ngIf="isVerified && isLogin">Third</a>
+            </li>
+            <li>
+              <a href="" *ngIf="isVerified && isLogin">Fourth</a>
+            </li>
+            <li>
+              <a class="waves-effect waves-light btn btn-small m-2" href="" routerLink="/login" *ngIf="!isLogin">
+                <span class="white-text m-1">
+                  <i class="material-icons left ml-1">account_circle</i>
+                  <strong>Iniciar Sesión</strong>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<!--Boton para el sidenav-->
+<div class="fixed-action-btn" id="sidenav-boton">
+  <a href="#" data-target="slide-out" class="sidenav-trigger btn-floating btn-large teal pulse show-on-large" id="menu">
+    <i class="material-icons text-white">apps</i>
+  </a>
+</div>
+
+<!--Estructura del Tap Target Menu-->
+<div class="tap-target teal lighten-3" data-target="menu">
+  <div class="tap-target-content">
+    <h5>Aqui Estoy!</h5>
+    <p>Si deseas navegar por toda la plataforma solo basta que me toques para yo poderte mostrar las rutas.</p>
+  </div>
+</div>
 <!-- se termina de agregar el navbar-->

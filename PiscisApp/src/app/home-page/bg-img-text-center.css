@@ -1,0 +1,29 @@
+div.jumbotron.hero-technology {
+  text-align:center;
+  background:url('https://www.desktopbackground.org/download/o/2010/04/13/1158_cloud-wallpaper-hd-background-5-png-ioncube-blog_1920x1080_h.png');
+  background-size:cover;
+  background-position:center;
+  padding-top:10vh;
+  padding-bottom:100px;
+}
+
+h1.hero-title, h2.hero-title, h3.hero-title {
+  text-shadow:0 2px 2px rgba(0,0,0,0.3);
+  color:#fff;
+  font-weight:500;
+}
+
+p.hero-subtitle {
+  max-width:600px;
+  margin:25px auto;
+  padding:10px 15px;
+  background-color:rgba(0,0,0,0.1);
+  color:#fff;
+  text-shadow:0 1px 1px rgba(0,0,0,0.7);
+  font-weight:500;
+}
+
+.full-screen-hero {
+  min-height:100vh;
+}
+

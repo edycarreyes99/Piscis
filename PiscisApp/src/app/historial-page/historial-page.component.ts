@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { AuthService } from '../auth.service'
 import { MatDialog } from '@angular/material';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Router, NavigationEnd } from '@angular/router'
 import * as _ from 'lodash';
 import { DocumentSnapshot } from '@firebase/firestore-types';
 import { PropertyRead } from '@angular/compiler';
@@ -11,16 +12,15 @@ import * as $ from 'jquery';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
-import {Subscription} from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 import { NgwWowService } from 'ngx-wow';
-import { Router, NavigationEnd } from '../../../node_modules/@angular/router';
 @Component({
   selector: 'app-historial-page',
   templateUrl: './historial-page.component.html',
   styleUrls: ['./historial-page.component.scss']
 })
 export class HistorialPageComponent implements OnDestroy, OnInit {
-  private wowSubscription:Subscription;
+  private wowSubscription: Subscription;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   title = 'Temperaturas';
@@ -49,13 +49,13 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
     private dialog: MatDialog,
     private db: AngularFireDatabase,
     private http: Http,
-    private router:Router,
-    private wowService:NgwWowService
-  ) { 
+    private router: Router,
+    private wowService: NgwWowService
+  ) {
     this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
       // Reload WoW animations when done navigating to page,
       // but you are free to call it whenever/wherever you like
-      this.wowService.init(); 
+      this.wowService.init();
     });
   }
   temperaturas: any;
@@ -66,7 +66,7 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
   mes: string;
   dia: string;
   filtro = true;
-  persons: any = [];
+  
   //reglas de filtros activos
   filtros = {}
 
@@ -77,22 +77,15 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
     };
     M.AutoInit();
     //WOW.init();
+
     //se extraen los datos por primera vez... En este caso se mostraran todos los datos la primera vez que se cargue la pagina antes de aplicar los filtros.
     this.db.list('/contactos').snapshotChanges()
       .map(temperaturas => {
-        let values = temperaturas.map(c => ({
-          key: c.payload.key, ...c.payload.val()
-        }));
-        this.extractData;
         return temperaturas.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       })
       .subscribe(temperaturas => {
         this.temperaturas = temperaturas;
         this.dtTrigger.next();
-        for (var j = 0; j < Object.keys(this.temperaturas).length; j++) {
-            this.numeroElemento.push(j);
-          }
-          //console.log(this.numeroElemento);
       })
 
     //se llaman a las funciones desde el servicio y se igualan todas las variables.
@@ -102,10 +95,12 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
     this.temperatura = this.servicio.temperatura;
     this.filtros = this.servicio.filtros;
   }
+
   ngOnDestroy(): void {
+    //control del paginado de la tabla
     this.dtTrigger.unsubscribe();
-    this.wowSubscription.unsubscribe();
   }
+
   //se aplica el filtro para el select de años
   filtroExactoAno(property: string, regla: any) {
     this.numeroElementoFiltrado = [];
@@ -134,12 +129,6 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
     this.temperatura = this.servicio.temperatura;
     this.filtro = this.servicio.filtro;
     this.filtros = this.servicio.filtros;
-    this.temperaturasFiltradas.map(charts => {
-      let values = charts.map(c => ({
-        key: c.payload.key, ...c.payload.val()
-      }))
-      //console.log(values);
-    })
   }
   //funcion que ejecuta el boton para eliminar los filtros de cada select
   eliminarFiltro(property: string) {
@@ -154,53 +143,48 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
     this.filtro = this.servicio.filtro;
     this.filtros = this.servicio.filtros;
   }
-  private extractData(res: Response) {
-    const body = res.json();
-    return body.data || {};
-  }
 
   //funcion que muestra el grafico
   mostrarGrafico() {
-    //se dan a conocer los objetos de las temperaturas filtradas
-    //console.log('Las temperaturas Filtradas son: '+Object.entries(this.temperaturasFiltradas));
-
-    //se mapean todos los objetos de las temperaturas filtradas
-    this.temperaturasFiltradas.map(tf => {
-      //console.log(Object.keys(tf).length)    
-    })
 
     //se recorre todo el arreglo de objetos de las temperaturas filtradas
     for (var i = 0; i < Object.keys(this.temperaturasFiltradas).length; i++) {
+
       //se convierten los valores de las temperaturas a enteros para su push al arreglo para el grafico
       //console.log(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));
       this.arrayx.push(Object.values(Object.values(this.temperaturasFiltradas[i].hora).join("")).join(""));//datos de las X que son las horas de cada temperatura
       this.arrayy.push(parseInt(Object.values(Object.values(this.temperaturasFiltradas[i].valor).join("")).join("")));//datos de las Y que son las temperaturas de cada hora
     }
 
-    //se emite en consola el arreglo en Y
-    //console.log(Object.values(this.arrayy));
-
     //se emite la señal para que el componente del grafico agarre los valores desde este componente
     this.chart = true;
   }
   //funcion que oculta el grafico
   cerrarGrafico() {
+
+    //se anulan todos los valores del grafico para su apertura de nuevo sin ningun problema
     this.chart = false;
     this.arrayx = [];
     this.arrayy = [];
     this.numeroElemento = [];
   }
 
+  //funcion que muestra los detalles
   onClick(elemento) {
     console.log('Detalles Mostrado');
     this.elemento = elemento;
     this.detallesElemento = true;
-    $(window).ready( function() {
+
+    //hace un scroll al final de la pagina
+    $(window).ready(function () {
       $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     });
   }
+
+  //funcion que cierra los detalles
   cerrarDetalles() {
-    $(window).ready(function() {
+    //hace un scroll al principio de la pagina
+    $(window).ready(function () {
       $("html, body").animate({ scrollTop: 0 }, 1000);
       return false;
     });

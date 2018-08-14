@@ -1,0 +1,116 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cambiar Imagen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-file-upload></app-file-upload>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="toast()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Modal-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+<div class="wrapper">
+    <app-sidenav-dashboard></app-sidenav-dashboard>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container profile profile-view" id="profile">
+                <div class="row">
+                    <div class="col-md-12 alert-col relative">
+                        <div class="alert alert-info absolue center" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <span>Profile save with success</span>
+                        </div>
+                    </div>
+                </div>
+                <form>
+                    <div class="form-row profile-row">
+                        <div class="col-md-4 relative">
+                            <div class="avatar"></div>
+                            <div class="text-center profile-card" style="margin:15px;background-color:#ffffff;color:rgb(3,118,234);">
+                                <div class="profile-card-img" style="height:150px;background-size:cover;">
+                                    <div class="d-flex justify-content-center align-items-center align-content-center align-self-center flex-wrap profile-back"
+                                        style="background-image:url('https://thewallpaper.co/wp-content/uploads/2017/10/vector-moon-balloons-fantasy-bokehship-clouds-ship-hd-free-background-images-boat-amazinghigh-resolution-cartoon-wallpapers-schooner-sail-balloon.jpg');background-color:rgb(255,255,255);"></div>
+                                </div>
+                                <div *ngIf="user | async as usr">
+                                    <img class="rounded-circle" src="{{usr.photoURL}}" height="150px" style="margin-top:-70px;">
+                                    <h3 style="color:rgb(70,116,163);">{{usr.Nombre}} {{usr.Apellido}}</h3>
+                                    <p style="padding:20px;padding-bottom:0;padding-top:5px;color:rgb(73,97,120);">{{usr.bio}}
+                                    <p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Cambiar Imagen
+                            </button>
+                        </div>
+                        <div class="col-md-8" style="padding-top:10;">
+                            <h1>Perfil</h1>
+                            <hr>
+                            <div class="form-row" *ngIf="user | async as usr">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Nombre</label>
+                                        <input disabled value="{{usr.Nombre}}" id="nombre" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Apellido</label>
+                                        <input disabled value="{{usr.Apellido}}" id="apellido" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label class="col-form-label">Email</label>
+                                    <input disabled value="{{usr.Correo}}" id="email" type="email" class="form-control"  [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col">
+                                    <label class="col-form-label">Username</label>
+                                    <input id="username" type="text" class="form-control" disabled value="{{usr.username}}">
+                                </div>
+                            </div>
+                            <div class="form-row" *ngIf="user | async as usr">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Contraseña</label>
+                                        <input id="password" type="password" class="form-control" id="contrasena" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>Confirmar Contraseña</label>
+                                        <input id="passwordconfirm" type="password" class="form-control" id="contrasenaconfirm" [(ngModel)]="passwordconfirm" [ngModelOptions]="{standalone: true}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 content-right">
+                                    <button class="btn btn-warning form-btn" type="submit" (click)="actualizarContrasena()" type="reset">Actualizar Contraseña</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <label class="col-form-label">Cuéntanos sobre ti</label>
+                            <textarea id="textareaBio" class="form-control" [(ngModel)]="bio" [ngModelOptions]="{standalone: true}"></textarea>
+                            <hr>
+                            <div class="form-row">
+                                <div class="col-md-12 content-right">
+                                    <button id="actualizarDatosPerfilBtn" class="btn btn-primary form-btn" type="submit" (click)="actualizarDatosPerfil()">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
