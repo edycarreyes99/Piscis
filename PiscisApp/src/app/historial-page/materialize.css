@@ -2661,7 +2661,7 @@ a {
 }
 
 /* 24dp elevation */
-.z-depth-5, .modal {
+.z-depth-5, .modall {
   -webkit-box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
           box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
 }
@@ -5748,7 +5748,7 @@ body.keyboard-focused .dropdown-content li:focus {
   z-index: -1;
 }
 
-.modal {
+.modall {
   display: none;
   position: fixed;
   left: 0;
@@ -5763,29 +5763,29 @@ body.keyboard-focused .dropdown-content li:focus {
   will-change: top, opacity;
 }
 
-.modal:focus {
+.modall:focus {
   outline: none;
 }
 
 @media only screen and (max-width: 992px) {
-  .modal {
+  .modall {
     width: 80%;
   }
 }
 
-.modal h1, .modal h2, .modal h3, .modal h4 {
+.modall h1, .modall h2, .modall h3, .modall h4 {
   margin-top: 0;
 }
 
-.modal .modal-content {
+.modall .modall-content {
   padding: 24px;
 }
 
-.modal .modal-close {
+.modall .modall-close {
   cursor: pointer;
 }
 
-.modal .modal-footer {
+.modall .modall-footer {
   border-radius: 0 0 2px 2px;
   background-color: #fafafa;
   padding: 4px 6px;
@@ -5794,11 +5794,11 @@ body.keyboard-focused .dropdown-content li:focus {
   text-align: right;
 }
 
-.modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-small, .modal .modal-footer .btn-flat {
+.modall .modall-footer .btn, .modall .modall-footer .btn-large, .modall .modall-footer .btn-small, .modall .modall-footer .btn-flat {
   margin: 6px 0;
 }
 
-.modal-overlay {
+.modall-overlay {
   position: fixed;
   z-index: 999;
   top: -25%;
@@ -5812,12 +5812,12 @@ body.keyboard-focused .dropdown-content li:focus {
   will-change: opacity;
 }
 
-.modal.modal-fixed-footer {
+.modall.modall-fixed-footer {
   padding: 0;
   height: 70%;
 }
 
-.modal.modal-fixed-footer .modal-content {
+.modall.modall-fixed-footer .modall-content {
   position: absolute;
   height: calc(100% - 56px);
   max-height: 100%;
@@ -5825,13 +5825,13 @@ body.keyboard-focused .dropdown-content li:focus {
   overflow-y: auto;
 }
 
-.modal.modal-fixed-footer .modal-footer {
+.modall.modall-fixed-footer .modall-footer {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   position: absolute;
   bottom: 0;
 }
 
-.modal.bottom-sheet {
+.modall.bottom-sheet {
   top: auto;
   bottom: -100%;
   margin: 0;
@@ -8486,10 +8486,19 @@ input[type=range]::-ms-thumb {
   visibility: visible;
   -webkit-animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
           animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
-  -webkit-transition: opacity .3s, visibility 0s 1s, -webkit-transform .3s;
-  transition: opacity .3s, visibility 0s 1s, -webkit-transform .3s;
-  transition: opacity .3s, transform .3s, visibility 0s 1s;
-  transition: opacity .3s, transform .3s, visibility 0s 1s, -webkit-transform .3s;
+  -webkit-transition: opacity .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s 1s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
 }
 
 .tap-target {
@@ -8542,10 +8551,19 @@ input[type=range]::-ms-thumb {
 
 .tap-target-wave::after {
   visibility: hidden;
-  -webkit-transition: opacity .3s, visibility 0s, -webkit-transform .3s;
-  transition: opacity .3s, visibility 0s, -webkit-transform .3s;
-  transition: opacity .3s, transform .3s, visibility 0s;
-  transition: opacity .3s, transform .3s, visibility 0s, -webkit-transform .3s;
+  -webkit-transition: opacity .3s,
+ visibility 0s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ visibility 0s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s,
+ -webkit-transform .3s;
   z-index: -1;
 }
 
@@ -8611,14 +8629,14 @@ input[type=range]::-ms-thumb {
   }
 }
 
-@keyframes pulse-animation {
-  0% {
+@kemodalles pulse-animation {
+  0% {modall
     opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1);
   }
   50% {
-    opacity: 0;
+    opacity: 0;modall
     -webkit-transform: scale(1.5);
             transform: scale(1.5);
   }
@@ -8802,10 +8820,10 @@ input[type=range]::-ms-thumb {
   display: flex;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
+      -ms-flexmodall: justify;
           justify-content: space-between;
 }
-
+modall
 .datepicker-cancel,
 .datepicker-clear,
 .datepicker-today,
@@ -8829,12 +8847,12 @@ input[type=range]::-ms-thumb {
     -webkit-flex-direction: row;
         -ms-flex-direction: row;
             flex-direction: row;
-  }
+  }modall
   .datepicker-date-display {
     -webkit-box-flex: 0;
     -webkit-flex: 0 1 270px;
         -ms-flex: 0 1 270px;
-            flex: 0 1 270px;
+            flex: 0 1 modall;
   }
   .datepicker-controls,
   .datepicker-table,
@@ -9026,7 +9044,7 @@ input[type=range]::-ms-thumb {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
-          justify-content: space-between;
+          justmodalontent: space-between;
 }
 
 .timepicker-clear {

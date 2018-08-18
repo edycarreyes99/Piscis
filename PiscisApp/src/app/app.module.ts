@@ -11,6 +11,9 @@ import {DataTablesModule} from 'angular-datatables';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { NgwWowModule } from 'ngx-wow';
 
+//MDBootstrap Module Start
+import { MDBBootstrapModule } from "angular-bootstrap-md";
+
 //Components Start
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -90,7 +93,8 @@ export const firebaseConfig={
     MatPaginatorModule,
     MatSortModule,
     DataTablesModule,
-    NgwWowModule.forRoot()
+    NgwWowModule.forRoot(),
+    MDBBootstrapModule.forRoot()
   ],
   providers: [AuthService,AuthContentOnlyGuard,NavbarComponent,SidenavDashboardComponent],
   bootstrap: [AppComponent]

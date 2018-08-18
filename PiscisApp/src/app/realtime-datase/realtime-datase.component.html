@@ -1,294 +1,85 @@
 <section>
   <div id="productlist" style="margin:0px;margin-top:0px;padding:10px;margin-right:0px;margin-left:0px;padding-top:20px;padding-bottom:10px;">
     <h1 class="text-uppercase text-center" style="margin-bottom:1px;color:rgb(50,122,188);">Datos en tiempo real</h1>
-    <div class="container" style="padding:10px;">
+    <div *ngIf="realTimeData as data" class="container border border-light rounded" style="padding:10px;">
       <div class="row" style="margin:10px;margin-right:0px;margin-left:0px;margin-top:10px;margin-bottom:10px;padding:10px;">
         <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card-container-imagia">
-            <div class="card-imagia">
-              <div class="front-imagia">
-                <div class="cover-imagia" style="height:300px;">
-                  <img src="https://unsplash.it/720/500?image=1067" alt="" style="height:300px;">
-                </div>
-                <div class="content-imagia">
-                  <h3 class="name-imagia">John Doe</h3>
-                  <p class="subtitle-imagia">Subtitle </p>
-                </div>
-                <div class="footer-imagia">
-                  <span>
-                    <i class="fa fa-plus"></i> More info</span>
-                </div>
-              </div>
-              <div class="back-imagia">
-                <div class="content-imagia content-back-imagia">
-                  <div>
-                    <h3 class="text-center">Lorem Ipsum</h3>
-                    <p class="text-center">Et hanc quidem praeter oppida multa duae civitates exornant Seleucia opus Seleuci regis, et Claudiopolis
-                      quam deduxit coloniam Claudius Caesar. Isaura enim antehac nimium potens, olim subversa ut rebellatrix
-                      interneciva aegre vestigia claritudinis pristinae monstrat admodum pauca. </p>
-                  </div>
-                </div>
-                <div class="footer-imagia">
-                  <div class="social-imagia text-center">
-                    <a href="#">
-                      <i class="icon ion-more"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div class="card border-success mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-success text-light border-success">Nivel de PH</div>
+            <div class="card-body text-success">
+              <h1 class="card-title"><div class="display-1 text-center">{{data.PH}}°</div></h1>
+              
             </div>
+            <div class="card-footer bg-success text-light border-success">Footer</div>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card-container-imagia">
-            <div class="card-imagia">
-              <div class="front-imagia">
-                <div class="cover-imagia" style="height:300px;">
-                  <img src="https://unsplash.it/720/500?image=1067" alt="" style="height:300px;">
-                </div>
-                <div class="content-imagia">
-                  <h3 class="name-imagia">John Doe</h3>
-                  <p class="subtitle-imagia">Subtitle </p>
-                </div>
-                <div class="footer-imagia">
-                  <span>
-                    <i class="fa fa-plus"></i> More info</span>
-                </div>
-              </div>
-              <div class="back-imagia">
-                <div class="content-imagia content-back-imagia">
-                  <div>
-                    <h3 class="text-center">Lorem Ipsum</h3>
-                    <p class="text-center">Et hanc quidem praeter oppida multa duae civitates exornant Seleucia opus Seleuci regis, et Claudiopolis
-                      quam deduxit coloniam Claudius Caesar. Isaura enim antehac nimium potens, olim subversa ut rebellatrix
-                      interneciva aegre vestigia claritudinis pristinae monstrat admodum pauca. </p>
-                  </div>
-                </div>
-                <div class="footer-imagia">
-                  <div class="social-imagia text-center">
-                    <a href="#">
-                      <i class="icon ion-more"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div class="card border-danger mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-danger text-light border-danger">Temperatura</div>
+            <div class="card-body text-danger">
+              <h1 class="card-title"><div class="display-1 text-center">{{data.Temperatura}}°</div></h1>
+              
             </div>
+            <div class="card-footer bg-danger text-light border-danger">Footer</div>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card-container-imagia">
-            <div class="card-imagia">
-              <div class="front-imagia">
-                <div class="cover-imagia" style="height:300px;">
-                  <img src="https://unsplash.it/720/500?image=1067" alt="" style="height:300px;">
-                </div>
-                <div class="content-imagia">
-                  <h3 class="name-imagia">John Doe</h3>
-                  <p class="subtitle-imagia">Subtitle </p>
-                </div>
-                <div class="footer-imagia">
-                  <span>
-                    <i class="fa fa-plus"></i> More info</span>
-                </div>
-              </div>
-              <div class="back-imagia">
-                <div class="content-imagia content-back-imagia">
-                  <div>
-                    <h3 class="text-center">Lorem Ipsum</h3>
-                    <p class="text-center">Et hanc quidem praeter oppida multa duae civitates exornant Seleucia opus Seleuci regis, et Claudiopolis
-                      quam deduxit coloniam Claudius Caesar. Isaura enim antehac nimium potens, olim subversa ut rebellatrix
-                      interneciva aegre vestigia claritudinis pristinae monstrat admodum pauca. </p>
-                  </div>
-                </div>
-                <div class="footer-imagia">
-                  <div class="social-imagia text-center">
-                    <a href="#">
-                      <i class="icon ion-more"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div class="card border-info mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-info text-light border-info">Humedad</div>
+            <div class="card-body text-info">
+              <h1 class="card-title"><div class="display-1 text-center">{{data.Humedad}} <div class="display-4">%</div> </div></h1>
+              
             </div>
+            <div class="card-footer bg-info text-light border-info">Footer</div>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card-container-imagia">
-            <div class="card-imagia">
-              <div class="front-imagia">
-                <div class="cover-imagia" style="height:300px;">
-                  <img src="https://unsplash.it/720/500?image=1067" alt="" style="height:300px;">
-                </div>
-                <div class="content-imagia">
-                  <h3 class="name-imagia">John Doe</h3>
-                  <p class="subtitle-imagia">Subtitle </p>
-                </div>
-                <div class="footer-imagia">
-                  <span>
-                    <i class="fa fa-plus"></i> More info</span>
-                </div>
-              </div>
-              <div class="back-imagia">
-                <div class="content-imagia content-back-imagia">
-                  <div>
-                    <h3 class="text-center">Lorem Ipsum</h3>
-                    <p class="text-center">Et hanc quidem praeter oppida multa duae civitates exornant Seleucia opus Seleuci regis, et Claudiopolis
-                      quam deduxit coloniam Claudius Caesar. Isaura enim antehac nimium potens, olim subversa ut rebellatrix
-                      interneciva aegre vestigia claritudinis pristinae monstrat admodum pauca. </p>
-                  </div>
-                </div>
-                <div class="footer-imagia">
-                  <div class="social-imagia text-center">
-                    <a href="#">
-                      <i class="icon ion-more"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div class="card border-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-secondary text-light border-secondary">Oxígeno</div>
+            <div class="card-body text-secondary">
+              <h1 class="card-title"><div class="display-1 text-center">{{data.Oxigeno}}<div class="display-4">%</div></div></h1>
+              
             </div>
+            <div class="card-footer bg-secondary text-light border-secondary">Footer</div>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card-container-imagia">
-            <div class="card-imagia">
-              <div class="front-imagia">
-                <div class="cover-imagia" style="height:300px;">
-                  <img src="https://unsplash.it/720/500?image=1067" alt="" style="height:300px;">
-                </div>
-                <div class="content-imagia">
-                  <h3 class="name-imagia">John Doe</h3>
-                  <p class="subtitle-imagia">Subtitle </p>
-                </div>
-                <div class="footer-imagia">
-                  <span>
-                    <i class="fa fa-plus"></i> More info</span>
-                </div>
-              </div>
-              <div class="back-imagia">
-                <div class="content-imagia content-back-imagia">
-                  <div>
-                    <h3 class="text-center">Lorem Ipsum</h3>
-                    <p class="text-center">Et hanc quidem praeter oppida multa duae civitates exornant Seleucia opus Seleuci regis, et Claudiopolis
-                      quam deduxit coloniam Claudius Caesar. Isaura enim antehac nimium potens, olim subversa ut rebellatrix
-                      interneciva aegre vestigia claritudinis pristinae monstrat admodum pauca. </p>
-                  </div>
-                </div>
-                <div class="footer-imagia">
-                  <div class="social-imagia text-center">
-                    <a href="#">
-                      <i class="icon ion-more"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div class="card border-teal mb-3" style="max-width: 18rem;">
+            <div class="card-header teal text-light ">Turbidad</div>
+            <div class="card-body teal-text">
+              <h1 class="card-title teal-text"><div class="display-1 text-center">{{data.Turbidad}}<div class="display-4">%</div></div></h1>
+              
             </div>
+            <div class="card-footer teal text-light ">Footer</div>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card-container-imagia">
-            <div class="card-imagia">
-              <div class="front-imagia">
-                <div class="cover-imagia" style="height:300px;">
-                  <img src="https://unsplash.it/720/500?image=1067" alt="" style="height:300px;">
-                </div>
-                <div class="content-imagia">
-                  <h3 class="name-imagia">John Doe</h3>
-                  <p class="subtitle-imagia">Subtitle </p>
-                </div>
-                <div class="footer-imagia">
-                  <span>
-                    <i class="fa fa-plus"></i> More info</span>
-                </div>
-              </div>
-              <div class="back-imagia">
-                <div class="content-imagia content-back-imagia">
-                  <div>
-                    <h3 class="text-center">Lorem Ipsum</h3>
-                    <p class="text-center">Et hanc quidem praeter oppida multa duae civitates exornant Seleucia opus Seleuci regis, et Claudiopolis
-                      quam deduxit coloniam Claudius Caesar. Isaura enim antehac nimium potens, olim subversa ut rebellatrix
-                      interneciva aegre vestigia claritudinis pristinae monstrat admodum pauca. </p>
-                  </div>
-                </div>
-                <div class="footer-imagia">
-                  <div class="social-imagia text-center">
-                    <a href="#">
-                      <i class="icon ion-more"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div class="card border-rgba-red-strong mb-3" style="max-width: 18rem;">
+            <div class="card-header rgba-red-strong text-light ">Viscosidad</div>
+            <div class="card-body rgba-red-strong-text">
+              <h1 class="card-title pink-text"><div class="display-1 text-center">{{data.Viscosidad}}<div class="display-4">%</div></div></h1>
+              
             </div>
+            <div class="card-footer rgba-red-strong text-light ">Footer</div>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card-container-imagia">
-            <div class="card-imagia">
-              <div class="front-imagia">
-                <div class="cover-imagia" style="height:300px;">
-                  <img src="https://unsplash.it/720/500?image=1067" alt="" style="height:300px;">
-                </div>
-                <div class="content-imagia">
-                  <h3 class="name-imagia">John Doe</h3>
-                  <p class="subtitle-imagia">Subtitle </p>
-                </div>
-                <div class="footer-imagia">
-                  <span>
-                    <i class="fa fa-plus"></i> More info</span>
-                </div>
-              </div>
-              <div class="back-imagia">
-                <div class="content-imagia content-back-imagia">
-                  <div>
-                    <h3 class="text-center">Lorem Ipsum</h3>
-                    <p class="text-center">Et hanc quidem praeter oppida multa duae civitates exornant Seleucia opus Seleuci regis, et Claudiopolis
-                      quam deduxit coloniam Claudius Caesar. Isaura enim antehac nimium potens, olim subversa ut rebellatrix
-                      interneciva aegre vestigia claritudinis pristinae monstrat admodum pauca. </p>
-                  </div>
-                </div>
-                <div class="footer-imagia">
-                  <div class="social-imagia text-center">
-                    <a href="#">
-                      <i class="icon ion-more"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div class="card border-cyan mb-3" style="max-width: 18rem;">
+            <div class="card-header cyan text-light ">Nivel de Purificación del agua</div>
+            <div class="card-body cyan-text">
+              <h1 class="card-title"><div class="display-1 text-center">{{data.Nivel_Purificacion}}<div class="display-4">%</div></div></h1>
             </div>
+            <div class="card-footer cyan text-light ">Footer</div>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-3">
-          <div class="card-container-imagia">
-            <div class="card-imagia">
-              <div class="front-imagia">
-                <div class="cover-imagia" style="height:300px;">
-                  <img src="https://unsplash.it/720/500?image=1067" alt="" style="height:300px;">
-                </div>
-                <div class="content-imagia">
-                  <h3 class="name-imagia">John Doe</h3>
-                  <p class="subtitle-imagia">Subtitle </p>
-                </div>
-                <div class="footer-imagia">
-                  <span>
-                    <i class="fa fa-plus"></i> More info</span>
-                </div>
-              </div>
-              <div class="back-imagia">
-                <div class="content-imagia content-back-imagia">
-                  <div>
-                    <h3 class="text-center">Lorem Ipsum</h3>
-                    <p class="text-center">Et hanc quidem praeter oppida multa duae civitates exornant Seleucia opus Seleuci regis, et Claudiopolis
-                      quam deduxit coloniam Claudius Caesar. Isaura enim antehac nimium potens, olim subversa ut rebellatrix
-                      interneciva aegre vestigia claritudinis pristinae monstrat admodum pauca. </p>
-                  </div>
-                </div>
-                <div class="footer-imagia">
-                  <div class="social-imagia text-center">
-                    <a href="#">
-                      <i class="icon ion-more"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div class="card border-brown mb-3" style="max-width: 18rem;">
+            <div class="card-header brown text-light ">Nivel del Agua</div>
+            <div class="card-body brown-text">
+              <h1 class="card-title"><div class="display-1 text-center">{{data.Nivel_Agua}}<div class="display-4">%</div></div></h1>
+              
             </div>
+            <div class="card-footer brown text-light ">Footer</div>
           </div>
         </div>
       </div>

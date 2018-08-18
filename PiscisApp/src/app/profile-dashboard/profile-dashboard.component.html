@@ -43,13 +43,13 @@
                             <div class="text-center profile-card" style="margin:15px;background-color:#ffffff;color:rgb(3,118,234);">
                                 <div class="profile-card-img" style="height:150px;background-size:cover;">
                                     <div class="d-flex justify-content-center align-items-center align-content-center align-self-center flex-wrap profile-back"
-                                        style="background-image:url('https://thewallpaper.co/wp-content/uploads/2017/10/vector-moon-balloons-fantasy-bokehship-clouds-ship-hd-free-background-images-boat-amazinghigh-resolution-cartoon-wallpapers-schooner-sail-balloon.jpg');background-color:rgb(255,255,255);"></div>
+                                        style="background-image:url('https://i.pinimg.com/originals/57/8c/ef/578cef92a55dc2cd39c426d63ea4a42a.jpg');background-color:rgb(255,255,255);"></div>
                                 </div>
                                 <div *ngIf="user | async as usr">
                                     <img class="rounded-circle" src="{{usr.photoURL}}" height="150px" style="margin-top:-70px;">
                                     <h3 style="color:rgb(70,116,163);">{{usr.Nombre}} {{usr.Apellido}}</h3>
                                     <p style="padding:20px;padding-bottom:0;padding-top:5px;color:rgb(73,97,120);">{{usr.bio}}
-                                    <p>
+                                        <p>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="col">
                                     <label class="col-form-label">Email</label>
-                                    <input disabled value="{{usr.Correo}}" id="email" type="email" class="form-control"  [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+                                    <input disabled value="{{usr.Correo}}" id="email" type="email" class="form-control" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
                                 </div>
                                 <div class="col">
                                     <label class="col-form-label">Username</label>
@@ -83,15 +83,24 @@
                             </div>
                             <div class="form-row" *ngIf="user | async as usr">
                                 <div class="col-sm-12 col-md-6">
+                                    <!--
                                     <div class="form-group">
                                         <label>Contraseña</label>
                                         <input id="password" type="password" class="form-control" id="contrasena" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                                    </div>-->
+                                    <div class="input-field">
+                                        <input id="password" type="password" class="validate" id="contrasena" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                                        <label for="password" data-error="wrong" data-success="right">Contraseña</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label>Confirmar Contraseña</label>
                                         <input id="passwordconfirm" type="password" class="form-control" id="contrasenaconfirm" [(ngModel)]="passwordconfirm" [ngModelOptions]="{standalone: true}">
+                                    </div>-->
+                                    <div class="input-field">
+                                        <input id="password" type="password" class="validate" id="contrasenaconfirm" [(ngModel)]="passwordconfirm" [ngModelOptions]="{standalone: true}">
+                                        <label for="passwordconfirm" data-error="wrong" data-success="right">Confirmar Contraseña</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12 content-right">
@@ -100,7 +109,18 @@
                             </div>
                             <hr>
                             <label class="col-form-label">Cuéntanos sobre ti</label>
-                            <textarea id="textareaBio" class="form-control" [(ngModel)]="bio" [ngModelOptions]="{standalone: true}"></textarea>
+                            <!--<textarea id="textareaBio" class="form-control" [(ngModel)]="bio" [ngModelOptions]="{standalone: true}"></textarea>-->
+                            <div class="row">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <textarea id="textareaBio" class="materialize-textarea" length="120" [(ngModel)]="bio" [ngModelOptions]="{standalone: true}"></textarea>
+                                            <label for="textarea1">Máximo 120 Caracteres</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
                             <hr>
                             <div class="form-row">
                                 <div class="col-md-12 content-right">

@@ -6,6 +6,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { NavbarComponent } from "../navbar/navbar.component";
 import * as M from 'materialize-css';
+declare var $:any;
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -55,6 +56,9 @@ export class ProfileDashboardComponent implements OnInit {
 
   ngOnInit() {
     M.AutoInit();
+    $(document).ready(function() {
+      $('textarea#textareaBio').characterCounter();
+    });
   }
   toast() {
     M.toast({ html: 'Imagen Actualizada' })

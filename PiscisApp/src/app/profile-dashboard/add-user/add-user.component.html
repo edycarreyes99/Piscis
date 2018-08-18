@@ -1,54 +1,111 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-  crossorigin="anonymous">
+<div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Are you sure?</p>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <h3>¿Estas seguro que deseas agregar este usuario?</h3>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer flex-center">
+        <a data-dismiss="modal" (click)="frame.hide()" mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect>Yes</a>
+        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">No</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
 <div class="wrapper">
   <app-sidenav-dashboard></app-sidenav-dashboard>
   <div class="main-panel">
     <div class="content">
       <div class="row register-form">
         <div class="col-md-8 offset-md-2">
+          <h1>Agregar Usuario</h1>
           <form class="custom-form">
-            <h1>Agregar Usuario</h1>
             <div class="form-row form-group">
               <div class="col-sm-4 label-column">
                 <label class="col-form-label" for="name-input-field">Nombre</label>
               </div>
-              <div class="col-sm-6 input-column">
-                <input class="form-control" type="text">
+              <div class="col-sm-6 ">
+                <div class="input-field">
+                  <input id="nombre" type="text" class="validate" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" (keydown)="concatenar()">
+                  <label for="nombre" data-error="wrong" data-success="right">Ingrese el Nombre</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row form-group">
+              <div class="col-sm-4 label-column">
+                <label class="col-form-label" for="name-input-field">Apellido</label>
+              </div>
+              <div class="col-sm-6 ">
+                <div class="input-field">
+                  <input id="apellido" type="text" class="validate" [(ngModel)]="apellido" [ngModelOptions]="{standalone: true}">
+                  <label for="apellido" data-error="wrong" data-success="right">Ingrese el Apellido</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row form-group">
+              <div class="col-sm-4 label-column">
+                <label class="col-form-label" for="email-input-field">Username </label>
+              </div>
+              <div class="col-sm-6 ">
+                <div class="input-field">
+                  <input disabled id="username" type="text" class="validate" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+                  <label for="username" data-error="wrong" data-success="right">Este es su Username</label>
+                </div>
               </div>
             </div>
             <div class="form-row form-group">
               <div class="col-sm-4 label-column">
                 <label class="col-form-label" for="email-input-field">Email </label>
               </div>
-              <div class="col-sm-6 input-column">
-                <input class="form-control" type="email">
+              <div class="col-sm-6 ">
+                <div class="input-field">
+                  <input id="email" type="email" class="validate" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+                  <label for="email" data-error="wrong" data-success="right">Ingrese el Email</label>
+                </div>
               </div>
             </div>
             <div class="form-row form-group">
               <div class="col-sm-4 label-column">
                 <label class="col-form-label" for="pawssword-input-field">Contraseña</label>
               </div>
-              <div class="col-sm-6 input-column">
-                <input class="form-control" type="password">
+              <div class="col-sm-6">
+                <div class="input-field">
+                  <input id="password" type="password" class="validate" id="contrasena" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                  <label for="password" data-error="wrong" data-success="right">Ingrese la Contraseña</label>
+                </div>
               </div>
             </div>
             <div class="form-row form-group">
               <div class="col-sm-4 label-column">
                 <label class="col-form-label" for="repeat-pawssword-input-field">Repetir Contraseña</label>
               </div>
-              <div class="col-sm-6 input-column">
-                <input class="form-control" type="password">
+              <div class="col-sm-6 ">
+                <div class="input-field">
+                  <input id="passwordconfirm" type="password" class="validate" [(ngModel)]="passwordconfirm" [ngModelOptions]="{standalone: true}">
+                  <label for="passwordconfirm" data-error="wrong" data-success="right">Confirme la Contraseña</label>
+                </div>
               </div>
             </div>
             <div class="form-row form-group">
               <div class="col-sm-4 label-column">
                 <label class="col-form-label" for="dropdown-input-field">Tipo de Cuenta</label>
               </div>
-              <div class="col-sm-4 input-column">
+              <div class="col-sm-4 ">
                 <mat-form-field class="text-center mx-auto wow slideInLeft">
-                  <mat-select placeholder="Sexo">
-                    <mat-option value="1">1</mat-option>
-                    <mat-option value="2">2</mat-option>
+                  <mat-select placeholder="Seleccione un tipo de Cuenta">
+                    <mat-option value="1">Administrador</mat-option>
+                    <mat-option value="2">Usuario Convencional</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -56,7 +113,8 @@
             <div class="container">
               <mat-checkbox class="ml-0 mx-auto text-center">Acepto los Términos y Condiciónes de Piscis.</mat-checkbox>
             </div>
-            <button class="btn btn-light submit-button" type="button">Agregar</button>
+            <button type="button" mdbBtn color="primary" class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="frame.show()"
+              mdbWavesEffect>Agregar</button>
           </form>
         </div>
       </div>
