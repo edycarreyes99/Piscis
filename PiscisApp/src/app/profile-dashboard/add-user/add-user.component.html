@@ -15,7 +15,7 @@
 
       <!--Footer-->
       <div class="modal-footer flex-center">
-        <a data-dismiss="modal" (click)="frame.hide()" mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect>Yes</a>
+        <a data-dismiss="modal" (click)="crearUsuario()" mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect>Yes</a>
         <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">No</a>
       </div>
     </div>
@@ -37,7 +37,7 @@
               </div>
               <div class="col-sm-6 ">
                 <div class="input-field">
-                  <input id="nombre" type="text" class="validate" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" (keydown)="concatenar()">
+                  <input id="nombre" type="text" class="validate" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}">
                   <label for="nombre" data-error="wrong" data-success="right">Ingrese el Nombre</label>
                 </div>
               </div>
@@ -55,13 +55,15 @@
             </div>
             <div class="form-row form-group">
               <div class="col-sm-4 label-column">
-                <label class="col-form-label" for="email-input-field">Username </label>
+                <label class="col-form-label" for="name-input-field">UserName</label>
               </div>
               <div class="col-sm-6 ">
                 <div class="input-field">
                   <input disabled id="username" type="text" class="validate" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
-                  <label for="username" data-error="wrong" data-success="right">Este es su Username</label>
+                  <label for="username" data-error="wrong" data-success="right">Aqui va su User Name</label>
                 </div>
+                <button type="submit" mdbBtn color="warning" class="waves-light" (click)="generarUsername()"
+                  mdbWavesEffect>Generar Username</button>
               </div>
             </div>
             <div class="form-row form-group">
@@ -81,7 +83,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="input-field">
-                  <input id="password" type="password" class="validate" id="contrasena" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                  <input id="password" type="password" class="validate" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
                   <label for="password" data-error="wrong" data-success="right">Ingrese la Contraseña</label>
                 </div>
               </div>
@@ -113,7 +115,7 @@
             <div class="container">
               <mat-checkbox class="ml-0 mx-auto text-center">Acepto los Términos y Condiciónes de Piscis.</mat-checkbox>
             </div>
-            <button type="button" mdbBtn color="primary" class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="frame.show()"
+            <button type="submit" mdbBtn color="primary" class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="frame.show()"
               mdbWavesEffect>Agregar</button>
           </form>
         </div>
