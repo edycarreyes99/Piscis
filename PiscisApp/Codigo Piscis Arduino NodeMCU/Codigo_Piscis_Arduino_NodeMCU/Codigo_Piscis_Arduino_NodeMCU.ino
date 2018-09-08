@@ -36,6 +36,10 @@ int viscosidad = 0;
 int nPurificacion = 0; //nivel de purificacion del agua
 int nAgua = 0; //nivel del agua
 int LEDS = 5;
+String fecha1 = "";
+String fecha2 = "";
+String tiempo1 = "";
+String tiempo2 = "";
 
 //se declaran las variables de temperatura del dht11
 float temperatura, humedad;
@@ -124,6 +128,10 @@ void loop()
     segundos = p_tm->tm_sec;
 
     privata_key_id = "-" + mes + "-" + ano + "," + hora + ":" + minuto + ":" + segundos;
+    fecha1 = "-" + mes + "-" + ano;
+    fecha2 = dia + fecha1;
+    tiempo1 = ":" + String(minuto) + ":" + String(segundos);
+    tiempo2 = hora + tiempo1;
     String nueva_key = dia + privata_key_id;
     Serial.println(nueva_key);
 
@@ -148,6 +156,14 @@ void loop()
     root["Turbidad"] = turbidad;
     root["Nivel_Purificacion"] = nPurificacion;
     root["Nivel_Agua"] = nAgua;
+    root["Hora"] = hora;
+    root["Minuto"] = minuto;
+    root["Segundo"] = segundos;
+    root["Tiempo"] = tiempo2;
+    root["Private_Key_Id"] = nueva_key;
+    root["Fecha"]= fecha2;
+    Serial.println(tiempo2);
+    Serial.println(fecha2);
     String setting = "Historial/" + nueva_key;
 
     // append a new value to /logDHT
@@ -176,6 +192,10 @@ void loop()
     viscosidad = random(0,100);
     nPurificacion = random(0,100);
     nAgua = random(0,100);
+    fecha1 = "-" + mes + "-" + ano;
+    fecha2 = dia + fecha1;
+    tiempo1 = ":" + String(minuto) + ":" + String(segundos);
+    tiempo2 = hora + tiempo1;
 
     //Se muestran los datos del tiempo
     Serial.print(p_tm->tm_mday);
@@ -218,13 +238,20 @@ void loop()
     root["Año"] = p_tm->tm_year + 1900;
     root["Mes"] = meses[p_tm->tm_mon];
     root["Dia"] = p_tm->tm_mday;
-    root["private_key_id"] = nueva_key;
     root["PH"] = PH;
     root["Viscosidad"] = viscosidad;
     root["Oxigeno"] = oxigeno;
     root["Turbidad"] = turbidad;
     root["Nivel_Purificacion"] = nPurificacion;
     root["Nivel_Agua"] = nAgua;
+    root["Hora"] = hora;
+    root["Minuto"] = minuto;
+    root["Segundo"] = segundos;
+    root["Tiempo"] = tiempo2;
+    root["Private_Key_Id"] = nueva_key;
+    root["Fecha"]= fecha2;
+    Serial.println(tiempo2);
+    Serial.println(fecha2);
     String setting = "Tiempo_Real";
 
     // append a new value to /logDHT
