@@ -1,0 +1,8 @@
+{
+  "name": "Piscis",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "f9a2eb46"
+}
