@@ -8,10 +8,47 @@ import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+
+//AngularFire2 Modules Start
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from "angularfire2/storage";
 
 import { Items } from '../mocks/providers/items';
 import { Settings, User, Api } from '../providers';
 import { MyApp } from './app.component';
+
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MAT_DATE_LOCALE
+} from '@angular/material';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -33,7 +70,14 @@ export function provideSettings(storage: Storage) {
     option4: 'Hello'
   });
 }
-
+var FirebaseConfig = {
+  apiKey: "AIzaSyBu_Yb1UXx6W12dkeSYvr7aj9ueNwj0NLQ",
+  authDomain: "proyecto-robotica-35bed.firebaseapp.com",
+  databaseURL: "https://proyecto-robotica-35bed.firebaseio.com",
+  projectId: "proyecto-robotica-35bed",
+  storageBucket: "proyecto-robotica-35bed.appspot.com",
+  messagingSenderId: "990553561020"
+};
 @NgModule({
   declarations: [
     MyApp
@@ -49,7 +93,40 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+
+    AngularFireModule.initializeApp(FirebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireStorageModule,
+
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatTooltipModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,7 +141,9 @@ export function provideSettings(storage: Storage) {
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
   ]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
+import { HistorialPage } from './historial';
 import {
   MatButtonModule,
   MatCardModule,
@@ -25,16 +25,12 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
-
-import { MenuPage } from './menu';
-
 @NgModule({
   declarations: [
-    MenuPage,
+    HistorialPage,
   ],
   imports: [
-    IonicPageModule.forChild(MenuPage),
-    TranslateModule.forChild(),
+    IonicPageModule.forChild(HistorialPage),
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -59,7 +55,7 @@ import { MenuPage } from './menu';
     MatTooltipModule
   ],
   exports: [
-    MenuPage
-  ]
+    HistorialPage
+  ],
 })
-export class MenuPageModule { }
+export class HistorialPageModule { }
