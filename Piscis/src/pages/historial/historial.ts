@@ -1,86 +1,90 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
-import {Sort} from '@angular/material';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+import { IonicPage, Nav, NavController } from 'ionic-angular';
+import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
+import { Sort } from "@angular/material";
+
+export interface historialDocumentos {
+  private_key_id: string,
+  ano: number,
+  mes: string,
+  fecha: string,
+  dia: number,
+  hora: number,
+  minutos: number,
+  segundos: number,
+  tiempo: string,
+  temperatura: number,
+  humedad: number,
+  nivel_agua: number,
+  nivel_purificacion: number,
+  oxigeno: number,
+  ph: number,
+  turbidad: number,
+  viscosidad: number
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
-
-export interface Dessert {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
-
 @IonicPage()
 @Component({
-  selector: 'page-historial',
-  templateUrl: 'historial.html',
+  selector: 'historial-page',
+  templateUrl: 'historial.html'
 })
 export class HistorialPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams ) {
-    this.sortedData = this.desserts.slice();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HistorialPage');
-  }
+  coleccionHistorial: AngularFirestoreCollection<historialDocumentos>;
+  documentos: historialDocumentos[];
+  sortedData: historialDocumentos[];
+  datasource;
+  // A reference to the ion-nav in our component
   @ViewChild(Nav) nav: Nav;
 
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  constructor(public navCtrl: NavController, public fs: AngularFirestore) {
 
-  desserts: Dessert[] = [
-    {name: 'Frozen yogurt', calories: 159, fat: 6, carbs: 24, protein: 4},
-    {name: 'Ice cream sandwich', calories: 237, fat: 9, carbs: 37, protein: 4},
-    {name: 'Eclair', calories: 262, fat: 16, carbs: 24, protein: 6},
-    {name: 'Cupcake', calories: 305, fat: 4, carbs: 67, protein: 4},
-    {name: 'Gingerbread', calories: 356, fat: 16, carbs: 49, protein: 4},
-  ];
-
-  sortedData: Dessert[];
+  }
 
   sortData(sort: Sort) {
-    const data = this.desserts.slice();
+    const data = this.documentos.slice();
     if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
+      this.documentos = data;
       return;
     }
 
-    this.sortedData = data.sort((a, b) => {
+    this.documentos = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'calories': return compare(a.calories, b.calories, isAsc);
-        case 'fat': return compare(a.fat, b.fat, isAsc);
-        case 'carbs': return compare(a.carbs, b.carbs, isAsc);
-        case 'protein': return compare(a.protein, b.protein, isAsc);
+        case 'ID': return compare(a.dia, b.dia, isAsc);
         default: return 0;
       }
     });
+    console.log(sort.active + sort.direction);
   }
 
-}
+  ionViewDidEnter() {
 
+    this.coleccionHistorial = this.fs.collection('Piscis/Historial/Sensores');
+    this.coleccionHistorial.snapshotChanges().subscribe(documentos => {
+      this.documentos = documentos.map(documento => {
+        return {
+          private_key_id: documento.payload.doc.data().Private_Key_Id,
+          ano: documento.payload.doc.data().Año,
+          mes: documento.payload.doc.data().Mes,
+          dia: documento.payload.doc.data().Dia,
+          fecha: documento.payload.doc.data().Fecha,
+          hora: documento.payload.doc.data().Hora,
+          minutos: documento.payload.doc.data().Minuto,
+          segundos: documento.payload.doc.data().Segundo,
+          tiempo: documento.payload.doc.data().Tiempo,
+          temperatura: documento.payload.doc.data().Temperatura,
+          humedad: documento.payload.doc.data().Humedad,
+          nivel_agua: documento.payload.doc.data().Nivel_Agua,
+          nivel_purificacion: documento.payload.doc.data().Nivel_Purificacion,
+          oxigeno: documento.payload.doc.data().Oxigeno,
+          ph: documento.payload.doc.data().PH,
+          turbidad: documento.payload.doc.data().Turbidad,
+          viscosidad: documento.payload.doc.data().Viscosidad,
+        }
+      });
+    });
+  }
+  displayedColumns = ['ID', 'Acciones'];
+}
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

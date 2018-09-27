@@ -35,7 +35,7 @@ export class ItemCreatePage {
   }
 
   getPicture() {
-    if (Camera['installed']()) {
+    /*if (Camera['installed']()) {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
         targetWidth: 96,
@@ -47,7 +47,8 @@ export class ItemCreatePage {
       })
     } else {
       this.fileInput.nativeElement.click();
-    }
+    }*/
+    this.fileInput.nativeElement.click();
   }
 
   processWebImage(event) {
