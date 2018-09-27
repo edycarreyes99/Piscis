@@ -17,9 +17,9 @@
         {{documento.private_key_id}}
       </ion-item>
     </ion-list>-->
-    <mat-table #table [dataSource]="documentos" style="margin: auto;" >
+    <mat-table matSort #table [dataSource]="documentos" style="margin: auto;" (matSortChange)="sortData($event)">
       <ng-container matColumnDef="ID">
-        <mat-header-cell mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="ID"> ID </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element"> {{element.private_key_id}} </mat-cell>
       </ng-container>
 
@@ -38,6 +38,8 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
   </mat-card>
 
 </ion-content>
