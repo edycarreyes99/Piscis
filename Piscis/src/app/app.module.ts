@@ -70,7 +70,7 @@ export function provideSettings(storage: Storage) {
     option4: 'Hello'
   });
 }
-var FirebaseConfig = {
+export const FirebaseConfig = {
   apiKey: "AIzaSyBu_Yb1UXx6W12dkeSYvr7aj9ueNwj0NLQ",
   authDomain: "proyecto-robotica-35bed.firebaseapp.com",
   databaseURL: "https://proyecto-robotica-35bed.firebaseio.com",
@@ -102,7 +102,7 @@ var FirebaseConfig = {
     AngularFireModule.initializeApp(FirebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule.enablePersistence(),
+    AngularFirestoreModule,
     AngularFireStorageModule,
 
     MatButtonModule,

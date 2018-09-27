@@ -1,5 +1,6 @@
 <ion-menu [content]="content">
-    <ion-header>
+
+    <ion-content>
         <ion-item class="background-profile" color="positive" menuClose="" on-click="goToCameraTabDefaultPage()" id="side-menu21-list-item8">
             <ion-avatar item-center>
                 <img src="https://www.w3schools.com/howto/img_avatar.png" alt="User Profile">
@@ -11,9 +12,6 @@
                 edycarreyes@gmail.com
             </h4>
         </ion-item>
-    </ion-header>
-
-    <ion-content>
         <ion-list>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
                 {{p.title}}
