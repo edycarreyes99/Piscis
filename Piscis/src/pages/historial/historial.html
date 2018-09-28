@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="pink">
-  <button ion-button menuToggle>
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Historial</ion-title>
@@ -9,34 +9,34 @@
 
 </ion-header>
 <ion-content padding>
-    <mat-card padding>
-      <ion-title padding>Documentos</ion-title>
-      <!--<ion-list reorder="true" padding>
+  <mat-card padding>
+    <ion-title padding>Documentos</ion-title>
+    <!--<ion-list reorder="true" padding>
         <ion-item *ngFor="let documento of documentos" padding>
           {{documento.private_key_id}}
         </ion-item>
       </ion-list>-->
-      <mat-table matSort #table [dataSource]="documentos" style="margin: auto;" (matSortChange)="sortData($event)">
-        <ng-container matColumnDef="ID">
-          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="ID"> ID </mat-header-cell>
-          <mat-cell mat-cell *matCellDef="let element"> {{element.private_key_id}} </mat-cell>
-        </ng-container>
-  
-        <!-- Name Column -->
-        <ng-container matColumnDef="Acciones">
-          <mat-header-cell mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-          <mat-cell mat-cell *matCellDef="let element">
-            <ion-buttons end>
-              <button ion-button icon-only color="red">
-                <ion-icon name="trash"></ion-icon>
-              </button>
-            </ion-buttons>
-          </mat-cell>
-        </ng-container>
-  
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-    </mat-card>
-  
-  </ion-content>
+    <mat-table matSort #table [dataSource]="documentos" style="width:80%; margin:20px auto;" (matSortChange)="sortData($event)">
+      <ng-container matColumnDef="ID">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="ID"> ID </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let element"> {{element.private_key_id}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Acciones">
+        <mat-header-cell mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let element">
+          <ion-buttons end>
+            <button ion-button icon-only color="red" (click)="eliminarDocumento(element)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-buttons>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card>
+
+</ion-content>

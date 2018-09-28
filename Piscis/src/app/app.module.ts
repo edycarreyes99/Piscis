@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import { ServicioService } from "../services/servicio.service";
 
 //AngularFire2 Modules Start
 import { AngularFireModule } from 'angularfire2';
@@ -139,6 +140,7 @@ export const FirebaseConfig = {
     Camera,
     SplashScreen,
     StatusBar,
+    ServicioService,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },

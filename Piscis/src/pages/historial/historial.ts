@@ -39,6 +39,10 @@ export class HistorialPage {
 
   }
 
+  eliminarDocumento(documento:historialDocumentos){
+    this.fs.doc(`Piscis/Historial/Sensores/${documento.private_key_id}`).delete();
+  }
+
   sortData(sort: Sort) {
     const data = this.documentos.slice();
     if (!sort.active || sort.direction === '') {
