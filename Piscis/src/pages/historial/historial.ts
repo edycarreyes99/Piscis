@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Nav, NavController } from 'ionic-angular';
+import { IonicPage, Nav, NavController,AlertController } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
 import { Sort } from "@angular/material";
 
@@ -35,12 +35,30 @@ export class HistorialPage {
   // A reference to the ion-nav in our component
   @ViewChild(Nav) nav: Nav;
 
-  constructor(public navCtrl: NavController, public fs: AngularFirestore) {
+  constructor(public navCtrl: NavController, public fs: AngularFirestore,public alert:AlertController) {
 
   }
 
   eliminarDocumento(documento:historialDocumentos){
-    this.fs.doc(`Piscis/Historial/Sensores/${documento.private_key_id}`).delete();
+    const alert = this.alert.create({
+      title: 'Eliminar Documento',
+      subTitle: `${documento.private_key_id}`,
+      message: '¿Estas seguro que deseas eliminar este documento?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text:'Aceptar',
+          handler:()=>{
+            this.fs.doc(`Piscis/Historial/Sensores/${documento.private_key_id}`).delete();
+          }
+        },
+      ]
+    })
+    alert.present();
+    //this.fs.doc(`Piscis/Historial/Sensores/${documento.private_key_id}`).delete();
   }
 
   sortData(sort: Sort) {
