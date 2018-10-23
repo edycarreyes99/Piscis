@@ -16,10 +16,14 @@
           {{documento.private_key_id}}
         </ion-item>
       </ion-list>-->
-    <mat-table matSort #table [dataSource]="documentos" style="width:80%; margin:20px auto;" (matSortChange)="sortData($event)">
+    <mat-table matSort #table [dataSource]="documentosStorage"  (matSortChange)="sortData($event)">
       <ng-container matColumnDef="ID">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="ID"> ID </mat-header-cell>
-        <mat-cell mat-cell *matCellDef="let element"> {{element.private_key_id}} </mat-cell>
+        <mat-cell mat-cell *matCellDef="let element">
+          <button ion-item (click)="detalles(element)">
+            <h4>{{element.private_key_id}}</h4>
+          </button>
+        </mat-cell>
       </ng-container>
 
       <!-- Name Column -->

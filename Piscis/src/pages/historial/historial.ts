@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Nav, NavController,AlertController } from 'ionic-angular';
+import { IonicPage, Nav, NavController, AlertController } from 'ionic-angular';
+import { Storage } from "@ionic/storage";
 import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
 import { Sort } from "@angular/material";
 
@@ -30,16 +31,22 @@ export interface historialDocumentos {
 export class HistorialPage {
   coleccionHistorial: AngularFirestoreCollection<historialDocumentos>;
   documentos: historialDocumentos[];
+  documentosStorage:historialDocumentos[];
   sortedData: historialDocumentos[];
   datasource;
   // A reference to the ion-nav in our component
   @ViewChild(Nav) nav: Nav;
 
-  constructor(public navCtrl: NavController, public fs: AngularFirestore,public alert:AlertController) {
+  constructor(public storage:Storage, public navCtrl: NavController, public fs: AngularFirestore, public alert: AlertController) {
 
   }
+  detalles(documento: historialDocumentos) {
+    this.navCtrl.push('DetallesPage', {
+      documento: documento
+    });
+  }
 
-  eliminarDocumento(documento:historialDocumentos){
+  eliminarDocumento(documento: historialDocumentos) {
     const alert = this.alert.create({
       title: 'Eliminar Documento',
       subTitle: `${documento.private_key_id}`,
@@ -50,8 +57,8 @@ export class HistorialPage {
           role: 'cancel'
         },
         {
-          text:'Aceptar',
-          handler:()=>{
+          text: 'Aceptar',
+          handler: () => {
             this.fs.doc(`Piscis/Historial/Sensores/${documento.private_key_id}`).delete();
           }
         },
@@ -62,13 +69,13 @@ export class HistorialPage {
   }
 
   sortData(sort: Sort) {
-    const data = this.documentos.slice();
+    const data = this.documentosStorage.slice();
     if (!sort.active || sort.direction === '') {
-      this.documentos = data;
+      this.documentosStorage = data;
       return;
     }
 
-    this.documentos = data.sort((a, b) => {
+    this.documentosStorage = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'ID': return compare(a.dia, b.dia, isAsc);
@@ -79,7 +86,9 @@ export class HistorialPage {
   }
 
   ionViewDidEnter() {
-
+    this.storage.get('documentos').then((documentos)=>{
+      this.documentosStorage = documentos;
+    });
     this.coleccionHistorial = this.fs.collection('Piscis/Historial/Sensores');
     this.coleccionHistorial.snapshotChanges().subscribe(documentos => {
       this.documentos = documentos.map(documento => {
@@ -103,6 +112,7 @@ export class HistorialPage {
           viscosidad: documento.payload.doc.data().Viscosidad,
         }
       });
+      this.storage.set('documentos',this.documentos);
     });
   }
   displayedColumns = ['ID', 'Acciones'];

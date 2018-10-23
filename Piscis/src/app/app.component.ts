@@ -28,7 +28,8 @@ export class MyApp {
     { title: 'Menu', component: 'MenuPage' },
     { title: 'Settings', component: 'SettingsPage' },
     { title: 'Search', component: 'SearchPage' },
-    { title: 'Historial', component: 'HistorialPage'}
+    { title: 'Historial', component: 'HistorialPage'},
+    { title: 'Detalles', component: 'DetallesPage' }
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
