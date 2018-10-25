@@ -5,10 +5,43 @@
     </button>
     <ion-title>Historial</ion-title>
   </ion-navbar>
-
-
 </ion-header>
 <ion-content padding>
+  <ion-card>
+    <h1 style="text-align:center;" padding>
+      Filtrar Datos Por:
+    </h1>
+    <ion-row >
+      <ion-col class="col" col-12 tappable>
+        <ion-item>
+          <ion-label>Año</ion-label>
+          <ion-select [(ngModel)]="ano" (ionChange)="filtroExactoAno($event)">
+            <ion-option value="{{anoo}}"  *ngFor="let anoo of anos">{{anoo}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="col" col-12 tappable>
+        <ion-item>
+          <ion-label>Mes</ion-label>
+          <ion-select [(ngModel)]="mes" (ionChange)="filtroExactoMes($event)">
+            <ion-option value="{{mess}}" *ngFor="let mess of meses">{{mess}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="col" col-12 tappable>
+        <ion-item>
+          <ion-label>Dia</ion-label>
+          <ion-select [(ngModel)]="dia" (ionChange)="filtroExactoDia($event)">
+            <ion-option value="{{diaa}}" *ngFor="let diaa of dias">{{diaa}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-card>
   <mat-card padding>
     <ion-title padding>Documentos</ion-title>
     <!--<ion-list reorder="true" padding>
@@ -16,7 +49,7 @@
           {{documento.private_key_id}}
         </ion-item>
       </ion-list>-->
-    <mat-table matSort #table [dataSource]="documentosStorage"  (matSortChange)="sortData($event)">
+    <mat-table matSort #table [dataSource]="documentos" (matSortChange)="sortData($event)">
       <ng-container matColumnDef="ID">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="ID"> ID </mat-header-cell>
         <mat-cell mat-cell *matCellDef="let element">

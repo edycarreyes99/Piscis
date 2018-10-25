@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, Nav, NavController, AlertController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
-import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
+import { AngularFirestore, AngularFirestoreCollection,Angular } from "angularfire2/firestore";
 import { Sort } from "@angular/material";
 
 export interface historialDocumentos {
@@ -28,16 +28,24 @@ export interface historialDocumentos {
   selector: 'historial-page',
   templateUrl: 'historial.html'
 })
+
 export class HistorialPage {
   coleccionHistorial: AngularFirestoreCollection<historialDocumentos>;
   documentos: historialDocumentos[];
-  documentosStorage:historialDocumentos[];
+  documentosStorage: historialDocumentos[];
   sortedData: historialDocumentos[];
+  dias: Array<number> = [];
+  meses: Array<String> = [];
+  anos: Array<number> = [];
+  dia:number = null;
+  mes:String = null;
+  ano:number = null;
+  mesesDataMap: Array<String> = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   datasource;
   // A reference to the ion-nav in our component
   @ViewChild(Nav) nav: Nav;
 
-  constructor(public storage:Storage, public navCtrl: NavController, public fs: AngularFirestore, public alert: AlertController) {
+  constructor(public storage: Storage, public navCtrl: NavController, public fs: AngularFirestore, public alert: AlertController) {
 
   }
   detalles(documento: historialDocumentos) {
@@ -47,6 +55,7 @@ export class HistorialPage {
   }
 
   eliminarDocumento(documento: historialDocumentos) {
+    var alerta = false;
     const alert = this.alert.create({
       title: 'Eliminar Documento',
       subTitle: `${documento.private_key_id}`,
@@ -59,23 +68,40 @@ export class HistorialPage {
         {
           text: 'Aceptar',
           handler: () => {
-            this.fs.doc(`Piscis/Historial/Sensores/${documento.private_key_id}`).delete();
+            this.fs.doc(`Piscis/Historial/Sensores/${documento.private_key_id}`).delete().then((x) => {
+              const alert = this.alert.create({
+                title: 'Hecho',
+                message: 'Documento eliminado con éxito',
+                buttons: [
+                  {
+                    text: 'Aceptar'
+                  }
+                ]
+              });
+              alert.present();
+            });
+            this.storage.set('documentos', this.documentos);
           }
         },
       ]
     })
     alert.present();
+    if (alerta) {
+
+    } else {
+      alerta = false;
+    }
     //this.fs.doc(`Piscis/Historial/Sensores/${documento.private_key_id}`).delete();
   }
 
   sortData(sort: Sort) {
-    const data = this.documentosStorage.slice();
+    const data = this.documentos.slice();
     if (!sort.active || sort.direction === '') {
-      this.documentosStorage = data;
+      this.documentos = data;
       return;
     }
 
-    this.documentosStorage = data.sort((a, b) => {
+    this.documentos = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'ID': return compare(a.dia, b.dia, isAsc);
@@ -86,8 +112,24 @@ export class HistorialPage {
   }
 
   ionViewDidEnter() {
-    this.storage.get('documentos').then((documentos)=>{
-      this.documentosStorage = documentos;
+    var i = 0;
+    do {
+      this.dias.push(i + 1);
+      i++;
+    } while (i <= 30)
+    i = 0;
+    do {
+      this.meses.push(this.mesesDataMap[i]);
+      i++;
+    } while (i <= 11)
+    i=2018;
+    do{
+      this.anos.push(i);
+      i++;
+    }while(i<=2030)
+    //console.log(this.anos);
+    this.storage.get('documentos').then((documentos) => {
+      this.documentos = documentos;
     });
     this.coleccionHistorial = this.fs.collection('Piscis/Historial/Sensores');
     this.coleccionHistorial.snapshotChanges().subscribe(documentos => {
@@ -112,11 +154,13 @@ export class HistorialPage {
           viscosidad: documento.payload.doc.data().Viscosidad,
         }
       });
-      this.storage.set('documentos',this.documentos);
+      this.storage.set('documentos', this.documentos);
     });
   }
   displayedColumns = ['ID', 'Acciones'];
+
 }
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+
