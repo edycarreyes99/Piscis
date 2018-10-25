@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, Nav, NavController, AlertController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
-import { AngularFirestore, AngularFirestoreCollection,Angular } from "angularfire2/firestore";
+import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
 import { Sort } from "@angular/material";
 
 export interface historialDocumentos {
