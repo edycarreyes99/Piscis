@@ -16,7 +16,7 @@ DHT dht(DHTPIN, DHTTYPE);
 #define FIREBASE_HOST "proyecto-robotica-35bed.firebaseio.com"
 #define FIREBASE_AUTH "U8fa2vQ6TYumXGdMs3sw0SRY0Z3GcUHprhAD4U7f"
 #define WIFI_SSID "Familia_Reyes_Jimenez"
-#define WIFI_PASSWORD "@#H0h58I"
+#define WIFI_PASSWORD "D@phne141212"
 
 //Se definen las variables para el tiempo
 int timezone = -6;
@@ -95,8 +95,8 @@ void loop()
   {  
     hora2 = hora;
     //Se leen las variables de temperatura y humedad del dht
-    temperatura = dht.readTemperature();
-    humedad = dht.readHumidity();
+    temperatura = 30;
+    humedad = 87;
     PH = random(1,14);
     oxigeno = random(0,100);
     turbidad = random(300,900);
@@ -184,8 +184,8 @@ void loop()
   else
   {
     //Se leen las variables de temperatura y humedad del dht
-    temperatura = dht.readTemperature();
-    humedad = dht.readHumidity();
+    temperatura = 30;
+    humedad = 87;
     PH = random(1,14);
     oxigeno = random(0,100);
     turbidad = random(300,900);
