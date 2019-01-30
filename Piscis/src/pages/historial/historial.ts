@@ -3,6 +3,7 @@ import { IonicPage, Nav, NavController, AlertController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
 import { Sort } from "@angular/material";
+import * as _ from 'lodash';
 
 export interface historialDocumentos {
   private_key_id: string,
@@ -32,14 +33,17 @@ export interface historialDocumentos {
 export class HistorialPage {
   coleccionHistorial: AngularFirestoreCollection<historialDocumentos>;
   documentos: historialDocumentos[];
+  documentosFiltrados:historialDocumentos;
   documentosStorage: historialDocumentos[];
   sortedData: historialDocumentos[];
   dias: Array<number> = [];
   meses: Array<String> = [];
   anos: Array<number> = [];
-  dia:number = null;
-  mes:String = null;
-  ano:number = null;
+  dia: number = null;
+  mes: String = null;
+  ano: number = null;
+  filtros = {};
+  filtro = true;
   mesesDataMap: Array<String> = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   datasource;
   // A reference to the ion-nav in our component
@@ -93,6 +97,26 @@ export class HistorialPage {
     }
     //this.fs.doc(`Piscis/Historial/Sensores/${documento.private_key_id}`).delete();
   }
+  //funcion para aplicar cada uno de los filtros al seleccionarlos
+  aplicarFiltros() {
+    this.documentosFiltrados = _.filter(this.documentos, _.conforms(this.filtros));
+    this.filtro = false;
+  }
+
+  filtroExactoAno(propiedad:string, regla:any) {
+    this.filtros[propiedad] = val => val == regla;
+    this.aplicarFiltros();
+  }
+  
+  filtroExactoMes(propiedad:string, regla:any) {
+    this.filtros[propiedad] = val => val == regla;
+    this.aplicarFiltros();
+  }
+  
+  filtroExactoDia(propiedad:string,regla:any) {
+    this.filtros[propiedad] = val => val == regla;
+    this.aplicarFiltros();
+  }
 
   sortData(sort: Sort) {
     const data = this.documentos.slice();
@@ -122,11 +146,11 @@ export class HistorialPage {
       this.meses.push(this.mesesDataMap[i]);
       i++;
     } while (i <= 11)
-    i=2018;
-    do{
+    i = 2018;
+    do {
       this.anos.push(i);
       i++;
-    }while(i<=2030)
+    } while (i <= 2030)
     //console.log(this.anos);
     this.storage.get('documentos').then((documentos) => {
       this.documentos = documentos;
@@ -160,6 +184,7 @@ export class HistorialPage {
   displayedColumns = ['ID', 'Acciones'];
 
 }
+
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

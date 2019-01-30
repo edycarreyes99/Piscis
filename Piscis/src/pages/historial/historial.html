@@ -15,7 +15,7 @@
       <ion-col class="col" col-12 tappable>
         <ion-item>
           <ion-label>Año</ion-label>
-          <ion-select [(ngModel)]="ano" (ionChange)="filtroExactoAno($event)">
+          <ion-select [(ngModel)]="ano" (ionChange)="filtroExactoAno('ano',ano)">
             <ion-option value="{{anoo}}"  *ngFor="let anoo of anos">{{anoo}}</ion-option>
           </ion-select>
         </ion-item>
@@ -25,7 +25,7 @@
       <ion-col class="col" col-12 tappable>
         <ion-item>
           <ion-label>Mes</ion-label>
-          <ion-select [(ngModel)]="mes" (ionChange)="filtroExactoMes($event)">
+          <ion-select [(ngModel)]="mes" (ionChange)="filtroExactoMes('mes',mes)">
             <ion-option value="{{mess}}" *ngFor="let mess of meses">{{mess}}</ion-option>
           </ion-select>
         </ion-item>
@@ -35,7 +35,7 @@
       <ion-col class="col" col-12 tappable>
         <ion-item>
           <ion-label>Dia</ion-label>
-          <ion-select [(ngModel)]="dia" (ionChange)="filtroExactoDia($event)">
+          <ion-select [(ngModel)]="dia" (ionChange)="filtroExactoDia('dia',dia)">
             <ion-option value="{{diaa}}" *ngFor="let diaa of dias">{{diaa}}</ion-option>
           </ion-select>
         </ion-item>
