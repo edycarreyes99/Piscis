@@ -53,17 +53,24 @@ void setup()
 
   // se inicializa la conexion a la base de datos con los parametros ya establecidos
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH); // se inicializa la conexion
+  // se inicializa el subir a firestore a 1 para controlar su primera subida
+  Firebase.setFloat("Subir_Firestore", 1);
 }
 
 void loop() // funcion del loop
 {
-  int subirFirestore = Firebase.getInt("subirFirestore"); // cada determinado tiempo se leen los datos para saber si se va a subir o no a firestore
+  int subirFirestore = Firebase.getInt("Subir_Firestore"); // cada determinado tiempo se leen los datos para saber si se va a subir o no a firestore
+  int actualizarReal = Firebase.getInt("Actualizar_Real"); // cada determinado tiempo se leen los datos para saber si se va a actualizar el contenido del tiempo real
   if (subirFirestore == 1)                                // condicional para realizar ordenes
   {
     // si la condicion es verdadera se ejecuta el siguiente código
     leerDatos();       // se manda a llamar a la funcion para almacenar los datos
     generarPeticion(); // se manda a llamar a la funcion para generar la peticion con los datos almacenados
-    enviarPeticion();  // se manda a llamar a l funcion para generar el archivo json con los datos ya almacenados
+    enviarPeticion("/enviarafirestore");  // se manda a llamar a l funcion para generar el archivo json con los datos ya almacenados
+  } else if (actualizarReal == 1) {
+    leerDatos();
+    generarPeticion();
+    enviarPeticion("/enviarafirebase");
   }
   /*if (led == 0)
     {
@@ -81,7 +88,7 @@ void loop() // funcion del loop
     delay(50);
     digitalWrite(LED_BUILTIN, LOW);
     }*/
-  delay(10000); // se repite este codigo cada hora
+  delay(1000); // se repite este codigo cada hora
 }
 
 // se define una funcion para leer los datos
@@ -121,9 +128,17 @@ String generarPeticion()
   return peticion;
 }
 
-void enviarPeticion()
+void enviarPeticion(String destino)
 {
+  if (destino == "/enviarafirebase") {
+    subirAFirebase();
+  } else {
+    subirAFirestore();
+  }
+}
 
+void subirAFirebase() {
+  Firebase.setFloat("Actualizar_Real", 0);
   // Se utiliza la clase de WiFiClientSecure para crear una conexion TLS
   WiFiClientSecure client;
   Serial.print("Conectando a ");
@@ -145,7 +160,6 @@ void enviarPeticion()
     digitalWrite(LED_BUILTIN, LOW);
     delay(50);
     digitalWrite(LED_BUILTIN, HIGH);
-    enviarPeticion();
   }
   else
   {
@@ -200,13 +214,17 @@ void enviarPeticion()
     delay(50);
     digitalWrite(D1, LOW);
   }
-  else
-  {
+  else if (line.startsWith("Datos actualizados")) {
+    Serial.println("esp8266/Arduino Actualizacion CI completado!");
+    digitalWrite(D1, HIGH);
+    delay(50);
+    digitalWrite(D1, LOW);
+  }
+  else {
     Serial.println("esp8266/Arduino CI ha fallado");
     digitalWrite(LED_BUILTIN, LOW);
     delay(50);
     digitalWrite(LED_BUILTIN, HIGH);
-    enviarPeticion();
   }
   Serial.println("La respuesta fue:"); // se confirma la respuesta del servidor
   Serial.println("==========");
@@ -214,3 +232,100 @@ void enviarPeticion()
   Serial.println("==========");
   Serial.println("Cerrando la Conexion"); // se cierra la conexion con el servidor
 }
+
+void subirAFirestore() {
+  Firebase.setFloat("Subir_Firestore", 0);
+  // Se utiliza la clase de WiFiClientSecure para crear una conexion TLS
+  WiFiClientSecure client;
+  Serial.print("Conectando a ");
+  Serial.println(host);
+
+  // se verifica si la conexion fue correcta o no
+  if (!client.connect(host, httpsPort))
+  {
+    // en caso de no ser correcta
+    Serial.println("Conexion Fallida!");
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(50);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(50);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(50);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(50);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(50);
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+  else
+  {
+    // en caso de ser correcta
+    Serial.println("Conexion exitosa");
+    digitalWrite(D1, HIGH);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(50);
+    digitalWrite(D1, LOW);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(50);
+    digitalWrite(D1, HIGH);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(50);
+    digitalWrite(D1, LOW);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(50);
+    digitalWrite(D1, HIGH);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(50);
+    digitalWrite(D1, LOW);
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+
+  // Se crea la variable que almacenara toda la peticion
+  String url = "/enviarafirestore" + contenido; // se concatena el contenido de la variable
+  Serial.println("Enviando Contenido: " + url);
+
+  // se realiza la peticion al servidor
+  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+               "Host: " + host + "\r\n" +
+               "User-Agent: BuildFailureDetectorESP8266\r\n" +
+               "Connection: close\r\n\r\n");
+
+  Serial.println("Peticion Enviada"); // se confirma el envio de la peticion
+
+  // se observa que mientras el dispositivo aun este conectado al servidor
+  while (client.connected())
+  {
+    String line = client.readStringUntil('\n'); // lee todas las lineas que tiene el response y se almacena en una variable temporal
+    if (line == "\r")
+    { // se observa que la linea contenta el caracter especial para determinar el estado de los headers
+      Serial.println("headers recibidos");
+      break; // se sale del condicional
+    }
+  }
+  String line = client.readStringUntil('\n');
+  if (line.startsWith("Datos subidos a firestore"))
+  {
+    Serial.println("esp8266/Arduino CI completado!");
+    digitalWrite(D1, HIGH);
+    delay(50);
+    digitalWrite(D1, LOW);
+  }
+  else if (line.startsWith("Datos actualizados")) {
+    Serial.println("esp8266/Arduino Actualizacion CI completado!");
+    digitalWrite(D1, HIGH);
+    delay(50);
+    digitalWrite(D1, LOW);
+  }
+  else {
+    Serial.println("esp8266/Arduino CI ha fallado");
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(50);
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+  Serial.println("La respuesta fue:"); // se confirma la respuesta del servidor
+  Serial.println("==========");
+  Serial.println(line); // se imprime la respuesta
+  Serial.println("==========");
+  Serial.println("Cerrando la Conexion"); // se cierra la conexion con el servidor
+}
+
