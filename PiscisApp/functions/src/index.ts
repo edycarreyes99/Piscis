@@ -2,8 +2,10 @@ import * as functions from 'firebase-functions';
 
 exports.UploadToFirestore = functions.https.onRequest((req, res) => {
     if (req.method === 'POST') {
+        res.statusCode = 200;
         res.send('Metodo POST');
     } else if (req.method === 'GET') {
+        res.statusCode = 200;
         res.send('Method GET');
     } else {
         res.send('Invalid Method!');
