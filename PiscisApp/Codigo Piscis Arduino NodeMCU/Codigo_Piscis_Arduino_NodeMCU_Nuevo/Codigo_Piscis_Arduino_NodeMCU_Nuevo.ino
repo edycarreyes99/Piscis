@@ -81,7 +81,7 @@ void loop() // funcion del loop
     delay(50);
     digitalWrite(LED_BUILTIN, LOW);
     }*/
-  delay(60*60000); // se repite este codigo cada hora
+  delay(10000); // se repite este codigo cada hora
 }
 
 // se define una funcion para leer los datos
