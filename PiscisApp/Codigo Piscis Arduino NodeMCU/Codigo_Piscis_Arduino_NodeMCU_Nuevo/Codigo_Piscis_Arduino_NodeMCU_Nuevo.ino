@@ -185,7 +185,7 @@ void subirAFirebase() {
   }
 
   // Se crea la variable que almacenara toda la peticion
-  String url = "/enviarafirestore" + contenido; // se concatena el contenido de la variable
+  String url = "/enviarafirebase" + contenido; // se concatena el contenido de la variable
   Serial.println("Enviando Contenido: " + url);
 
   // se realiza la peticion al servidor
