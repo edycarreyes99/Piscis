@@ -3,24 +3,18 @@ import { AuthService } from '../auth.service';
 import { MatDialog } from '@angular/material';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Router, NavigationEnd } from '@angular/router';
-import * as _ from 'lodash';
-import { DocumentSnapshot } from '@firebase/firestore-types';
-import { PropertyRead } from '@angular/compiler';
-import { Chart } from 'chart.js';
 import * as M from 'materialize-css';
 import * as $ from 'jquery';
 import { Http, Response } from '@angular/http';
-import { Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
-import { Subscription } from 'rxjs/Subscription';
 import { NgwWowService } from 'ngx-wow';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-historial-page',
   templateUrl: './historial-page.component.html',
   styleUrls: ['./historial-page.component.scss']
 })
 export class HistorialPageComponent implements OnDestroy, OnInit {
-  private wowSubscription: Subscription;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   title = 'Temperaturas';
@@ -51,11 +45,6 @@ export class HistorialPageComponent implements OnDestroy, OnInit {
     private router: Router,
     private wowService: NgwWowService
   ) {
-    this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
-      //  Reload WoW animations when done navigating to page,
-      //  but you are free to call it whenever/wherever you like
-      this.wowService.init();
-    });
   }
   temperaturas: any;
   temperaturasFiltradas: any;
